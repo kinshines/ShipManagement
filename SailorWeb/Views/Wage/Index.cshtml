@@ -1,0 +1,85 @@
+﻿@using PagedList.Mvc
+@using SailorDomain.Entities
+@model PagedList.IPagedList<DateTime>
+
+@{
+    ViewBag.Title = "工资结算";
+}
+
+<!-- BEGIN PAGE CONTENT -->
+<div class="page-content">
+    <div class="container">
+        <!-- BEGIN PAGE BREADCRUMB -->
+        <ul class="page-breadcrumb breadcrumb">
+            <li>
+                @Html.ActionLink("首页", "Index", "Home")
+                <i class="fa fa-circle"></i>
+            </li>
+            <li>
+                @Html.ActionLink("工资结算", "Index")
+                <i class="fa fa-circle"></i>
+            </li>
+            <li class="active">
+                @ViewBag.Title
+            </li>
+        </ul>
+        <!-- END PAGE BREADCRUMB -->
+
+        <div class="row">
+            <div class="col-md-12">
+                <!-- BEGIN SAMPLE TABLE PORTLET-->
+                <div class="portlet light">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <i class="fa fa-list font-green-sharp"></i>
+                            <span class="caption-subject font-green-sharp bold uppercase">@ViewBag.Title</span>
+                        </div>
+                    </div>
+                    <div class="portlet-body">
+                        <div class="table-scrollable table-scrollable-borderless">
+                            <table class="table table-hover table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            年份
+                                        </th>
+                                        <th>
+                                            月份
+                                        </th>
+                                        <th>
+                                            操作
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @Html.DisplayFor(modelItem=>item.Year)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Month)
+                                            </td>
+                                            <td>
+                                                <a href="@Url.Action("MonthlyList","Wage",new {year=item.Year,month=item.Month})" class="btn default btn-xs blue">
+                                                    <i class="fa fa-edit"></i> 查看
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                        第 @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) 页，共 @Model.PageCount 页
+
+                        @Html.PagedListPager(Model, page => Url.Action("Index",
+                        new { page }))
+                    </div>
+                </div>
+                <!-- END SAMPLE TABLE PORTLET-->
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END PAGE CONTENT -->

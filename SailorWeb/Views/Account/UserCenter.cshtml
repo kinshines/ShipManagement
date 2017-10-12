@@ -1,0 +1,151 @@
+﻿@{
+    ViewBag.Title = "个人中心";
+}
+<link href="~/assets/pages/css/profile.css" rel="stylesheet" />
+<!-- BEGIN PAGE CONTENT -->
+<div class="page-content">
+    <div class="container">
+        <!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+        <!-- BEGIN PAGE BREADCRUMB -->
+        <ul class="page-breadcrumb breadcrumb">
+            <li>
+                <a href="@Url.Action("Index","Home")">首页</a><i class="fa fa-circle"></i>
+            </li>
+            <li>
+                <a href="@Url.Action("UserCenter")">个人中心</a>
+                <i class="fa fa-circle"></i>
+            </li>
+            <li class="active">
+                @ViewBag.Title
+            </li>
+        </ul>
+        <!-- END PAGE BREADCRUMB -->
+        <!-- BEGIN PAGE CONTENT INNER -->
+        <div class="row margin-top-10">
+            <div class="col-md-12">
+                <!-- BEGIN PROFILE SIDEBAR -->
+                <div class="profile-sidebar" style="width: 250px;">
+                    <!-- PORTLET MAIN -->
+                    <div class="portlet light profile-sidebar-portlet">
+                        <!-- SIDEBAR USERPIC -->
+                        <div class="profile-userpic">
+                            <img src="@Url.Action("GetAvatar", new { size="medium" })" class="img-responsive" alt="">
+                        </div>
+                        <!-- END SIDEBAR USERPIC -->
+                        <!-- SIDEBAR USER TITLE -->
+                        <div class="profile-usertitle">
+                            <div class="profile-usertitle-name">
+                                @User.Identity.Name
+                            </div>
+                            <div class="profile-usertitle-job">
+                                @ViewBag.CompanyName
+                            </div>
+                        </div>
+                        <!-- END SIDEBAR USER TITLE -->
+                        <!-- SIDEBAR MENU -->
+                        <div class="profile-usermenu">
+                            <ul class="nav">
+                                <li class="active">
+                                    <a href="@Url.Action("UserCenter")">
+                                        <i class="icon-home"></i>
+                                        个人中心
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("AccountSetting")">
+                                        <i class="icon-settings"></i>
+                                        账号设置
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("ChangePassword")">
+                                        <i class="icon-lock"></i>
+                                        修改密码
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("UploadAvatar")">
+                                        <i class="icon-picture"></i>
+                                        上传头像
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- END MENU -->
+                    </div>
+                    <!-- END PORTLET MAIN -->
+                </div>
+                <!-- END BEGIN PROFILE SIDEBAR -->
+                <!-- BEGIN PROFILE CONTENT -->
+                <div class="profile-content">
+                    <div class="portlet light">
+                        <div class="portlet-title tabbable-line">
+                            <div class="caption caption-md">
+                                <i class="icon-globe theme-font hide"></i>
+                                <span class="caption-subject font-blue-madison bold uppercase">@ViewBag.Title</span>
+                            </div>
+                        </div>
+                        <div class="portlet-body">
+                            @if (ViewBag.StatusMessage as string == "出错啦.")
+                            {
+                                <div class="note note-danger">
+                                    <p>
+                                        @ViewBag.StatusMessage
+                                    </p>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="note note-success">
+                                    <p>
+                                        @ViewBag.StatusMessage
+                                    </p>
+                                </div>
+                            }
+
+                            <div class="top-news">
+                                <a href="@Url.Action("AccountSetting")" class="btn blue">
+                                    <span>
+                                        账号设置
+                                    </span>
+                                    <em>
+                                        <i class="fa fa-tags"></i>
+                                        更改您的邮箱，电话号码
+                                    </em>
+                                    <i class="fa fa-globe top-news-icon"></i>
+                                </a>
+                            </div>
+                            <div class="top-news">
+                                <a href="@Url.Action("ChangePassword")" class="btn green">
+                                    <span>
+                                        修改密码
+                                    </span>
+                                    <em>
+                                        <i class="fa fa-tags"></i>
+                                        更改您的登录密码
+                                    </em>
+                                    <i class="fa fa-briefcase top-news-icon"></i>
+                                </a>
+                            </div>
+                            <div class="top-news">
+                                <a href="@Url.Action("UploadAvatar")" class="btn yellow">
+                                    <span>
+                                        上传头像
+                                    </span>
+                                    <em>
+                                        <i class="fa fa-tags"></i>
+                                        上传喜爱的图片作为头像
+                                    </em>
+                                    <i class="fa fa-trophy top-news-icon"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- END PROFILE CONTENT -->
+            </div>
+        </div>
+        <!-- END PAGE CONTENT INNER -->
+    </div>
+</div>
+<!-- END PAGE CONTENT -->

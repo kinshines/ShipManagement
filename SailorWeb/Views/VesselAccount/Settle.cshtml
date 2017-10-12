@@ -1,0 +1,252 @@
+﻿@model SailorWeb.ViewModels.SettlePayment
+
+@{
+    ViewBag.Title = "单笔款项结算";
+}
+
+<!-- BEGIN PAGE CONTENT -->
+<div class="page-content">
+    <div class="container">
+        <!-- BEGIN PAGE BREADCRUMB -->
+        <ul class="page-breadcrumb breadcrumb">
+            <li>
+                @Html.ActionLink("首页", "Index", "Home")
+                <i class="fa fa-circle"></i>
+            </li>
+            <li>
+                @Html.ActionLink("船舶费用", "CostList")
+                <i class="fa fa-circle"></i>
+            </li>
+            <li class="active">
+                @ViewBag.Title
+            </li>
+        </ul>
+        <!-- END PAGE BREADCRUMB -->
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="portlet light">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <i class="fa fa-rmb font-green-sharp"></i>
+                            <span class="caption-subject font-green-sharp bold uppercase">@ViewBag.Title</span>
+                        </div>
+                    </div>
+                    <div class="portlet-body form">
+                        <!-- BEGIN FORM-->
+                        @using (Html.BeginForm("Settle", "VesselAccount", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+                        {
+                            <div class="form-body">
+                                @Html.AntiForgeryToken()
+                                @Html.ValidationSummary(true)
+                                @Html.HiddenFor(model => model.VesselCostID)
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">
+                                                进账
+                                            </label>
+                                            <div class="col-md-9">
+                                                <p class="form-control-static">
+                                                    @Html.DisplayFor(model=>model.Cost) @Html.DisplayFor(model => model.USCost)
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">
+                                                已出账
+                                            </label>
+                                            <div class="col-md-9">
+                                                <p class="form-control-static">
+                                                    @Html.DisplayFor(model => model.PaidCost) @Html.DisplayFor(model => model.USPaidCost)
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.Debt, new { @class = "control-label col-md-5" })
+                                            <div class="col-md-7">
+                                                <p class="form-control-static">
+                                                    @Html.DisplayFor(model => model.Debt)
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.Payment, new { @class = "control-label col-md-5" })
+                                            <div class="col-md-7">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        ￥
+                                                    </span>
+                                                    @Html.EditorFor(model => model.Payment, new { htmlAttributes = new { @class = "form-control" } })
+                                                </div>
+                                                @Html.ValidationMessageFor(model => model.Payment)
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.Debt, new { @class = "control-label col-md-5" })
+                                            <div class="col-md-7">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        ￥
+                                                    </span>
+                                                    @Html.EditorFor(model => model.Debt, new { htmlAttributes = new { @class = "form-control" } })
+                                                </div>
+                                                @Html.ValidationMessageFor(model => model.Debt)
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.USDebt, new { @class = "control-label col-md-5" })
+                                            <div class="col-md-7">
+                                                <p class="form-control-static">
+                                                    @Html.DisplayFor(model => model.USDebt)
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.USPayment, new { @class = "control-label col-md-5" })
+                                            <div class="col-md-7">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        $
+                                                    </span>
+                                                    @Html.EditorFor(model => model.USPayment, new { htmlAttributes = new { @class = "form-control" } })
+                                                </div>
+                                                @Html.ValidationMessageFor(model => model.USPayment)
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.USDebt, new { @class = "control-label col-md-5" })
+                                            <div class="col-md-7">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        $
+                                                    </span>
+                                                    @Html.EditorFor(model => model.USDebt, new { htmlAttributes = new { @class = "form-control" } })
+                                                </div>
+                                                @Html.ValidationMessageFor(model => model.USDebt)
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.PaymentDate, new { @class = "control-label col-md-5" })
+                                            <div class="col-md-7">
+                                                @Html.EditorFor(model => model.PaymentDate, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.PaymentDate)
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.Payoff, new { @class = "control-label col-md-5" })
+                                            <div class="col-md-7">
+                                                <div class="icheck-inline">
+                                                    @Html.EditorFor(model => model.Payoff, new { htmlAttributes = new { @class = "form-control" } })
+                                                </div>
+                                                @Html.ValidationMessageFor(model => model.Payoff)
+                                            </div>
+                                        </div>
+                                    </div>                              
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+
+                                            <label class="control-label col-md-3">上传回单</label>
+                                            <div class="col-md-9">
+                                                <div class="fileinput fileinput-new" data-provides="fileinput">
+                                                    <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="height: 300px; width: 300px;"></div>
+                                                    <div>
+                                                        <span class="btn btn-default btn-file"><span class="fileinput-new">选择图片</span><span class="fileinput-exists">更改</span><input type="file" name="receiptFile"></span>
+                                                        <a href="#" class="btn btn-default fileinput-exists" data-dismiss="fileinput">移除</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.Remark, new { @class = "control-label col-md-3" })
+                                            <div class="col-md-9">
+                                                @Html.EditorFor(model => model.Remark, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.Remark)
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-actions">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="row">
+                                            <div class="col-md-offset-3 col-md-9">
+                                                <button type="submit" class="btn green"><i class="fa fa-save"></i> 保存</button>
+                                                <a class="btn default" href="@Url.Action("Index")"><i class="fa fa-undo"></i> 返回列表</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                        <!-- END FORM-->
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END PAGE CONTENT -->
+
+@section scripts{
+    <script>
+        $(function () {
+            debtSettle();
+            USdebtSettle();
+            $('#Payment').on('change', debtSettle);
+            $('#USPayment').on('change', USdebtSettle);
+        });
+
+        function debtSettle() {
+            var debt = '@Model.Debt';
+            if (!debt)
+                return;
+            var cost = Number(debt);
+            var payment = Number($('#Payment').val());
+            $('#Debt').val(cost - payment > 0 ? cost - payment : 0);
+        }
+
+        function USdebtSettle() {
+            var debt = '@Model.USDebt';
+            if (!debt)
+                return;
+            var cost = Number(debt);
+            var payment = Number($('#USPayment').val());
+            $('#USDebt').val(cost - payment > 0 ? cost - payment : 0);
+        }
+    </script>
+}
+

@@ -1,0 +1,247 @@
+﻿@model SailorWeb.ViewModels.IndexData
+@{
+    ViewBag.Title = "首页";
+}
+
+	<!-- BEGIN PAGE CONTENT -->
+<div class="page-content">
+    <div class="container">
+        <!-- BEGIN PAGE BREADCRUMB -->
+        <ul class="page-breadcrumb breadcrumb">
+        </ul>
+        <!-- END PAGE BREADCRUMB -->
+        <!-- BEGIN PAGE CONTENT INNER -->
+        <div class="tiles">
+            <a class="tile double-down bg-blue-hoki" href="@Url.Action("Index","Notice")">
+                <div class="tile-body">
+                    <i class="fa fa-bell-o"></i>
+                </div>
+                <div class="tile-object">
+                    <div class="name">
+                        @Html.DisplayNameFor(model => model.Notice)
+                    </div>
+                    <div class="number">
+                        @Html.DisplayFor(model => model.Notice)
+                    </div>
+                </div>
+            </a>
+            <a class="tile bg-red-sunglo" href="@Url.Action("Index", "Sailor", new { status="aboard"})">
+                <div class="tile-body">
+                    <i class="fa fa-anchor"></i>
+                </div>
+                <div class="tile-object">
+                    <div class="name">
+                        @Html.DisplayNameFor(model => model.SailorAboard)
+                    </div>
+                    <div class="number">
+                        @Html.DisplayFor(model => model.SailorAboard)
+                    </div>
+                </div>
+            </a>
+            <a class="tile double bg-green-turquoise" href="@Url.Action("Index","Certificate")">
+                <div class="tile-body">
+                    <h4>证书管理</h4>
+                    <p>
+                        @Html.DisplayNameFor(model => model.CertificateTotal)
+                    </p>
+                    <p>
+                        船员取得的证书情况
+                    </p>
+                </div>
+                <div class="tile-object">
+                    <div class="name">
+                        <i class="fa fa-envelope"></i>
+                    </div>
+                    <div class="number">
+                        @Html.DisplayFor(model => model.CertificateTotal)
+                    </div>
+                </div>
+            </a>
+            <a class="tile bg-green-jungle" href="@Url.Action("Index","Vessel")">
+                <div class="tile-body">
+                    <i class="fa fa-ship"></i>
+                </div>
+                <div class="tile-object">
+                    <div class="name">
+                        @Html.DisplayNameFor(model => model.Vessel)
+                    </div>
+                    <div class="number">
+                        @Html.DisplayFor(model => model.Vessel)
+                    </div>
+                </div>
+            </a>
+            <a class="tile double bg-blue-madison" href="@Url.Action("Index","LaborSupply")">
+                <div class="tile-body">
+                    <h4>劳保用品库存</h4>
+                    <p>
+                        劳保用品库存
+                    </p>
+                    <p>
+                        劳保用品库存及领用情况
+                    </p>
+                </div>
+                <div class="tile-object">
+                    <div class="name">
+                        <i class="fa fa-suitcase"></i>
+                    </div>
+                    <div class="number">
+                    </div>
+                </div>
+            </a>
+            <a class="tile bg-purple-studio" href="@Url.Action("Index", "Sailor", new { status="waiting"})">
+                <div class="tile-body">
+                    <i class="fa fa-puzzle-piece"></i>
+                </div>
+                <div class="tile-object">
+                    <div class="name">
+                        @Html.DisplayNameFor(model => model.SailorWaiting)
+                    </div>
+                    <div class="number">
+                        @Html.DisplayFor(model => model.SailorWaiting)
+                    </div>
+                </div>
+            </a>
+            <a class="tile bg-yellow-saffron" href="@Url.Action("Index", "Certificate", new { status="notice"})">
+                <div class="tile-body">
+                    <i class="fa fa-paper-plane"></i>
+                </div>
+                <div class="tile-object">
+                    <div class="name">
+                        @Html.DisplayNameFor(model => model.CertificateNotice)
+                    </div>
+                    <div class="number">
+                        @Html.DisplayFor(model => model.CertificateNotice)
+                    </div>
+                </div>
+            </a>
+            <a class="tile bg-red-sunglo" href="@Url.Action("Index", "Certificate", new { status="overdue"})">
+                <div class="tile-body">
+                    <i class="fa fa-google-wallet"></i>
+                </div>
+                <div class="tile-object">
+                    <div class="name">
+                        @Html.DisplayNameFor(model => model.CertificateOverdue)
+                    </div>
+                    <div class="number">
+                        @Html.DisplayFor(model => model.CertificateOverdue)
+                    </div>
+                </div>
+            </a>
+            <a class="tile double bg-grey-cascade" href="@Url.Action("Index", "Contract", new { status="normal"})">
+                <div class="tile-body">
+                    <h4>合同管理</h4>
+                    <p>
+                        @Html.DisplayNameFor(model => model.ContractPerform)
+                    </p>
+                    <p>
+                        船员与船舶签订的合同情况
+                    </p>
+                </div>
+                <div class="tile-object">
+                    <div class="name">
+                        <i class="fa fa-twitter"></i>
+                    </div>
+                    <div class="number">
+                        @Html.DisplayFor(model => model.ContractPerform)
+                    </div>
+                </div>
+            </a>
+            <a class="tile bg-red-intense" href="@Url.Action("Index", "Contract", new { status="notice"})">
+                <div class="tile-body">
+                    <i class="fa fa-coffee"></i>
+                </div>
+                <div class="tile-object">
+                    <div class="name">
+                        @Html.DisplayNameFor(model => model.ContractNotice)
+                    </div>
+                    <div class="number">
+                        @Html.DisplayFor(model => model.ContractNotice)
+                    </div>
+                </div>
+            </a>
+            <a class="tile bg-green" href="@Url.Action("Index", "Sailor")">
+                <div class="tile-body">
+                    <i class="fa fa-bar-chart-o"></i>
+                </div>
+                <div class="tile-object">
+                    <div class="name">
+                        @Html.DisplayNameFor(model => model.SailorTotal)
+                    </div>
+                    <div class="number">
+                        @Html.DisplayFor(model => model.SailorTotal)
+                    </div>
+                </div>
+            </a>
+            <a class="tile bg-blue-steel" href="@Url.Action("Index", "Sailor", new { status="rest"})">
+                <div class="tile-body">
+                    <i class="fa fa-calendar"></i>
+                </div>
+                <div class="tile-object">
+                    <div class="name">
+                        @Html.DisplayNameFor(model => model.SailorRest)
+                    </div>
+                    <div class="number">
+                        @Html.DisplayFor(model => model.SailorRest)
+                    </div>
+                </div>
+            </a>
+            <a class="tile double bg-blue-chambray" href="@Url.Action("CostBill", "VesselAccount")">
+                <div class="corner">
+                </div>
+                <div class="tile-body">
+                    <h4>船舶费用</h4>
+                    <p>
+                        船舶账单汇总
+                    </p>
+                    <p>
+                        根据船舶的日常费用生成账单
+                    </p>
+                </div>
+                <div class="tile-object">
+                    <div class="name">
+                        <i class="fa fa-credit-card"></i>
+                    </div>
+                </div>
+            </a>
+            <a class="tile bg-yellow-lemon" href="@Url.Action("BalanceList", "VesselAccount")">
+                <div class="tile-body">
+                    <i class="fa fa-rmb"></i>
+                </div>
+                <div class="tile-object">
+                    <div class="name">
+                        船舶余额
+                    </div>
+                    <div class="number">
+                    </div>
+                </div>
+            </a>
+            <a class="tile bg-blue-soft" href="@Url.Action("Index","Shipowner")">
+                <div class="tile-body">
+                    <i class="fa fa-building"></i>
+                </div>
+                <div class="tile-object">
+                    <div class="name">
+                        @Html.DisplayNameFor(model => model.Shipowner)
+                    </div>
+                    <div class="number">
+                        @Html.DisplayFor(model => model.Shipowner)
+                    </div>
+                </div>
+            </a>
+            <a class="tile bg-green-meadow" href="@Url.Action("Index","ServiceRecord")">
+                <div class="tile-body">
+                    <i class="fa fa-comments"></i>
+                </div>
+                <div class="tile-object">
+                    <div class="name">
+                        服务记录
+                    </div>
+                    <div class="number">
+                    </div>
+                </div>
+            </a>
+        </div>
+        <!-- END PAGE CONTENT INNER -->
+    </div>
+</div>
+<!-- END PAGE CONTENT -->

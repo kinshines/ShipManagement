@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SailorWeb", "SailorWeb\SailorWeb.csproj", "{D320A70B-0964-4551-981E-2A23A00C55D2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OverseeService", "OverseeService\OverseeService.csproj", "{2B75C65D-D747-46ED-B312-1E2365854DE2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SailorDomain", "SailorDomain\SailorDomain.csproj", "{2F8E0627-F1F1-463B-97D2-C40769A5E21A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D320A70B-0964-4551-981E-2A23A00C55D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D320A70B-0964-4551-981E-2A23A00C55D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D320A70B-0964-4551-981E-2A23A00C55D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D320A70B-0964-4551-981E-2A23A00C55D2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2B75C65D-D747-46ED-B312-1E2365854DE2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B75C65D-D747-46ED-B312-1E2365854DE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B75C65D-D747-46ED-B312-1E2365854DE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B75C65D-D747-46ED-B312-1E2365854DE2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2F8E0627-F1F1-463B-97D2-C40769A5E21A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F8E0627-F1F1-463B-97D2-C40769A5E21A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F8E0627-F1F1-463B-97D2-C40769A5E21A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F8E0627-F1F1-463B-97D2-C40769A5E21A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

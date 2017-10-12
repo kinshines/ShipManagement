@@ -1,0 +1,414 @@
+﻿@model SailorDomain.Entities.Interview
+
+@{
+    ViewBag.Title = "新增面试信息";
+}
+
+<!-- BEGIN PAGE CONTENT -->
+<div class="page-content">
+    <div class="container">
+        <!-- BEGIN PAGE BREADCRUMB -->
+        <ul class="page-breadcrumb breadcrumb">
+            <li>
+                @Html.ActionLink("首页", "Index", "Home")
+                <i class="fa fa-circle"></i>
+            </li>
+            <li>
+                @Html.ActionLink("面试管理", "Index")
+                <i class="fa fa-circle"></i>
+            </li>
+            <li class="active">
+                @ViewBag.Title
+            </li>
+        </ul>
+        <!-- END PAGE BREADCRUMB -->
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="portlet light">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <i class="fa fa-plus-square-o font-green-sharp"></i>
+                            <span class="caption-subject font-green-sharp bold uppercase">@ViewBag.Title</span>
+                        </div>
+                    </div>
+                    <div class="portlet-body form">
+                        <!-- BEGIN FORM-->
+                        @using (Html.BeginForm("Create", "Interview", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                        {
+                            <div class="form-body">
+                                @Html.AntiForgeryToken()
+                                @Html.ValidationSummary(true)
+                                @Html.Hidden("medium")
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3" for="Post">
+                                                @Html.DisplayNameFor(model => model.Post)
+                                                <span class="required" aria-required="true">*</span>
+                                            </label>
+                                            <div class="col-md-9">
+                                                @Html.EditorFor(model => model.Post, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.Post)
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3" for="SailorID">
+                                                @Html.DisplayNameFor(model => model.SailorID)
+                                                <span class="required" aria-required="true">*</span>
+                                            </label>
+                                            <div class="col-md-9">
+                                                @Html.DropDownList("SailorID", null, String.Empty, new { @class = "form-control select2me" })
+                                                @Html.ValidationMessageFor(model => model.SailorID)
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                </div>
+                                <!--/row-->
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.EnglishLevel, new { @class = "control-label col-md-3" })
+                                            <div class="col-md-9">
+                                                @Html.EditorFor(model => model.EnglishLevel, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.EnglishLevel)
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.Listening, new { @class = "control-label col-md-3" })
+                                            <div class="col-md-9">
+                                                @Html.EditorFor(model => model.Listening)
+                                                @Html.ValidationMessageFor(model => model.Listening)
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                </div>
+                                <!--/row-->
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.Speaking, new { @class = "control-label col-md-3" })
+                                            <div class="col-md-9">
+                                                @Html.EditorFor(model => model.Speaking, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.Speaking)
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.Reading, new { @class = "control-label col-md-3" })
+                                            <div class="col-md-9">
+                                                @Html.EditorFor(model => model.Reading, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.Reading)
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                </div>
+                                <!--/row-->
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.Writing, new { @class = "control-label col-md-3" })
+                                            <div class="col-md-9">
+                                                @Html.EditorFor(model => model.Writing, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.Writing)
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.Expertise, new { @class = "control-label col-md-3" })
+                                            <div class="col-md-9">
+                                                @Html.EditorFor(model => model.Expertise, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.Expertise)
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--/row-->
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.Qualification, new { @class = "control-label col-md-3" })
+                                            <div class="col-md-9">
+                                                <div class="icheck-inline">
+                                                    @Html.EditorFor(model => model.Qualification, new { htmlAttributes = new { @class = "form-control" } })
+                                                </div>
+                                                @Html.ValidationMessageFor(model => model.Qualification)
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.EmergencyHandle, new { @class = "control-label col-md-3" })
+                                            <div class="col-md-9">
+                                                @Html.EditorFor(model => model.EmergencyHandle, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.EmergencyHandle)
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                </div>
+                                <!--/row-->
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.ServiceAwareness, new { @class = "control-label col-md-3" })
+                                            <div class="col-md-9">
+                                                <div class="icheck-inline">
+                                                    @Html.EditorFor(model => model.ServiceAwareness, new { htmlAttributes = new { @class = "form-control" } })
+                                                </div>
+                                                @Html.ValidationMessageFor(model => model.ServiceAwareness)
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.Health, new { @class = "control-label col-md-3" })
+                                            <div class="col-md-9">
+                                                @Html.EditorFor(model => model.Health, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.Health)
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                </div>
+                                <!--/row-->
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.Management, new { @class = "control-label col-md-3" })
+                                            <div class="col-md-9">
+                                                <div class="icheck-inline">
+                                                    @Html.EditorFor(model => model.Management, new { htmlAttributes = new { @class = "form-control" } })
+                                                </div>
+                                                @Html.ValidationMessageFor(model => model.Management)
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.SmsOperation, new { @class = "control-label col-md-3" })
+                                            <div class="col-md-9">
+                                                @Html.EditorFor(model => model.SmsOperation, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.SmsOperation)
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                </div>
+                                <!--/row-->
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.Other, new { @class = "control-label col-md-3" })
+                                            <div class="col-md-9">
+                                                <div class="icheck-inline">
+                                                    @Html.EditorFor(model => model.Other, new { htmlAttributes = new { @class = "form-control" } })
+                                                </div>
+                                                @Html.ValidationMessageFor(model => model.Other)
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3" for="InterviewScore">
+                                                @Html.DisplayNameFor(model=>model.InterviewScore)
+                                                <span class="required" aria-required="true">*</span>
+                                            </label>
+                                            <div class="col-md-9">
+                                                @Html.EditorFor(model => model.InterviewScore, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.InterviewScore)
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                </div>
+                                <!--/row-->
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.Conclusion, new { @class = "control-label col-md-3" })
+                                            <div class="col-md-9">
+                                                @Html.EditorFor(model => model.Conclusion, "Enum-radio")
+                                                @Html.ValidationMessageFor(model => model.Conclusion)
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3" for="Comment">
+                                                @Html.DisplayNameFor(model => model.Comment)
+                                                <span class="required" aria-required="true">*</span>
+                                            </label>
+                                            <div class="col-md-9">
+                                                @Html.EditorFor(model => model.Comment, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.Comment)
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                </div>
+                                <!--/row-->
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3" for="Interviewer">
+                                                @Html.DisplayNameFor(model => model.Interviewer)
+                                                <span class="required" aria-required="true">*</span>
+                                            </label>
+                                            <div class="col-md-9">
+                                                <div class="icheck-inline">
+                                                    @Html.EditorFor(model => model.Interviewer, new { htmlAttributes = new { @class = "form-control" } })
+                                                </div>
+                                                @Html.ValidationMessageFor(model => model.Interviewer)
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.InterviewDate, new { @class = "control-label col-md-3" })
+                                            <div class="col-md-9">
+                                                @Html.EditorFor(model => model.InterviewDate, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.InterviewDate)
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                </div>
+                                <!--/row-->
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.InterviewPlace, new { @class = "control-label col-md-3" })
+                                            <div class="col-md-9">
+                                                <div class="icheck-inline">
+                                                    @Html.EditorFor(model => model.InterviewPlace, new { htmlAttributes = new { @class = "form-control" } })
+                                                </div>
+                                                @Html.ValidationMessageFor(model => model.InterviewPlace)
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.ProfessionalScore, new { @class = "control-label col-md-3" })
+                                            <div class="col-md-9">
+                                                @Html.EditorFor(model => model.ProfessionalScore, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.ProfessionalScore)
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                </div>
+                                <!--/row-->
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.ComprehensiveScore, new { @class = "control-label col-md-3" })
+                                            <div class="col-md-9">
+                                                <div class="icheck-inline">
+                                                    @Html.EditorFor(model => model.ComprehensiveScore, new { htmlAttributes = new { @class = "form-control" } })
+                                                </div>
+                                                @Html.ValidationMessageFor(model => model.ComprehensiveScore)
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.ComprehensiveAssessment, new { @class = "control-label col-md-3" })
+                                            <div class="col-md-9">
+                                                @Html.EditorFor(model => model.ComprehensiveAssessment, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.ComprehensiveAssessment)
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                </div>
+                                <!--/row-->
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.SailorRequirement, new { @class = "control-label col-md-3" })
+                                            <div class="col-md-9">
+                                                <div class="icheck-inline">
+                                                    @Html.EditorFor(model => model.SailorRequirement, new { htmlAttributes = new { @class = "form-control" } })
+                                                </div>
+                                                @Html.ValidationMessageFor(model => model.SailorRequirement)
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                    <div class="col-md-6">
+                                        
+                                    </div>
+                                    <!--/span-->
+                                </div>
+                                <!--/row-->
+
+                            </div>
+                            <div class="form-actions">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="row">
+                                            <div class="col-md-offset-3 col-md-9">
+                                                <button type="submit" class="btn green"><i class="fa fa-save"></i> 保存</button>
+                                                <a href="@Url.Action("Index")" class="btn default"><i class="fa fa-undo"></i> 返回列表</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                        <!-- END FORM-->
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END PAGE CONTENT -->
+
+@section scripts{
+    <script>
+        $(function () {
+            var SailorID = '@Request.QueryString["SailorID"]';
+            if (SailorID) {
+                $('#SailorID').select2("readonly", true);
+                var sailorUrl = '@Url.Action("GetSailor", "Sailor")';
+                var data = { "id": SailorID };
+                $.getJSON(sailorUrl, data, function (sailor) {
+                    $('#Post').select2("val", sailor.Post);
+                });
+            }
+
+            var sailorUrl = '@Url.Action("GetSailor", "Sailor")';
+            $('#SailorID').on('change', function (e) {
+                var data = { "id": e.val };
+                $.getJSON(sailorUrl, data, function (sailor) {
+                    $('#Post').select2("val", sailor.Post);
+                });
+            });
+        })
+    </script>
+}

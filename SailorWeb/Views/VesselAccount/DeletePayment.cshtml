@@ -1,0 +1,29 @@
+﻿<div class="row">
+    <div class="col-md-12">
+        <div class="portlet light">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-trash font-red"></i>
+                    <span class="caption-subject font-red bold uppercase">确认删除此项信息？</span>
+                </div>
+            </div>
+            <div class="portlet-body form">
+                <!-- BEGIN FORM-->
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="row">
+                        <div class="col-md-offset-3 col-md-9">
+                            <button type="submit" class="btn red"><i class="fa fa-trash"></i> 确认删除</button>
+                            <a class="btn default" href="javascript:void(0)" data-dismiss="modal"><i class="fa fa-undo"></i> 返回列表</a>
+                        </div>
+                    </div>
+                }
+                <!-- END FORM-->
+            </div>
+        </div>
+
+    </div>
+</div>
+
+

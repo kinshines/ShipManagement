@@ -1,0 +1,286 @@
+﻿@using SailorDomain.Entities;
+@using PagedList.Mvc;
+@model PagedList.IPagedList<Sailor>
+
+@{
+    ViewBag.Title = "船员列表";
+}
+<style>
+    .address-ellipsis {
+        width: 155px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+    }
+    .remark-ellipsis {
+        width: 100px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+    }
+</style>
+
+<!-- BEGIN PAGE CONTENT -->
+<div class="page-content">
+    <div class="container">
+        <!-- BEGIN PAGE BREADCRUMB -->
+        <ul class="page-breadcrumb breadcrumb">
+            <li>
+                @Html.ActionLink("首页", "Index", "Home")
+                <i class="fa fa-circle"></i>
+            </li>
+            <li>
+                @Html.ActionLink("船员管理", "Index", "Sailor")
+                <i class="fa fa-circle"></i>
+            </li>
+            <li class="active">
+                @ViewBag.Title
+            </li>
+        </ul>
+        <!-- END PAGE BREADCRUMB -->
+
+        <div class="row">
+            <div class="col-md-12">
+                <!-- BEGIN SAMPLE TABLE PORTLET-->
+                <div class="portlet light">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <i class="fa fa-list font-green-sharp"></i>
+                            <span class="caption-subject font-green-sharp bold uppercase">@ViewBag.Title</span>
+                        </div>
+                        <div class="actions btn-set">
+                            <a href="@Url.Action("Create")" class="btn btn-circle green-haze btn-sm">
+                                <i class="fa fa-plus"></i> 添加
+                            </a>
+                            <a href="javascript:void(0)" class="btn btn-circle green btn-sm btn-search">
+                                <i class="fa fa-search"></i> 搜索
+                            </a>
+                        </div>
+                    </div>
+                    <div class="portlet-body form portlet-search">
+                        <!-- BEGIN FORM-->
+                        @using (Html.BeginForm("Index", "Sailor", FormMethod.Get, new { @class = "form-horizontal" }))
+                        {
+                            @Html.Hidden("status")
+                            <button type="submit" class="display-hide"></button>
+                            <div class="form-body">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-4">姓名</label>
+                                            <div class="col-md-8">
+                                                @Html.TextBox("Name", ViewBag.Name as string, new { @class = "form-control", placeholder = "请输入姓名" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-4">身份证号</label>
+                                            <div class="col-md-8">
+                                                @Html.TextBox("IdentityNo", ViewBag.IdentityNo as string, new { @class = "form-control", placeholder = "请输入身份证号" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-4">职务</label>
+                                            <div class="col-md-8">
+                                                @Html.DropDownList("Post", null, "", new { @class = "form-control select2me" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-4">证书等级</label>
+                                            <div class="col-md-8">
+                                                @Html.DropDownList("Degree", null, "", new { @class = "form-control select2me" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">手机</label>
+                                            <div class="col-md-9">
+                                                @Html.TextBox("Mobile", ViewBag.Mobile as string, new { @class = "form-control", placeholder = "请输入手机号" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">备注</label>
+                                            <div class="col-md-9">
+                                                @Html.TextBox("Remark", ViewBag.Remark as string, new { @class = "form-control", placeholder = "请输入备注" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">家庭住址</label>
+                                            <div class="col-md-9">
+                                                @Html.TextBox("Address", ViewBag.Address as string, new { @class = "form-control", placeholder = "请输入家庭住址" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                        <!-- END FORM-->
+                    </div>
+                    <div class="portlet-body">
+                        <div class="table-scrollable table-scrollable-borderless">
+                            <table class="table table-hover table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            姓名
+                                        </th>                                     
+                                        <th width="155px">
+                                            身份证号
+                                        </th>
+                                        <th>
+                                            职务
+                                        </th>
+                                        <th>
+                                            证书等级
+                                        </th>
+                                        <th width="130px">
+                                            手机
+                                        </th>
+                                        <th>
+                                            家庭住址
+                                        </th>
+                                        <th>
+                                            备注
+                                        </th>
+                                        <th>
+                                            状态
+                                        </th>
+                                        <th>
+                                            操作
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr data-id="@item.SailorID">
+                                            <td>
+                                                @Html.ActionLink(item.Name, "Details", new { id = item.SailorID })
+                                            </td>
+                                            <td width="155px">
+                                                @Html.DisplayFor(modelItem => item.IdentityNo)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Post)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Degree)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Mobile)
+                                            </td>
+                                            <td>
+                                                <div class="address-ellipsis" title="@item.Address">
+                                                    @Html.DisplayFor(modelItem => item.Address)
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="remark-ellipsis" title="@item.Remark">
+                                                    @Html.DisplayFor(modelItem => item.Remark)
+                                                </div>
+                                            </td>
+                                            <td>
+                                                @if (item.Status == SailorStatus.在船)
+                                                {
+                                                    <a href="javascript:Metronic.showDialog('@Url.Action("Details", "ServiceRecord", new { id = item.ServiceRecordID })','在船情况');" class="btn default btn-xs blue-stripe" title="点击查看在船情况">
+                                                        <span data-content="status">@Html.DisplayFor(modelItem => item.Status)</span>
+                                                    </a>
+                                                }
+                                                else
+                                                {
+                                                    <a href="javascript:changeStatus('@item.SailorID','@item.Name','@item.Status');" class="btn default btn-xs green-stripe">
+                                                        <i class="fa fa-refresh"></i> <span data-content="status">@Html.DisplayFor(modelItem => item.Status)</span>
+                                                    </a>
+                                                }
+                                            </td>
+                                            <td>
+                                                <a href="@Url.Action("Details", new { id=item.SailorID})" class="btn default btn-xs green-jungle">
+                                                    <i class="fa fa-th"></i> 详情
+                                                </a>
+                                                <a href="@Url.Action("Edit", new { id=item.SailorID})" class="btn default btn-xs blue">
+                                                    <i class="fa fa-edit"></i> 编辑
+                                                </a>
+                                                @if (User.IsInRole("CompanyAdmin"))
+                                                {
+                                                    <a href="javascript:Metronic.deleteItem('@Url.Action("Delete", new { id = item.SailorID })')" class="btn default btn-xs red">
+                                                        <i class="fa fa-trash"></i> 删除
+                                                    </a>
+                                                }
+                                                
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+
+                        第 @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) 页，共 @Model.PageCount 页
+
+                        @Html.PagedListPager(Model, page => Url.Action("Index",
+                        new { page, Name = ViewBag.Name, IdentityNo = ViewBag.IdentityNo, Remark = ViewBag.Remark,
+                              Mobile = ViewBag.Mobile,
+                              status = ViewBag.status,
+                              Post = ViewBag.SelectedPost,
+                              Degree = ViewBag.SelectedDegree
+                        }))
+                    </div>
+                </div>
+                <!-- END SAMPLE TABLE PORTLET-->
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END PAGE CONTENT -->
+@Html.Partial("_ChangeStatus")
+
+@section scripts{
+    <script>
+        function changeStatus(id, name, status) {
+            $('div.icheck-inline').children('label:contains(' + status + ')').hide().siblings().show();
+            $('input[name="SailorID"]').val(id);
+            $('input[name="SailorID"]').prev('span').text(name);
+            $('#statusModal').modal();
+        }
+
+        function changeSuccess(data) {
+            if (data == "error") {
+                alert("保存失败！")
+            }
+            else {
+                $('tr[data-id="' + data.Id + '"]').find('span[data-content="status"]').text(data.Status);
+                $('#statusModal').modal('hide');
+            }
+        }
+
+        function ashoreSuccess(data) {
+            if (data.IsSuccess) {
+                var entity = data.Entity;
+                $('tr[data-id="' + entity.SailorID + '"]').find('span[data-content="status"]').text("休假");
+                bootbox.hideAll();
+            }
+            else {
+                var error = $('<li>');
+                error.append(data.Message);
+                $('#summaryErrors ul').html(error);
+            }
+        }
+    </script>
+    }

@@ -1,0 +1,640 @@
+﻿@using SailorDomain.Entities
+@model Vessel
+
+@{
+    ViewBag.Title = "船舶详情";
+}
+
+<!-- BEGIN PAGE CONTENT -->
+<div class="page-content">
+    <div class="container">
+        <!-- BEGIN PAGE BREADCRUMB -->
+        <ul class="page-breadcrumb breadcrumb">
+            <li>
+                @Html.ActionLink("首页", "Index", "Home")
+                <i class="fa fa-circle"></i>
+            </li>
+            <li>
+                @Html.ActionLink("船舶管理", "Index")
+                <i class="fa fa-circle"></i>
+            </li>
+            <li class="active">
+                @ViewBag.Title
+            </li>
+        </ul>
+        <!-- END PAGE BREADCRUMB -->
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="tabbable tabbable-custom tabbable-noborder tabbable-reversed">
+                    <ul class="nav nav-tabs">
+                        <li class="active">
+                            <a href="#tab_vessel" data-toggle="tab">
+                                船舶信息
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#tab_sailor" data-toggle="tab">
+                                在船船员
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#tab_contract" data-toggle="tab">
+                                签署合同
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#tab_servicerecord" data-toggle="tab">
+                                历史服务评价
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="tab_vessel">
+                            <div class="portlet box blue">
+                                <div class="portlet-title">
+                                    <div class="caption">
+                                        <i class="fa fa-ship"></i>船舶信息
+                                    </div>
+                                </div>
+                                <div class="portlet-body form">
+                                    <form class="form-horizontal" role="form">
+                                        <div class="form-body">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.ShipownerName, new { @class = "control-label col-md-3" })
+                                                        <div class="col-md-9">
+                                                            <p class="form-control-static">
+                                                                @Html.ActionLink(Model.ShipownerName, "Details", "Shipowner", new { id = Model.ShipownerID }, null)
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--/span-->
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.Name, new { @class = "control-label col-md-3" })
+                                                        <div class="col-md-9">
+                                                            <p class="form-control-static">
+                                                                @Html.DisplayFor(model => model.Name)
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--/span-->
+                                            </div>
+                                            <!--/row-->
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.IMO, new { @class = "control-label col-md-3" })
+                                                        <div class="col-md-9">
+                                                            <p class="form-control-static">
+                                                                @Html.DisplayFor(model => model.IMO)
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--/span-->
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.Type, new { @class = "control-label col-md-3" })
+                                                        <div class="col-md-9">
+                                                            <p class="form-control-static">
+                                                                @Html.DisplayFor(model => model.Type)
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--/span-->
+                                            </div>
+                                            <!--/row-->
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.Flag, new { @class = "control-label col-md-3" })
+                                                        <div class="col-md-9">
+                                                            <p class="form-control-static">
+                                                                @Html.DisplayFor(model => model.Flag)
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--/span-->
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.SailZone, new { @class = "control-label col-md-3" })
+                                                        <div class="col-md-9">
+                                                            <p class="form-control-static">
+                                                                @Html.DisplayFor(model => model.SailZone)
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--/span-->
+                                            </div>
+                                            <!--/row-->
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.GrossTon, new { @class = "control-label col-md-3" })
+                                                        <div class="col-md-9">
+                                                            <p class="form-control-static">
+                                                                @Html.DisplayFor(model => model.GrossTon)
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.DeadWeightTon, new { @class = "control-label col-md-3" })
+                                                        <div class="col-md-9">
+                                                            <p class="form-control-static">
+                                                                @Html.DisplayFor(model => model.DeadWeightTon)
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!--/row-->
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.NetTon, new { @class = "control-label col-md-3" })
+                                                        <div class="col-md-9">
+                                                            <p class="form-control-static">
+                                                                @Html.DisplayFor(model => model.NetTon)
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--/span-->
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.Power, new { @class = "control-label col-md-3" })
+                                                        <div class="col-md-9">
+                                                            <p class="form-control-static">
+                                                                @Html.DisplayFor(model => model.Power)
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--/span-->
+                                            </div>
+                                            <!--/row-->
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.BuildDate, new { @class = "control-label col-md-3" })
+                                                        <div class="col-md-9">
+                                                            <p class="form-control-static">
+                                                                @Html.DisplayFor(model => model.BuildDate)
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--/span-->
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.BuildPlace, new { @class = "control-label col-md-3" })
+                                                        <div class="col-md-9">
+                                                            <p class="form-control-static">
+                                                                @Html.DisplayFor(model => model.BuildPlace)
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--/span-->
+                                            </div>
+                                            <!--/row-->
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.MainEngine, new { @class = "control-label col-md-3" })
+                                                        <div class="col-md-9">
+                                                            <p class="form-control-static">
+                                                                @Html.DisplayFor(model => model.MainEngine)
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--/span-->
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.AuxiliaryEngine, new { @class = "control-label col-md-3" })
+                                                        <div class="col-md-9">
+                                                            <p class="form-control-static">
+                                                                @Html.DisplayFor(model => model.AuxiliaryEngine)
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--/span-->
+                                            </div>
+                                            <!--/row-->
+                                            <div class="row">
+                                                
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.ElectricGenerator, new { @class = "control-label col-md-3" })
+                                                        <div class="col-md-9">
+                                                            <p class="form-control-static">
+                                                                @Html.DisplayFor(model => model.ElectricGenerator)
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--/span-->
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.Manager, new { @class = "control-label col-md-3" })
+                                                        <div class="col-md-9">
+                                                            <p class="form-control-static">
+                                                                @Html.DisplayFor(model => model.Manager)
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--/span-->
+                                            </div>
+                                            <!--/row-->
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.MinManning, new { @class = "control-label col-md-3" })
+                                                        <div class="col-md-9">
+                                                            <p class="form-control-static">
+                                                                @Html.DisplayFor(model => model.MinManning)
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--/span-->
+                                                
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.Catchword, new { @class = "control-label col-md-3" })
+                                                        <div class="col-md-9">
+                                                            <p class="form-control-static">
+                                                                @Html.DisplayFor(model => model.Catchword)
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--/span-->
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.VesselManageType, new { @class = "control-label col-md-3" })
+                                                        <div class="col-md-9">
+                                                            <p class="form-control-static">
+                                                                @Html.DisplayFor(model => model.VesselManageType)
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--/span-->
+                                            </div>
+                                            <!--/row-->
+                                        </div>
+                                        <div class="form-actions">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="row">
+                                                        <div class="col-md-offset-3 col-md-9">
+                                                            <a href="@Url.Action("Edit", new { id = Model.VesselID })" class="btn green"><i class="fa fa-pencil"></i> 编辑</a>
+                                                            <a href="@Url.Action("Index")" class="btn default"><i class="fa fa-undo"></i> 返回列表</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="tab_sailor">
+                            <div class="portlet box blue">
+                                <div class="portlet-title">
+                                    <div class="caption">
+                                        <i class="fa fa-users"></i>在船船员
+                                    </div>
+                                </div>
+                                <div class="portlet-body form">
+                                    <form class="form-horizontal" role="form">
+                                        <div class="form-body">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <!-- BEGIN SAMPLE TABLE PORTLET-->
+                                                    <div class="portlet light">
+                                                        <div class="portlet-body">
+                                                            <table class="table table-hover table-striped table-bordered">
+                                                                <thead>
+                                                                <tr>
+                                                                    <th class="hidden">
+                                                                        职务编码
+                                                                    </th>
+                                                                    <th>
+                                                                        船员姓名
+                                                                    </th>
+                                                                    <th>
+                                                                        航区
+                                                                    </th>
+                                                                    <th>
+                                                                        职务
+                                                                    </th>
+                                                                    <th>
+                                                                        上船地点
+                                                                    </th>
+                                                                    <th>
+                                                                        上船日期
+                                                                    </th>
+                                                                    <th>
+                                                                        预计下船日期
+                                                                    </th>
+                                                                    <th>
+                                                                        备注
+                                                                    </th>
+                                                                    <th>
+                                                                        操作
+                                                                    </th>
+                                                                </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                @foreach (var item in Model.ServiceRecords.Where(s => !s.Complete))
+                                                                {
+                                                                    <tr data-id="@item.ServiceRecordID">
+                                                                        <td class="hidden">@item.PostInt</td>
+                                                                        <td>
+                                                                            @Html.ActionLink(item.SailorName, "Details", "Sailor", new {id = item.SailorID}, null)
+                                                                        </td>
+                                                                        <td>
+                                                                            @Html.DisplayFor(modelItem => item.SailZone)
+                                                                        </td>
+                                                                        <td>
+                                                                            @Html.DisplayFor(modelItem => item.Post)
+                                                                        </td>
+                                                                        <td>
+                                                                            @Html.DisplayFor(modelItem => item.AboardPlace)
+                                                                        </td>
+                                                                        <td>
+                                                                            @Html.DisplayFor(modelItem => item.AboardDate)
+                                                                        </td>
+                                                                        <td data-content="ashoreDate">
+                                                                            @Html.DisplayFor(modelItem=>item.AshoreDate)
+                                                                        </td>
+                                                                        <td>
+                                                                            @Html.DisplayFor(modelItem => item.Remark)
+                                                                        </td>
+                                                                        <td>
+                                                                            <a href="javascript:Metronic.showDialog('@Url.Action("Ashore", "ServiceRecord",new { id = item.ServiceRecordID })','船员下船')" class="btn default btn-xs green-seagreen">
+                                                                                <i class="fa fa-ship"></i> 下船
+                                                                            </a>
+                                                                        </td>
+                                                                    </tr>
+                                                                }
+                                                                </tbody>
+                                                            </table>
+
+                                                        </div>
+                                                    </div>
+                                                    <!-- END SAMPLE TABLE PORTLET-->
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="tab_contract">
+                            <div class="portlet box blue">
+                                <div class="portlet-title">
+                                    <div class="caption">
+                                        <i class="fa fa-tag"></i>签署合同
+                                    </div>
+                                </div>
+                                <div class="portlet-body form">
+                                    <!-- BEGIN FORM-->
+                                    <form class="form-horizontal" role="form">
+                                        <div class="form-body">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <!-- BEGIN SAMPLE TABLE PORTLET-->
+                                                    <div class="portlet light">
+                                                        <div class="portlet-body">
+                                                            <table class="table table-hover table-striped table-bordered">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>
+                                                                            合同号
+                                                                        </th>
+                                                                        <th>
+                                                                            船员姓名
+                                                                        </th>
+                                                                        <th>
+                                                                            职务
+                                                                        </th>
+                                                                        <th>
+                                                                            船付工资
+                                                                        </th>
+                                                                        <th>
+                                                                            家汇工资
+                                                                        </th>
+                                                                        <th>
+                                                                            上船日期
+                                                                        </th>
+                                                                        <th>
+                                                                            下船日期
+                                                                        </th>
+                                                                        <th>
+                                                                            备注
+                                                                        </th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    @foreach (var item in Model.Contracts.OrderByDescending(c => c.ContractID))
+                                                                    {
+                                                                        <tr>
+                                                                            <td>
+                                                                                @Html.DisplayFor(modelItem => item.ContractNo)
+                                                                            </td>
+                                                                            <td>
+                                                                                @Html.ActionLink(item.SailorName, "Details", "Sailor", new { id = item.SailorID }, null)
+                                                                            </td>
+                                                                            <td>
+                                                                                @Html.DisplayFor(modelItem => item.Post)
+                                                                            </td>
+                                                                            <td>
+                                                                                @Html.DisplayFor(modelItem => item.ShipWage)
+                                                                            </td>
+                                                                            <td>
+                                                                                @Html.DisplayFor(modelItem => item.HomeWage)
+                                                                            </td>
+                                                                            <td>
+                                                                                @Html.DisplayFor(modelItem => item.AboardDate)
+                                                                            </td>
+                                                                            <td>
+                                                                                @Html.DisplayFor(modelItem => item.AshoreDate)
+                                                                            </td>
+                                                                            <td>
+                                                                                @Html.DisplayFor(modelItem => item.Remark)
+                                                                            </td>
+                                                                        </tr>
+                                                                    }
+                                                                </tbody>
+                                                            </table>
+
+                                                        </div>
+                                                    </div>
+                                                    <!-- END SAMPLE TABLE PORTLET-->
+                                                </div>
+                                            </div>
+
+                                            <!--/row-->
+                                        </div>
+                                        <div class="form-actions">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="row">
+                                                        <div class="col-md-offset-3 col-md-9">
+                                                            <a href="@Url.Action("Create", "Contract", new { VesselID = Model.VesselID, medium = "Vessel" })" class="btn green"><i class="fa fa-plus"></i> 签署合同</a>
+                                                            <a href="@Url.Action("Index", "Vessel")" class="btn default"><i class="fa fa-undo"></i> 返回列表</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                    <!-- END FORM-->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="tab_servicerecord">
+                            <div class="portlet box blue">
+                                <div class="portlet-title">
+                                    <div class="caption">
+                                        <i class="fa fa-thumbs-o-up"></i>历史服务记录及评价
+                                    </div>
+                                </div>
+                                <div class="portlet-body form">
+                                    <!-- BEGIN FORM-->
+                                    <form class="form-horizontal" role="form">
+                                        <div class="form-body">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <!-- BEGIN SAMPLE TABLE PORTLET-->
+                                                    <div class="portlet light">
+                                                        <div class="portlet-body">
+                                                            <table class="table table-hover table-striped table-bordered">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>
+                                                                            船员姓名
+                                                                        </th>
+                                                                        <th>
+                                                                            职务
+                                                                        </th>
+                                                                        <th>
+                                                                            上船日期
+                                                                        </th>
+                                                                        <th>
+                                                                            下船日期
+                                                                        </th>
+                                                                        <th>
+                                                                            离船原因
+                                                                        </th>
+                                                                        <th>
+                                                                            备注
+                                                                        </th>
+                                                                        <th>
+                                                                            评价
+                                                                        </th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    @foreach (var item in Model.ServiceRecords.Where(s => s.Complete).OrderByDescending(s => s.ServiceRecordID))
+                                                                    {
+                                                                        <tr>
+                                                                            <td>
+                                                                                @Html.ActionLink(item.SailorName, "Details", "Sailor", new { id = item.SailorID }, null)
+                                                                            </td>
+                                                                            <td>
+                                                                                @Html.DisplayFor(modelItem => item.Post)
+                                                                            </td>
+                                                                            <td>
+                                                                                @Html.DisplayFor(modelItem => item.AboardDate)
+                                                                            </td>
+                                                                            <td>
+                                                                                @Html.DisplayFor(modelItem => item.AshoreDate)
+                                                                            </td>
+                                                                            <td>
+                                                                                @Html.DisplayFor(modelItem => item.AshoreReason)
+                                                                            </td>
+                                                                            <td>
+                                                                                @Html.DisplayFor(modelItem => item.Remark)
+                                                                            </td>
+                                                                            <td>
+                                                                                @Html.DisplayFor(modelItem => item.Comment)
+                                                                            </td>
+                                                                        </tr>
+                                                                    }
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                    <!-- END SAMPLE TABLE PORTLET-->
+                                                </div>
+                                            </div>
+
+                                            <!--/row-->
+                                        </div>
+                                    </form>
+                                    <!-- END FORM-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END PAGE CONTENT -->
+
+@section scripts{
+    <script>
+        $(function() {
+            var tab = '@Request.QueryString["tab"]';
+            if (tab) {
+                tab = '#' + tab;
+                $('a[href=' + tab + ']').get(0).click();
+            }
+
+            var table = $('#sailor_table');
+            Metronic.initDataTableFormat($('div.tab-pane table'));
+
+
+        });
+
+        function ashoreSuccess(data) {
+            if (data.IsSuccess) {
+                var entity = data.Entity;
+                $('tr[data-id="' + entity.ServiceRecordID + '"]').hide();
+                bootbox.hideAll();
+            }
+            else {
+                var error = $('<li>');
+                error.append(data.Message);
+                $('#summaryErrors ul').html(error);
+            }
+        }
+    </script>
+}
+
+

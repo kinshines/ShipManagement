@@ -1,0 +1,279 @@
+﻿@using SailorDomain.Entities
+@using PagedList.Mvc;
+@model PagedList.IPagedList<VesselAccount>
+
+@{
+    ViewBag.Title = "船舶流水账记录";
+}
+
+<!-- BEGIN PAGE CONTENT -->
+<div class="page-content">
+    <div class="container">
+        <!-- BEGIN PAGE BREADCRUMB -->
+        <ul class="page-breadcrumb breadcrumb">
+            <li>
+                @Html.ActionLink("首页", "Index", "Home")
+                <i class="fa fa-circle"></i>
+            </li>
+            <li>
+                @Html.ActionLink("船舶管理", "ManagedList", "Vessel")
+                <i class="fa fa-circle"></i>
+            </li>
+            <li class="active">
+                @ViewBag.Title
+            </li>
+        </ul>
+        <!-- END PAGE BREADCRUMB -->
+
+        <div class="row">
+            <div class="col-md-12">
+                <!-- BEGIN SAMPLE TABLE PORTLET-->
+                <div class="portlet light">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <i class="fa fa-list font-green-sharp"></i>
+                            <span class="caption-subject font-green-sharp bold uppercase">@ViewBag.Title</span>
+                        </div>
+                        <div class="caption">
+                            <span class="caption-subject bold note note-warning">船舶名称：@Request.QueryString["VesselName"]</span>
+                        </div>
+                        <div class="actions btn-set">
+                            <a href="@Url.Action("Cost", new { VesselID = Request.QueryString["VesselID"], VesselName = Request.QueryString["VesselName"] })" class="btn btn-circle green-haze">
+                                <i class="fa fa-plus"></i> 添加进账记录
+                            </a>
+                            <a href="javascript:void(0)" class="btn btn-circle green btn-sm btn-search">
+                                <i class="fa fa-search"></i> 搜索
+                            </a>
+                        </div>
+                    </div>
+                    <div class="portlet-body form portlet-search">
+                        <!-- BEGIN FORM-->
+                        @using (Html.BeginForm("CostList", "VesselAccount", FormMethod.Get, new { @class = "form-horizontal" }))
+                        {
+                            @Html.Hidden("status")
+                            @Html.Hidden("VesselName", Request.QueryString["VesselName"])
+                            @Html.Hidden("VesselID", Request.QueryString["VesselID"])
+                            <button type="submit" class="display-hide"></button>
+                            <div class="form-body">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-4">收款单位</label>
+                                            <div class="col-md-8">
+                                                @Html.DropDownList("CompanyID", null, String.Empty, new { @class = "form-control select2me" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-4">项目</label>
+                                            <div class="col-md-8">
+                                                @Html.DropDownList("FeeItem", null, String.Empty, new { @class = "form-control select2me" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-4">发票号</label>
+                                            <div class="col-md-8">
+                                                @Html.TextBox("InvoiceNo", ViewBag.InvoiceNo as string, new { @class = "form-control", placeholder = "请输入发票号码" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-4">账单日期</label>
+                                            <div class="col-md-8">
+                                                <div class="input-group input-large date-picker input-daterange">
+                                                    @Html.TextBox("InvoiceBeginDate", ViewBag.InvoiceBeginDate as string, "{0:yyyy-MM-dd}", new { @class = "form-control" })
+                                                    <span class="input-group-addon">
+                                                        --
+                                                    </span>
+                                                    @Html.TextBox("InvoiceEndDate", ViewBag.InvoiceEndDate as string, "{0:yyyy-MM-dd}", new { @class = "form-control" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                </div>
+                            </div>
+                        }
+                        <!-- END FORM-->
+                    </div>
+                    <div class="portlet-body">
+                        <div class="table-scrollable table-scrollable-borderless">
+                            <table class="table table-hover table-striped">
+                                <thead>
+                                    <tr>
+                                        <th width="100px">
+                                            账单日期
+                                        </th>
+                                        <th width="100px">
+                                            收款单位
+                                        </th>
+                                        <th width="80px">
+                                            发票号
+                                        </th>
+                                        <th width="80px">
+                                            项目
+                                        </th>
+                                        <th>
+                                            进账
+                                        </th>
+                                        <th>
+                                            出账
+                                        </th>
+                                        <th>
+                                            余额
+                                        </th>
+                                        <th width="80px">
+                                            是否付清
+                                        </th>
+                                        <th width="100px">
+                                            付款日期
+                                        </th>
+                                        <th>
+                                            备注
+                                        </th>
+                                        <th>
+                                            发票
+                                        </th>
+                                        <th>
+                                            签收单
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr data-id="@item.VesselAccountID">
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.InvoiceDate)
+                                            </td>
+                                            <td>
+                                                <a href="@Url.Action("Details", "BusinessCompany", new { id = item.CompanyID })">@Html.DisplayFor(modelItem => item.CompanyName)</a>
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.InvoiceNo)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.FeeItem)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Cost) 
+                                                @Html.DisplayFor(modelItem => item.USCost)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Payment) 
+                                                @Html.DisplayFor(modelItem => item.USPayment)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Debt) 
+                                                @Html.DisplayFor(modelItem => item.USDebt)
+                                            </td>
+                                            <td>
+                                                @if (!item.Payoff)
+                                                {
+                                                    <a href="@Url.Action("Settle", "VesselAccount", new { VesselCostID = item.VesselAccountID })" class="btn default btn-xs blue">
+                                                        <i class="fa fa-rmb"></i> 出账
+                                                    </a>
+                                                }
+                                                else
+                                                {
+                                                    <a href="javascript:void(0)" class="btn default btn-xs green-stripe">
+                                                        已付清
+                                                    </a>
+                                                }
+                                                <a href="javascript:Metronic.showDialog('@Url.Action("PaymentList", "VesselAccount", new { id = item.VesselAccountID })','出账记录')" class="btn default btn-xs yellow-gold" title="出账记录">
+                                                    出账记录
+                                                </a>
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.PaymentDate)
+                                            </td>
+                                            <td>
+                                                <span data-content="remark">@Html.DisplayFor(modelItem => item.Remark)</span>
+                                                <a href="javascript:modifyRemark('@item.VesselAccountID')">修改</a>
+                                            </td>
+                                            <td>
+                                                @if (item.InvoiceFileID.HasValue)
+                                                {
+                                                    <a href="javascript:Metronic.showPicture('@item.InvoiceFileID','发票预览')" class="btn default btn-xs green" title="预览">
+                                                        <i class="icon-eye"></i>
+                                                    </a>
+                                                }
+                                            </td>
+                                            <td>
+                                                @if (item.SignFileID.HasValue)
+                                                {
+                                                    <a href="javascript:Metronic.showPicture('@item.SignFileID','签收单预览')" class="btn default btn-xs green" title="预览">
+                                                        <i class="icon-eye"></i>
+                                                    </a>
+                                                }
+                                                else
+                                                {
+                                                    <a href="@Url.Action("Sign", "VesselAccount", new { id = item.VesselAccountID })" class="btn default btn-xs blue">
+                                                        <i class="fa fa-gift"></i> 签收
+                                                    </a>
+                                                }
+                                                @if (User.IsInRole("CompanyAdmin"))
+                                                {
+                                                    <a href="javascript:Metronic.deleteItem('@Url.Action("Delete", new { id=item.VesselAccountID})')" class="btn default btn-xs red">
+                                                        <i class="fa fa-trash"></i> 删除
+                                                    </a>
+                                                }
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+
+                        第 @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) 页，共 @Model.PageCount 页
+
+                        @Html.PagedListPager(Model, page => Url.Action("CostList",
+                       new
+                       {
+                           page,
+                           InvoiceBeginDate = ViewBag.InvoiceBeginDate,
+                           InvoiceEndDate = ViewBag.InvoiceEndDate,
+                           VesselID = ViewBag.SelectedVesselID,
+                           CompanyID = ViewBag.SelectedCompanyID,
+                           FeeItem = ViewBag.SelectedFeeItem,
+                           VesselName = Request.QueryString["VesselName"]
+                       }))
+                    </div>
+                </div>
+                <!-- END SAMPLE TABLE PORTLET-->
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END PAGE CONTENT -->
+@Html.Partial("_ModifyRemark")
+@section scripts{
+    <script>
+
+        function modifyRemark(id, name) {
+            var remark = $('tr[data-id="' + id + '"]').find('span[data-content="remark"]').text();
+            $('#remarkModal input[name="VesselAccountID"]').val(id);
+            $('#remarkModal textarea[name="Remark"]').val(remark);
+            $('#remarkModal').modal();
+        }
+
+        function processSuccess(data) {
+            if (data == "error") {
+                alert("保存失败！");
+            }
+            else {
+                $('tr[data-id="' + data.Id + '"]').find('span[data-content="remark"]').text(data.Remark);
+                $('#remarkModal').modal('hide');
+            }
+        }
+    </script>
+}

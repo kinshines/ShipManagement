@@ -1,0 +1,1666 @@
+﻿@model SailorDomain.Entities.Sailor
+
+@{
+    ViewBag.Title = "船员详情";
+}
+
+<!-- BEGIN PAGE CONTENT -->
+<div class="page-content">
+    <div class="container">
+        <!-- BEGIN PAGE BREADCRUMB -->
+        <ul class="page-breadcrumb breadcrumb">
+            <li>
+                @Html.ActionLink("首页", "Index", "Home")
+                <i class="fa fa-circle"></i>
+            </li>
+            <li>
+                @Html.ActionLink("船员管理", "Index")
+                <i class="fa fa-circle"></i>
+            </li>
+            <li class="active">
+                @ViewBag.Title
+            </li>
+        </ul>
+        <!-- END PAGE BREADCRUMB -->
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="note note-success note-bordered">
+                    <h4 class="block">
+                        <span>@Html.DisplayFor(model => model.Name)</span>&nbsp;&nbsp;
+                        <span class="label label-primary">
+                            @Html.DisplayFor(model => model.Post)
+                        </span>&nbsp;&nbsp;
+                        @if (Model.Status == SailorDomain.Entities.SailorStatus.在船)
+                        {
+                            <span class="label label-warning">
+                                @Html.DisplayFor(model => model.Status)
+                            </span>
+                            <span>
+                                &nbsp; &nbsp; 所在船舶：<a href="@Url.Action("Details", "Vessel", new { id=Model.VesselID})">@Html.DisplayFor(model => model.VesselName)</a>
+                            </span>
+                        }
+                        else
+                        {
+                            <span class="label label-success">
+                                @Html.DisplayFor(model => model.Status)
+                            </span>
+                        }
+
+                    </h4>
+                </div>
+                <div class="tabbable tabbable-custom tabbable-noborder tabbable-reversed">
+                    <ul class="nav nav-tabs">
+                        <li class="active">
+                            <a href="#tab_basic" data-toggle="tab">
+                                个人资料
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#tab_certificate" data-toggle="tab">
+                                获得证书
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#tab_contract" data-toggle="tab">
+                                签署合同
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#tab_servicerecord" data-toggle="tab">
+                                服务评价
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#tab_family" data-toggle="tab">
+                                家庭情况
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#tab_experience" data-toggle="tab">
+                                工作经历
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#tab_title" data-toggle="tab">
+                                职称信息
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#tab_interview" data-toggle="tab">
+                                面试考核
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#tab_trainee" data-toggle="tab">
+                                参加培训
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#tab_exam" data-toggle="tab">
+                                参加考试
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="tab_basic">
+                            <div class="portlet box blue">
+                                <div class="portlet-title">
+                                    <div class="caption">
+                                        <i class="fa fa-user"></i>个人资料
+                                    </div>
+                                </div>
+                                <div class="portlet-body form">
+                                    <!-- BEGIN FORM-->
+                                    <form class="form-horizontal" role="form">
+                                        <div class="form-body">
+                                            <h4 class="form-section">基本信息</h4>
+                                            @if (Model.FileID.HasValue)
+                                            {
+                                                <div class="row">
+                                                    <div class="col-md-6 col-md-offset-3">
+                                                        <div class="form-group">
+                                                            <img src="@Url.Action("GetFile","UploadFile", new { id = Model.FileID })" style="max-height: 300px; max-width: 300px;" />
+                                                        </div>
+                                                    </div>
+                                                    <!--/span-->
+                                                </div>
+                                            }
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.Name, new { @class = "control-label col-md-3" })
+                                                        <div class="col-md-9">
+                                                            <p class="form-control-static">
+                                                                @Html.DisplayFor(model => model.Name)
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--/span-->
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.EnglishName, new { @class = "control-label col-md-3" })
+                                                        <div class="col-md-9">
+                                                            <p class="form-control-static">
+                                                                @Html.DisplayFor(model => model.EnglishName)
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--/span-->
+                                            </div>
+                                            <!--/row-->
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.Post, new { @class = "control-label col-md-3" })
+                                                        <div class="col-md-9">
+                                                            <p class="form-control-static">
+                                                                @Html.DisplayFor(model => model.Post)
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--/span-->
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.IdentityNo, new { @class = "control-label col-md-3" })
+                                                        <div class="col-md-9">
+                                                            <p class="form-control-static">
+                                                                @Html.DisplayFor(model => model.IdentityNo)
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--/span-->
+                                            </div>
+                                            <!--/row-->
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.Birthday, new { @class = "control-label col-md-3" })
+                                                        <div class="col-md-9">
+                                                            <p class="form-control-static">
+                                                                @Html.DisplayFor(model => model.Birthday)
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.Birthplace, new { @class = "control-label col-md-3" })
+                                                        <div class="col-md-9">
+                                                            <p class="form-control-static">
+                                                                @Html.DisplayFor(model => model.Birthplace)
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!--/row-->
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.Gender, new { @class = "control-label col-md-3" })
+                                                        <div class="col-md-9">
+                                                            <p class="form-control-static">
+                                                                @Html.DisplayFor(model => model.Gender)
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--/span-->
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.Ethnic, new { @class = "control-label col-md-3" })
+                                                        <div class="col-md-9">
+                                                            <p class="form-control-static">
+                                                                @Html.DisplayFor(model => model.Ethnic)
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--/span-->
+                                            </div>
+                                            <!--/row-->
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.EnglishLevel, new { @class = "control-label col-md-3" })
+                                                        <div class="col-md-9">
+                                                            <p class="form-control-static">
+                                                                @Html.DisplayFor(model => model.EnglishLevel)
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--/span-->
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.Marital, new { @class = "control-label col-md-3" })
+                                                        <div class="col-md-9">
+                                                            <p class="form-control-static">
+                                                                @Html.DisplayFor(model => model.Marital)
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--/span-->
+                                            </div>
+                                            <!--/row-->
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.Source, new { @class = "control-label col-md-3" })
+                                                        <div class="col-md-9">
+                                                            <p class="form-control-static">
+                                                                @Html.DisplayFor(model => model.Source)
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--/span-->
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.Degree, new { @class = "control-label col-md-3" })
+                                                        <div class="col-md-9">
+                                                            <p class="form-control-static">
+                                                                @Html.DisplayFor(model => model.Degree)
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--/span-->
+                                            </div>
+                                            <!--/row-->
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.HomeContacter, new { @class = "control-label col-md-3" })
+                                                        <div class="col-md-9">
+                                                            <p class="form-control-static">
+                                                                @Html.DisplayFor(model => model.HomeContacter)
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--/span-->
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.HomeTel, new { @class = "control-label col-md-3" })
+                                                        <div class="col-md-9">
+                                                            <p class="form-control-static">
+                                                                @Html.DisplayFor(model => model.HomeTel)
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--/span-->
+                                            </div>
+                                            <!--/row-->
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.Mobile, new { @class = "control-label col-md-3" })
+                                                        <div class="col-md-9">
+                                                            <p class="form-control-static">
+                                                                @Html.DisplayFor(model => model.Mobile)
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--/span-->
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.Email, new { @class = "control-label col-md-3" })
+                                                        <div class="col-md-9">
+                                                            <p class="form-control-static">
+                                                                @Html.DisplayFor(model => model.Email)
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--/span-->
+                                            </div>
+                                            <!--/row-->
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.WorkInDate, new { @class = "control-label col-md-3" })
+                                                        <div class="col-md-9">
+                                                            <p class="form-control-static">
+                                                                @Html.DisplayFor(model => model.WorkInDate)
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--/span-->
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.ComeInDate, new { @class = "control-label col-md-3" })
+                                                        <div class="col-md-9">
+                                                            <p class="form-control-static">
+                                                                @Html.DisplayFor(model => model.ComeInDate)
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--/span-->
+                                            </div>
+                                            <!--/row-->
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.EnrollmentDate, new { @class = "control-label col-md-3" })
+                                                        <div class="col-md-9">
+                                                            <p class="form-control-static">
+                                                                @Html.DisplayFor(model => model.EnrollmentDate)
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--/span-->
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.GraduateDate, new { @class = "control-label col-md-3" })
+                                                        <div class="col-md-9">
+                                                            <p class="form-control-static">
+                                                                @Html.DisplayFor(model => model.GraduateDate)
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--/span-->
+                                            </div>
+                                            <!--/row-->
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.EducationDegree, new { @class = "control-label col-md-3" })
+                                                        <div class="col-md-9">
+                                                            <p class="form-control-static">
+                                                                @Html.DisplayFor(model => model.EducationDegree)
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--/span-->
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.Major, new { @class = "control-label col-md-3" })
+                                                        <div class="col-md-9">
+                                                            <p class="form-control-static">
+                                                                @Html.DisplayFor(model => model.Major)
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--/span-->
+                                            </div>
+                                            <!--/row-->
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.GraduateCollege, new { @class = "control-label col-md-3" })
+                                                        <div class="col-md-9">
+                                                            <p class="form-control-static">
+                                                                @Html.DisplayFor(model => model.GraduateCollege)
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--/span-->
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.Address, new { @class = "control-label col-md-3" })
+                                                        <div class="col-md-9">
+                                                            <p class="form-control-static">
+                                                                @Html.DisplayFor(model => model.Address)
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--/span-->
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.Remark, new { @class = "control-label col-md-3" })
+                                                        <div class="col-md-9">
+                                                            <p class="form-control-static">
+                                                                @Html.DisplayFor(model => model.Remark)
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--/span-->
+                                            </div>
+                                            <!--/row-->
+                                            <h4 class="form-section">体貌特征</h4>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.Height, new { @class = "control-label col-md-3" })
+                                                        <div class="col-md-9">
+                                                            <p class="form-control-static">
+                                                                @Html.DisplayFor(model => model.Height)
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--/span-->
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.Weight, new { @class = "control-label col-md-3" })
+                                                        <div class="col-md-9">
+                                                            <p class="form-control-static">
+                                                                @Html.DisplayFor(model => model.Weight)
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--/span-->
+                                            </div>
+                                            <!--/row-->
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.Blood, new { @class = "control-label col-md-3" })
+                                                        <div class="col-md-9">
+                                                            <p class="form-control-static">
+                                                                @Html.DisplayFor(model => model.Blood)
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--/span-->
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.Sleeve, new { @class = "control-label col-md-3" })
+                                                        <div class="col-md-9">
+                                                            <p class="form-control-static">
+                                                                @Html.DisplayFor(model => model.Sleeve)
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--/span-->
+                                            </div>
+                                            <!--/row-->
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.Collar, new { @class = "control-label col-md-3" })
+                                                        <div class="col-md-9">
+                                                            <p class="form-control-static">
+                                                                @Html.DisplayFor(model => model.Collar)
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--/span-->
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.Waist, new { @class = "control-label col-md-3" })
+                                                        <div class="col-md-9">
+                                                            <p class="form-control-static">
+                                                                @Html.DisplayFor(model => model.Waist)
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--/span-->
+                                            </div>
+                                            <!--/row-->
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.Chest, new { @class = "control-label col-md-3" })
+                                                        <div class="col-md-9">
+                                                            <p class="form-control-static">
+                                                                @Html.DisplayFor(model => model.Chest)
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.CoatLength, new { @class = "control-label col-md-3" })
+                                                        <div class="col-md-9">
+                                                            <p class="form-control-static">
+                                                                @Html.DisplayFor(model => model.CoatLength)
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!--/row-->
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.TrouserLength, new { @class = "control-label col-md-3" })
+                                                        <div class="col-md-9">
+                                                            <p class="form-control-static">
+                                                                @Html.DisplayFor(model => model.TrouserLength)
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--/span-->
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.ShoeSize, new { @class = "control-label col-md-3" })
+                                                        <div class="col-md-9">
+                                                            <p class="form-control-static">
+                                                                @Html.DisplayFor(model => model.ShoeSize)
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--/span-->
+                                            </div>
+                                            <!--/row-->
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.HatSize, new { @class = "control-label col-md-3" })
+                                                        <div class="col-md-9">
+                                                            <p class="form-control-static">
+                                                                @Html.DisplayFor(model => model.HatSize)
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--/span-->
+                                            </div>
+                                            <!--/row-->
+                                            <h4 class="form-section">个人账号</h4>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.WageCardNo, new { @class = "control-label col-md-3" })
+                                                        <div class="col-md-9">
+                                                            <p class="form-control-static">
+                                                                @Html.DisplayFor(model => model.WageCardNo)
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--/span-->
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.Bank, new { @class = "control-label col-md-3" })
+                                                        <div class="col-md-9">
+                                                            <p class="form-control-static">
+                                                                @Html.DisplayFor(model => model.Bank)
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--/span-->
+                                            </div>
+                                            <!--/row-->
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.AccountName, new { @class = "control-label col-md-3" })
+                                                        <div class="col-md-9">
+                                                            <p class="form-control-static">
+                                                                @Html.DisplayFor(model => model.AccountName)
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.PensionNo, new { @class = "control-label col-md-3" })
+                                                        <div class="col-md-9">
+                                                            <p class="form-control-static">
+                                                                @Html.DisplayFor(model => model.PensionNo)
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!--/row-->
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.UnemployBenefitNo, new { @class = "control-label col-md-3" })
+                                                        <div class="col-md-9">
+                                                            <p class="form-control-static">
+                                                                @Html.DisplayFor(model => model.UnemployBenefitNo)
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--/span-->
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.SocialInsuranceNo, new { @class = "control-label col-md-3" })
+                                                        <div class="col-md-9">
+                                                            <p class="form-control-static">
+                                                                @Html.DisplayFor(model => model.SocialInsuranceNo)
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--/span-->
+                                            </div>
+                                            <!--/row-->
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.MedicalInsuranceNo, new { @class = "control-label col-md-3" })
+                                                        <div class="col-md-9">
+                                                            <p class="form-control-static">
+                                                                @Html.DisplayFor(model => model.MedicalInsuranceNo)
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--/span-->
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.ProvidentFundNo, new { @class = "control-label col-md-3" })
+                                                        <div class="col-md-9">
+                                                            <p class="form-control-static">
+                                                                @Html.DisplayFor(model => model.ProvidentFundNo)
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!--/row-->
+
+                                        </div>
+                                        <div class="form-actions">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="row">
+                                                        <div class="col-md-offset-3 col-md-9">
+                                                            <a href="@Url.Action("Export", "Sailor", new { id = Model.SailorID })" class="btn green-seagreen"><i class="fa fa-wordpress"></i> 导出简历</a>
+                                                            <a href="@Url.Action("Edit", "Sailor", new { id = Model.SailorID })" class="btn green"><i class="fa fa-pencil"></i> 编辑</a>
+                                                            <a href="@Url.Action("Index", "Sailor", new { id = Model.SailorID })" class="btn default"><i class="fa fa-undo"></i> 返回列表</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                    <!-- END FORM-->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="tab_certificate">
+                            <div class="portlet box blue">
+                                <div class="portlet-title">
+                                    <div class="caption">
+                                        <i class="fa fa-h-square"></i>获得证书
+                                    </div>
+                                </div>
+                                <div class="portlet-body form">
+                                    <!-- BEGIN FORM-->
+                                    <form class="form-horizontal" role="form">
+                                        <div class="form-body">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <!-- BEGIN SAMPLE TABLE PORTLET-->
+                                                    <div class="portlet light">
+                                                        <div class="portlet-body">
+                                                            <table class="table table-hover table-striped table-bordered">
+                                                                <thead>
+                                                                <tr>
+                                                                    <th class="hidden">证书序号</th>
+                                                                    <th>
+                                                                        证书名称
+                                                                    </th>
+                                                                    <th>
+                                                                        证书编号
+                                                                    </th>
+                                                                    <th>
+                                                                        证书等级
+                                                                    </th>
+                                                                    <th>
+                                                                        签发日期
+                                                                    </th>
+                                                                    <th>
+                                                                        失效日期
+                                                                    </th>
+                                                                    <th>
+                                                                        图片
+                                                                    </th>
+                                                                    <th>
+                                                                        操作
+                                                                    </th>
+                                                                </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    @foreach (var item in Model.Certificates.OrderBy(c => c.CertificateTypeID))
+                                                                    {
+                                                                        <tr>
+                                                                            <td class="hidden">
+                                                                                @Html.DisplayFor(modelItem=>item.CertificateTypeID)
+                                                                            </td>
+                                                                            <td>
+                                                                                @Html.DisplayFor(modelItem => item.Name)
+                                                                            </td>
+                                                                            <td>
+                                                                                @Html.DisplayFor(modelItem => item.Code)
+                                                                            </td>
+                                                                            <td>
+                                                                                @Html.DisplayFor(modelItem => item.Degree)
+                                                                            </td>
+                                                                            <td>
+                                                                                @Html.DisplayFor(modelItem => item.IssueDate)
+                                                                            </td>
+                                                                            <td>
+                                                                                @Html.DisplayFor(modelItem => item.ExpiryDate)
+                                                                            </td>
+                                                                            <td>
+                                                                                @if (item.FileID.HasValue)
+                                                                                {
+                                                                                    <a href="javascript:Metronic.showPicture('@item.FileID','证书预览')" class="btn default btn-xs green">
+                                                                                        <i class="icon-eye"></i> 预览
+                                                                                    </a>
+                                                                                }
+                                                                            </td>
+                                                                            <td>
+                                                                                <a href="@Url.Action("Details", "Certificate", new {id = item.CertificateID})" class="btn default btn-xs green-jungle">
+                                                                                    <i class="fa fa-th"></i> 详情
+                                                                                </a>
+                                                                                <a href="@Url.Action("Edit", "Certificate", new {id = item.CertificateID})" class="btn default btn-xs blue">
+                                                                                    <i class="fa fa-edit"></i> 编辑
+                                                                                </a>
+                                                                            </td>
+                                                                        </tr>
+                                                                    }
+                                                                </tbody>
+                                                            </table>
+
+                                                        </div>
+                                                    </div>
+                                                    <!-- END SAMPLE TABLE PORTLET-->
+                                                </div>
+                                            </div>
+
+                                            <!--/row-->
+                                        </div>
+                                        <div class="form-actions">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="row">
+                                                        <div class="col-md-offset-3 col-md-9">
+                                                            <a href="@Url.Action("Create", "Certificate", new { SailorID = Model.SailorID, medium="Sailor" })" class="btn green"><i class="fa fa-plus"></i> 添加证书</a>
+                                                            <a href="@Url.Action("Index", "Sailor", new { id = Model.SailorID })" class="btn default"><i class="fa fa-undo"></i> 返回列表</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                    <!-- END FORM-->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="tab_contract">
+                            <div class="portlet box blue">
+                                <div class="portlet-title">
+                                    <div class="caption">
+                                        <i class="fa fa-tag"></i>签署合同
+                                    </div>
+                                </div>
+                                <div class="portlet-body form">
+                                    <!-- BEGIN FORM-->
+                                    <form class="form-horizontal" role="form">
+                                        <div class="form-body">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <!-- BEGIN SAMPLE TABLE PORTLET-->
+                                                    <div class="portlet light">
+                                                        <div class="portlet-body">
+                                                            <table class="table table-hover table-striped table-bordered">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>
+                                                                            合同号
+                                                                        </th>
+                                                                        <th>
+                                                                            船东
+                                                                        </th>
+                                                                        <th>
+                                                                            船舶名称
+                                                                        </th>
+                                                                        <th>
+                                                                            职务
+                                                                        </th>
+                                                                        <th>
+                                                                            家汇工资
+                                                                        </th>
+                                                                        <th>
+                                                                            船付工资
+                                                                        </th>
+                                                                        <th>
+                                                                            上船日期
+                                                                        </th>
+                                                                        <th>
+                                                                            下船日期
+                                                                        </th>
+                                                                        <th>
+                                                                            备注
+                                                                        </th>
+                                                                        <th>
+                                                                            操作
+                                                                        </th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    @foreach (var item in Model.Contracts.OrderByDescending(c => c.ContractID))
+                                                                    {
+                                                                        <tr>
+                                                                            <td>
+                                                                                @Html.DisplayFor(modelItem => item.ContractNo)
+                                                                            </td>
+                                                                            <td>
+                                                                                @Html.ActionLink(item.ShipownerName, "Details", "Shipowner", new { id = item.ShipownerID }, null)
+                                                                            </td>
+                                                                            <td>
+                                                                                @Html.ActionLink(item.VesselName, "Details", "Vessel", new { id = item.VesselID }, null)
+                                                                            </td>
+                                                                            <td>
+                                                                                @Html.DisplayFor(modelItem => item.Post)
+                                                                            </td>
+                                                                            <td>
+                                                                                @Html.DisplayFor(modelItem => item.HomeWage)
+                                                                            </td>
+                                                                            <td>
+                                                                                @Html.DisplayFor(modelItem => item.ShipWage)
+                                                                            </td>
+                                                                            <td>
+                                                                                @Html.DisplayFor(modelItem => item.AboardDate)
+                                                                            </td>
+                                                                            <td>
+                                                                                @Html.DisplayFor(modelItem => item.AshoreDate)
+                                                                            </td>
+                                                                            <td>
+                                                                                @Html.DisplayFor(modelItem => item.Remark)
+                                                                            </td>
+                                                                            <td>
+                                                                                <a href="@Url.Action("Details", "Contract", new { id = item.ContractID })" class="btn default btn-xs green-jungle">
+                                                                                    <i class="fa fa-th"></i> 详情
+                                                                                </a>
+                                                                            </td>
+                                                                        </tr>
+                                                                    }
+                                                                </tbody>
+                                                            </table>
+
+                                                        </div>
+                                                    </div>
+                                                    <!-- END SAMPLE TABLE PORTLET-->
+                                                </div>
+                                            </div>
+
+                                            <!--/row-->
+                                        </div>
+                                        <div class="form-actions">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="row">
+                                                        <div class="col-md-offset-3 col-md-9">
+                                                            <a href="@Url.Action("Create", "Contract", new { SailorID = Model.SailorID, medium="Sailor" })" class="btn green"><i class="fa fa-plus"></i> 签署合同</a>
+                                                            <a href="@Url.Action("Index", "Sailor", new { id = Model.SailorID })" class="btn default"><i class="fa fa-undo"></i> 返回列表</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                    <!-- END FORM-->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="tab_servicerecord">
+                            <div class="portlet box blue">
+                                <div class="portlet-title">
+                                    <div class="caption">
+                                        <i class="fa fa-thumbs-o-up"></i>服务记录及评价
+                                    </div>
+                                </div>
+                                <div class="portlet-body form">
+                                    <!-- BEGIN FORM-->
+                                    <form class="form-horizontal" role="form">
+                                        <div class="form-body">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <!-- BEGIN SAMPLE TABLE PORTLET-->
+                                                    <div class="portlet light">
+                                                        <div class="portlet-body">
+                                                            <table class="table table-hover table-striped table-bordered">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>
+                                                                            船东
+                                                                        </th>
+                                                                        <th>
+                                                                            船舶名称
+                                                                        </th>
+                                                                        <th>
+                                                                            职务
+                                                                        </th>
+                                                                        <th>
+                                                                            上船日期
+                                                                        </th>
+                                                                        <th>
+                                                                            下船日期
+                                                                        </th>
+                                                                        <th>
+                                                                            评价
+                                                                        </th>
+                                                                        <th>
+                                                                            操作
+                                                                        </th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    @foreach (var item in Model.ServiceRecords.OrderByDescending(s => s.ServiceRecordID))
+                                                                    {
+                                                                        <tr>
+                                                                            <td>
+                                                                                @Html.ActionLink(item.ShipownerName, "Details", "Shipowner", new { id = item.ShipownerID }, null)
+                                                                            </td>
+                                                                            <td>
+                                                                                @Html.ActionLink(item.VesselName, "Details", "Vessel", new { id = item.VesselID }, null)
+                                                                            </td>
+                                                                            <td>
+                                                                                @Html.DisplayFor(modelItem => item.Post)
+                                                                            </td>
+                                                                            <td>
+                                                                                @Html.DisplayFor(modelItem => item.AboardDate)
+                                                                            </td>
+                                                                            <td>
+                                                                                @Html.DisplayFor(modelItem => item.AshoreDate)
+                                                                            </td>
+                                                                            <td>
+                                                                                @Html.DisplayFor(modelItem => item.Comment)
+                                                                            </td>
+                                                                            <td>
+                                                                                <a href="@Url.Action("Details", "ServiceRecord", new { id = item.ServiceRecordID })" class="btn default btn-xs green-jungle">
+                                                                                    <i class="fa fa-th"></i> 详情
+                                                                                </a>
+                                                                                <a href="@Url.Action("Edit", "ServiceRecord", new { id = item.ServiceRecordID })" class="btn default btn-xs blue">
+                                                                                    <i class="fa fa-edit"></i> 编辑
+                                                                                </a>
+                                                                            </td>
+                                                                        </tr>
+                                                                    }
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                    <!-- END SAMPLE TABLE PORTLET-->
+                                                </div>
+                                            </div>
+
+                                            <!--/row-->
+                                        </div>
+                                        <div class="form-actions">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="row">
+                                                        <div class="col-md-offset-3 col-md-9">
+                                                            <a href="@Url.Action("Index", "Sailor", new { id = Model.SailorID })" class="btn default"><i class="fa fa-undo"></i> 返回列表</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                    <!-- END FORM-->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="tab_family">
+                            <div class="portlet box blue">
+                                <div class="portlet-title">
+                                    <div class="caption">
+                                        <i class="fa fa-users"></i>家庭情况
+                                    </div>
+                                </div>
+                                <div class="portlet-body form">
+                                    <!-- BEGIN FORM-->
+                                    <form class="form-horizontal" role="form">
+                                        <div class="form-body">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <!-- BEGIN SAMPLE TABLE PORTLET-->
+                                                    <div class="portlet light">
+                                                        <div class="portlet-body">
+                                                            <table class="table table-hover table-striped table-bordered">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>
+                                                                            姓名
+                                                                        </th>
+                                                                        <th>
+                                                                            关系
+                                                                        </th>
+                                                                        <th>
+                                                                            是否受益人
+                                                                        </th>
+                                                                        <th>
+                                                                            电话
+                                                                        </th>
+                                                                        <th>
+                                                                            地址
+                                                                        </th>
+                                                                        <th>
+                                                                            备注
+                                                                        </th>
+                                                                        <th>
+                                                                            操作
+                                                                        </th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    @foreach (var item in Model.Families.OrderByDescending(f => f.FamilyID))
+                                                                    {
+                                                                        <tr>
+                                                                            <td>
+                                                                                @Html.DisplayFor(modelItem => item.Name)
+                                                                            </td>
+                                                                            <td>
+                                                                                @Html.DisplayFor(modelItem => item.Relationship)
+                                                                            </td>
+                                                                            <td>
+                                                                                @Html.DisplayFor(modelItem => item.Beneficiary)
+                                                                            </td>
+                                                                            <td>
+                                                                                @Html.DisplayFor(modelItem => item.Telephone)
+                                                                            </td>
+                                                                            <td>
+                                                                                @Html.DisplayFor(modelItem => item.Address)
+                                                                            </td>
+                                                                            <td>
+                                                                                @Html.DisplayFor(modelItem => item.Remark)
+                                                                            </td>
+                                                                            <td>
+                                                                                <a href="@Url.Action("Edit", "Family", new { id=item.FamilyID})" class="btn default btn-xs blue">
+                                                                                    <i class="fa fa-edit"></i> 编辑
+                                                                                </a>
+                                                                            </td>
+                                                                        </tr>
+                                                                    }
+                                                                </tbody>
+                                                            </table>
+
+                                                        </div>
+                                                    </div>
+                                                    <!-- END SAMPLE TABLE PORTLET-->
+                                                </div>
+                                            </div>
+
+                                            <!--/row-->
+                                        </div>
+                                        <div class="form-actions">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="row">
+                                                        <div class="col-md-offset-3 col-md-9">
+                                                            <a href="@Url.Action("Create", "Family", new { SailorID = Model.SailorID, medium="Sailor" })" class="btn green"><i class="fa fa-plus"></i> 添加成员</a>
+                                                            <a href="@Url.Action("Index", "Sailor", new { id = Model.SailorID })" class="btn default"><i class="fa fa-undo"></i> 返回列表</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                    <!-- END FORM-->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="tab_experience">
+                            <div class="portlet box blue">
+                                <div class="portlet-title">
+                                    <div class="caption">
+                                        <i class="fa fa-file"></i>工作经历
+                                    </div>
+                                </div>
+                                <div class="portlet-body form">
+                                    <!-- BEGIN FORM-->
+                                    <form class="form-horizontal" role="form">
+                                        <div class="form-body">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <!-- BEGIN SAMPLE TABLE PORTLET-->
+                                                    <div class="portlet light">
+                                                        <div class="portlet-body">
+                                                            <table class="table table-hover table-striped table-bordered">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>
+                                                                            单位名称
+                                                                        </th>
+                                                                        <th>
+                                                                            船舶名称
+                                                                        </th>
+                                                                        <th>
+                                                                            IMO号
+                                                                        </th>
+                                                                        <th>
+                                                                            职务
+                                                                        </th>
+                                                                        <th>
+                                                                            起始日期
+                                                                        </th>
+                                                                        <th>
+                                                                            船舶类型
+                                                                        </th>
+                                                                        <th>
+                                                                            操作
+                                                                        </th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    @foreach (var item in Model.Experiences.OrderByDescending(e => e.ExperienceID))
+                                                                    {
+                                                                        <tr>
+                                                                            <td>
+                                                                                @Html.DisplayFor(modelItem => item.CompanyName)
+                                                                            </td>
+                                                                            <td>
+                                                                                @Html.DisplayFor(modelItem => item.VesselName)
+                                                                            </td>
+                                                                            <td>
+                                                                                @Html.DisplayFor(modelItem => item.IMO)
+                                                                            </td>
+                                                                            <td>
+                                                                                @Html.DisplayFor(modelItem => item.Post)
+                                                                            </td>
+                                                                            <td>
+                                                                                @Html.DisplayFor(modelItem => item.BeginTime)~
+                                                                                @Html.DisplayFor(modelItem => item.EndTime)
+                                                                            </td>
+                                                                            <td>
+                                                                                @Html.DisplayFor(modelItem => item.VesselType)
+                                                                            </td>
+                                                                            <td>
+                                                                                <a href="@Url.Action("Details", "Experience", new { id = item.ExperienceID })" class="btn default btn-xs green-jungle">
+                                                                                    <i class="fa fa-th"></i> 详情
+                                                                                </a>
+                                                                                <a href="@Url.Action("Edit", "Experience", new { id = item.ExperienceID })" class="btn default btn-xs blue">
+                                                                                    <i class="fa fa-edit"></i> 编辑
+                                                                                </a>
+                                                                            </td>
+                                                                        </tr>
+                                                                    }
+                                                                </tbody>
+                                                            </table>
+
+                                                        </div>
+                                                    </div>
+                                                    <!-- END SAMPLE TABLE PORTLET-->
+                                                </div>
+                                            </div>
+
+                                            <!--/row-->
+                                        </div>
+                                        <div class="form-actions">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="row">
+                                                        <div class="col-md-offset-3 col-md-9">
+                                                            <a href="@Url.Action("Create", "Experience", new { SailorID = Model.SailorID, medium="Sailor" })" class="btn green"><i class="fa fa-plus"></i> 添加经历</a>
+                                                            <a href="@Url.Action("Index", "Sailor", new { id = Model.SailorID })" class="btn default"><i class="fa fa-undo"></i> 返回列表</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                    <!-- END FORM-->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="tab_title">
+                            <div class="portlet box blue">
+                                <div class="portlet-title">
+                                    <div class="caption">
+                                        <i class="fa fa-star"></i>职称信息
+                                    </div>
+                                </div>
+                                <div class="portlet-body form">
+                                    <!-- BEGIN FORM-->
+                                    <form class="form-horizontal" role="form">
+                                        <div class="form-body">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <!-- BEGIN SAMPLE TABLE PORTLET-->
+                                                    <div class="portlet light">
+                                                        <div class="portlet-body">
+                                                            <table class="table table-hover table-striped table-bordered">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>
+                                                                            职称
+                                                                        </th>
+                                                                        <th>
+                                                                            获得资格途径
+                                                                        </th>
+                                                                        <th>
+                                                                            聘任职务
+                                                                        </th>
+                                                                        <th>
+                                                                            聘任单位
+                                                                        </th>
+                                                                        <th>
+                                                                            主管从事工作
+                                                                        </th>
+                                                                        <th>
+                                                                            聘任日期
+                                                                        </th>
+                                                                        <th>
+                                                                            操作
+                                                                        </th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    @foreach (var item in Model.Titles.OrderByDescending(t => t.TitleID))
+                                                                    {
+                                                                        <tr>
+                                                                            <td>
+                                                                                @Html.DisplayFor(modelItem => item.Name)
+                                                                            </td>
+                                                                            <td>
+                                                                                @Html.DisplayFor(modelItem => item.Approach)
+                                                                            </td>
+                                                                            <td>
+                                                                                @Html.DisplayFor(modelItem => item.Post)
+                                                                            </td>
+                                                                            <td>
+                                                                                @Html.DisplayFor(modelItem => item.Company)
+                                                                            </td>
+                                                                            <td>
+                                                                                @Html.DisplayFor(modelItem => item.Work)
+                                                                            </td>
+                                                                            <td>
+                                                                                @Html.DisplayFor(modelItem => item.EngageDate)
+                                                                            </td>
+                                                                            <td>
+                                                                                <a href="@Url.Action("Details", "Title", new { id = item.TitleID })" class="btn default btn-xs green-jungle">
+                                                                                    <i class="fa fa-th"></i> 详情
+                                                                                </a>
+                                                                                <a href="@Url.Action("Edit", "Title", new { id = item.TitleID })" class="btn default btn-xs blue">
+                                                                                    <i class="fa fa-edit"></i> 编辑
+                                                                                </a>
+                                                                            </td>
+                                                                        </tr>
+                                                                    }
+                                                                </tbody>
+                                                            </table>
+
+                                                        </div>
+                                                    </div>
+                                                    <!-- END SAMPLE TABLE PORTLET-->
+                                                </div>
+                                            </div>
+
+                                            <!--/row-->
+                                        </div>
+                                        <div class="form-actions">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="row">
+                                                        <div class="col-md-offset-3 col-md-9">
+                                                            <a href="@Url.Action("Create", "Title", new { SailorID = Model.SailorID, medium="Sailor" })" class="btn green"><i class="fa fa-plus"></i> 添加职称</a>
+                                                            <a href="@Url.Action("Index", "Sailor", new { id = Model.SailorID })" class="btn default"><i class="fa fa-undo"></i> 返回列表</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                    <!-- END FORM-->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="tab_interview">
+                            <div class="portlet box blue">
+                                <div class="portlet-title">
+                                    <div class="caption">
+                                        <i class="fa fa-eyedropper"></i>面试考核
+                                    </div>
+                                </div>
+                                <div class="portlet-body form">
+                                    <!-- BEGIN FORM-->
+                                    <form class="form-horizontal" role="form">
+                                        <div class="form-body">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <!-- BEGIN SAMPLE TABLE PORTLET-->
+                                                    <div class="portlet light">
+                                                        <div class="portlet-body">
+                                                            <table class="table table-hover table-striped table-bordered">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>
+                                                                            面试职务
+                                                                        </th>
+                                                                        <th>
+                                                                            面试成绩
+                                                                        </th>
+                                                                        <th>
+                                                                            面试结论
+                                                                        </th>
+                                                                        <th>
+                                                                            面试人
+                                                                        </th>
+                                                                        <th>
+                                                                            面试日期
+                                                                        </th>
+                                                                        <th>
+                                                                            综合评定
+                                                                        </th>
+                                                                        <th>
+                                                                            操作
+                                                                        </th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    @foreach (var item in Model.Interviews.OrderByDescending(i => i.InterviewID))
+                                                                    {
+                                                                        <tr>
+                                                                            <td>
+                                                                                @Html.DisplayFor(modelItem => item.Post)
+                                                                            </td>
+                                                                            <td>
+                                                                                @Html.DisplayFor(modelItem => item.InterviewScore)
+                                                                            </td>
+                                                                            <td>
+                                                                                @Html.DisplayFor(modelItem => item.Conclusion)
+                                                                            </td>
+                                                                            <td>
+                                                                                @Html.DisplayFor(modelItem => item.Interviewer)
+                                                                            </td>
+                                                                            <td>
+                                                                                @Html.DisplayFor(modelItem => item.InterviewDate)
+                                                                            </td>
+                                                                            <td>
+                                                                                @Html.DisplayFor(modelItem => item.ComprehensiveAssessment)
+                                                                            </td>
+                                                                            <td>
+                                                                                <a href="@Url.Action("Details", "Interview", new { id = item.InterviewID })" class="btn default btn-xs green-jungle">
+                                                                                    <i class="fa fa-th"></i> 详情
+                                                                                </a>
+                                                                                <a href="@Url.Action("Edit", "Interview", new { id = item.InterviewID })" class="btn default btn-xs blue">
+                                                                                    <i class="fa fa-edit"></i> 编辑
+                                                                                </a>
+                                                                            </td>
+                                                                        </tr>
+                                                                    }
+                                                                </tbody>
+                                                            </table>
+
+                                                        </div>
+                                                    </div>
+                                                    <!-- END SAMPLE TABLE PORTLET-->
+                                                </div>
+                                            </div>
+
+                                            <!--/row-->
+                                        </div>
+                                        <div class="form-actions">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="row">
+                                                        <div class="col-md-offset-3 col-md-9">
+                                                            <a href="@Url.Action("Create", "Interview", new { SailorID = Model.SailorID, medium = "Sailor" })" class="btn green"><i class="fa fa-plus"></i> 面试记录</a>
+                                                            <a href="@Url.Action("Index", "Sailor", new { id = Model.SailorID })" class="btn default"><i class="fa fa-undo"></i> 返回列表</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                    <!-- END FORM-->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="tab_trainee">
+                            <div class="portlet box blue">
+                                <div class="portlet-title">
+                                    <div class="caption">
+                                        <i class="fa fa-graduation-cap"></i>参加培训
+                                    </div>
+                                </div>
+                                <div class="portlet-body form">
+                                    <!-- BEGIN FORM-->
+                                    <form class="form-horizontal" role="form">
+                                        <div class="form-body">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <!-- BEGIN SAMPLE TABLE PORTLET-->
+                                                    <div class="portlet light">
+                                                        <div class="portlet-body">
+                                                            <table class="table table-hover table-striped table-bordered">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>
+                                                                            培训班
+                                                                        </th>
+                                                                        <th>
+                                                                            证书编号
+                                                                        </th>
+                                                                        <th>
+                                                                            费用
+                                                                        </th>
+                                                                        <th>
+                                                                            报销费用
+                                                                        </th>
+                                                                        <th>
+                                                                            备注
+                                                                        </th>
+                                                                        <th>
+                                                                            是否合格
+                                                                        </th>
+                                                                        <th>
+                                                                            操作
+                                                                        </th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    @foreach (var item in Model.Trainees.OrderByDescending(t => t.TraineeID))
+                                                                    {
+                                                                        <tr>
+                                                                            <td>
+                                                                                @Html.ActionLink(item.TrainingClassName, "Details", "TrainingClass", new { id = item.TrainingClassID }, null)
+                                                                            </td>
+                                                                            <td>
+                                                                                @Html.DisplayFor(modelItem => item.CertificateNo)
+                                                                            </td>
+                                                                            <td>
+                                                                                @Html.DisplayFor(modelItem => item.Expense)
+                                                                            </td>
+                                                                            <td>
+                                                                                @Html.DisplayFor(modelItem => item.ExpenseClaim)
+                                                                            </td>
+                                                                            <td>
+                                                                                @Html.DisplayFor(modelItem => item.Remark)
+                                                                            </td>
+                                                                            <td>
+                                                                                @Html.DisplayFor(modelItem => item.Qualified)
+                                                                            </td>
+                                                                            <td>
+                                                                                <a href="@Url.Action("Edit", "Trainee", new { id = item.TraineeID })" class="btn default btn-xs blue">
+                                                                                    <i class="fa fa-edit"></i> 编辑
+                                                                                </a>
+                                                                            </td>
+                                                                        </tr>
+                                                                    }
+                                                                </tbody>
+                                                            </table>
+
+                                                        </div>
+                                                    </div>
+                                                    <!-- END SAMPLE TABLE PORTLET-->
+                                                </div>
+                                            </div>
+
+                                            <!--/row-->
+                                        </div>
+                                        <div class="form-actions">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="row">
+                                                        <div class="col-md-offset-3 col-md-9">
+                                                            <a href="@Url.Action("Create", "Trainee", new { SailorID = Model.SailorID, medium="Sailor" })" class="btn green"><i class="fa fa-plus"></i> 参加培训</a>
+                                                            <a href="@Url.Action("Index", "Sailor", new { id = Model.SailorID })" class="btn default"><i class="fa fa-undo"></i> 返回列表</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                    <!-- END FORM-->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="tab_exam">
+                            <div class="portlet box blue">
+                                <div class="portlet-title">
+                                    <div class="caption">
+                                        <i class="fa fa-list-alt"></i>参加考试
+                                    </div>
+                                </div>
+                                <div class="portlet-body form">
+                                    <!-- BEGIN FORM-->
+                                    <form class="form-horizontal" role="form">
+                                        <div class="form-body">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <!-- BEGIN SAMPLE TABLE PORTLET-->
+                                                    <div class="portlet light">
+                                                        <div class="portlet-body">
+                                                            <table class="table table-hover table-striped table-bordered">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>
+                                                                            申请职务
+                                                                        </th>
+                                                                        <th>
+                                                                            证书编号
+                                                                        </th>
+                                                                        <th>
+                                                                            费用
+                                                                        </th>
+                                                                        <th>
+                                                                            报销费用
+                                                                        </th>
+                                                                        <th>
+                                                                            备注
+                                                                        </th>
+                                                                        <th>
+                                                                            是否合格
+                                                                        </th>
+                                                                        <th>
+                                                                            操作
+                                                                        </th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    @foreach (var item in Model.Exams.OrderByDescending(e => e.ExamID))
+                                                                    {
+                                                                        <tr>
+                                                                            <td>
+                                                                                @Html.DisplayFor(modelItem => item.ApplyPost)
+                                                                            </td>
+                                                                            <td>
+                                                                                @Html.DisplayFor(modelItem => item.CertificateNo)
+                                                                            </td>
+                                                                            <td>
+                                                                                @Html.DisplayFor(modelItem => item.Expense)
+                                                                            </td>
+                                                                            <td>
+                                                                                @Html.DisplayFor(modelItem => item.ExpenseClaim)
+                                                                            </td>
+                                                                            <td>
+                                                                                @Html.DisplayFor(modelItem => item.Remark)
+                                                                            </td>
+                                                                            <td>
+                                                                                @Html.DisplayFor(modelItem => item.Qualified)
+                                                                            </td>
+                                                                            <td>
+                                                                                <a href="@Url.Action("Edit", "Exam", new { id = item.ExamID })" class="btn default btn-xs blue">
+                                                                                    <i class="fa fa-edit"></i> 编辑
+                                                                                </a>
+                                                                            </td>
+                                                                        </tr>
+                                                                    }
+                                                                </tbody>
+                                                            </table>
+
+                                                        </div>
+                                                    </div>
+                                                    <!-- END SAMPLE TABLE PORTLET-->
+                                                </div>
+                                            </div>
+
+                                            <!--/row-->
+                                        </div>
+                                        <div class="form-actions">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="row">
+                                                        <div class="col-md-offset-3 col-md-9">
+                                                            <a href="@Url.Action("Create", "Exam", new { SailorID = Model.SailorID, medium="Sailor" })" class="btn green"><i class="fa fa-plus"></i> 参加考试</a>
+                                                            <a href="@Url.Action("Index", "Sailor", new { id = Model.SailorID })" class="btn default"><i class="fa fa-undo"></i> 返回列表</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                    <!-- END FORM-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END PAGE CONTENT -->
+@section scripts{
+    <script>
+        $(function () {
+            var tab = '@Request.QueryString["tab"]';
+            if (tab) {
+                tab = '#' + tab;
+                $('a[href=' + tab + ']').get(0).click();
+            }
+
+            Metronic.initDataTableFormat($('div.tab-pane table'));
+        })
+
+    </script>
+}

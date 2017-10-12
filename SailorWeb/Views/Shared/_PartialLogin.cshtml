@@ -1,0 +1,56 @@
+﻿
+<div class="top-menu">
+    <ul class="nav navbar-nav pull-right">
+        @if (Request.IsAuthenticated)
+        {
+            @Html.Action("Message", "Notice")
+        <!-- BEGIN TODO DROPDOWN -->
+            <li class="dropdown dropdown-extended dropdown-dark dropdown-tasks" id="header_task_bar">
+                <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                    <i class="icon-calendar"></i>
+                    <span class="badge badge-default">0</span>
+                </a>
+            </li>
+        <!-- END TODO DROPDOWN -->
+            <li class="droddown dropdown-separator">
+                <span class="separator"></span>
+            </li>
+        <!-- BEGIN USER LOGIN DROPDOWN -->
+            <li class="dropdown dropdown-user dropdown-dark">
+                <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                    <img class="img-circle" src="@Url.Action("GetAvatar","Account",new{size="small"})" />
+                    <span class="username username-hide-mobile">@User.Identity.Name</span>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-default">
+                    <li>
+                        <a href="@Url.Action("UserCenter","Account")">
+                            <i class="icon-user"></i> 个人中心
+                        </a>
+                    </li>
+                    <li class="divider">
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Lock","Account")">
+                            <i class="icon-lock"></i> 锁屏
+                        </a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("LogOff","Account")">
+                            <i class="icon-key"></i> 退出
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+        <!-- END USER LOGIN DROPDOWN -->
+        }
+        else
+        {
+            <li class="dropdown dropdown-user dropdown-dark">
+                <a href="@Url.Action("Login","Account")">
+                    <span class="username username-hide-mobile">登录</span>
+                </a>
+            </li>
+        }
+    </ul>
+</div>

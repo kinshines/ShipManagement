@@ -1,0 +1,559 @@
+﻿<!DOCTYPE html>
+<!--[if IE 8]> <html lang="zh-cn" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="zh-cn" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="zh-cn">
+<!--<![endif]-->
+<!-- BEGIN HEAD -->
+<head>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - 帆海船员管理系统</title>
+
+    <link href="http://cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="~/assets/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" />
+    <link href="http://cdn.bootcss.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="http://cdn.bootcss.com/Uniform.js/2.1.2/themes/default/css/uniform.default.min.css" rel="stylesheet">
+    <link href="http://cdn.bootcss.com/iCheck/1.0.1/skins/minimal/blue.css" rel="stylesheet">
+    <link href="http://cdn.bootcss.com/select2/3.5.2/select2.min.css" rel="stylesheet">
+    <link href="http://cdn.bootcss.com/bootstrap-datepicker/1.4.0/css/bootstrap-datepicker3.min.css" rel="stylesheet">
+    <link href="~/assets/plugins/bootstrap-fileinput/bootstrap-fileinput.css" rel="stylesheet" />
+    <link href="~/assets/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css" rel="stylesheet" />
+
+    @*<!-- BEGIN GLOBAL MANDATORY STYLES -->
+    <link href="~/assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/assets/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" />
+    <link href="~/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/assets/plugins/uniform/css/uniform.default.min.css" rel="stylesheet" />
+    <!-- END GLOBAL MANDATORY STYLES -->
+    <!-- BEGIN PAGE LEVEL PLUGIN STYLES -->
+    <link href="~/assets/plugins/icheck/skins/minimal/blue.css" rel="stylesheet" />
+    <link href="~/assets/plugins/select2/select2.min.css" rel="stylesheet" />
+    <link href="~/assets/plugins/bootstrap-datepicker/css/datepicker3.css" rel="stylesheet" />
+    <link href="~/assets/plugins/bootstrap-fileinput/bootstrap-fileinput.css" rel="stylesheet" />
+    <!-- END PAGE LEVEL PLUGIN STYLES -->*@
+    <!-- BEGIN THEME STYLES -->
+    <!-- DOC: To use 'rounded corners' style just load 'components-rounded.css' stylesheet instead of 'components.css' in the below style tag -->
+    <link href="~/assets/css/components-rounded.css" rel="stylesheet" id="style_components" />
+    <link href="~/assets/css/plugins.css" rel="stylesheet" />
+    <link href="~/assets/layout3/css/layout.css" rel="stylesheet" />
+    <link href="~/assets/layout3/css/themes/default.css" rel="stylesheet" />
+    <!-- END THEME STYLES -->
+</head>
+<body>
+    <!-- BEGIN HEADER -->
+    <div class="page-header">
+        <!-- BEGIN HEADER TOP -->
+        <div class="page-header-top">
+            <div class="container">
+                <!-- BEGIN LOGO -->
+                <div class="page-logo">
+                    <a href="@Url.Action("Index","Home")">
+                        <img src="~/assets/layout3/img/logo-crew-default.png" />
+                    </a>
+                </div>
+                <!-- END LOGO -->
+                <!-- BEGIN RESPONSIVE MENU TOGGLER -->
+                <a href="javascript:;" class="menu-toggler"></a>
+                <!-- END RESPONSIVE MENU TOGGLER -->
+                <!-- BEGIN TOP NAVIGATION MENU -->
+                @Html.Partial("_PartialLogin")
+                <!-- END TOP NAVIGATION MENU -->
+            </div>
+        </div>
+        <!-- END HEADER TOP -->
+        <!-- BEGIN HEADER MENU -->
+        <div class="page-header-menu">
+            <div class="container">
+                <!-- BEGIN MEGA MENU -->
+                <!-- DOC: Apply "hor-menu-light" class after the "hor-menu" class below to have a horizontal menu with white background -->
+                <!-- DOC: Remove data-hover="dropdown" and data-close-others="true" attributes below to disable the dropdown opening on mouse hover -->
+                <div class="hor-menu ">
+                    <ul class="nav navbar-nav">
+                        <li class="menu-dropdown classic-menu-dropdown">
+                            <a data-hover="megamenu-dropdown" data-close-others="true" data-toggle="dropdown" href="javascript:;">
+                                船员名单 <i class="fa fa-angle-down"></i>
+                            </a>
+                            <ul class="dropdown-menu pull-left">
+                                <li class ="dropdown-submenu">
+                                    <a href="@Url.Action("Index","Sailor")">
+                                        <i class="icon-briefcase"></i>
+                                        所有船员名单
+                                    </a>
+                                </li>
+                                <li class="dropdown-submenu">
+                                    <a href="@Url.Action("Index", "ServiceRecord", new { status = "aboard" })">
+                                        <i class="icon-star"></i>
+                                        在船船员名单
+                                    </a>
+                                </li>
+                                <li class=" dropdown-submenu">
+                                    <a href="@Url.Action("Index", "Sailor", new { status = "waiting" })">
+                                        <i class="icon-bar-chart"></i>
+                                        待派船员名单
+                                    </a>
+                                </li>
+                                <li class=" dropdown-submenu">
+                                    <a href="@Url.Action("Index", "Sailor", new { status = "training" })">
+                                        <i class="icon-pointer"></i>
+                                        培训人员名单
+                                    </a>
+                                </li>
+                                <li class=" dropdown-submenu">
+                                    <a href="@Url.Action("Index", "Sailor", new { status = "rest" })">
+                                        <i class="icon-puzzle"></i>
+                                        休假人员名单
+                                    </a>
+                                </li>
+                                <li class=" dropdown-submenu">
+                                    <a href="@Url.Action("Index", "Sailor", new { status = "notrace" })">
+                                        <i class="icon-plane"></i>
+                                        不跟踪人员名单
+                                    </a>
+                                </li>
+                                <li class="dropdown-submenu">
+                                    <a href="@Url.Action("Index","ServiceRecord")">
+                                        <i class="icon-playlist"></i>
+                                        船员服务记录
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="menu-dropdown classic-menu-dropdown">
+                            <a data-hover="megamenu-dropdown" data-close-others="true" data-toggle="dropdown" href="javascript:;">
+                                相关资料 <i class="fa fa-angle-down"></i>
+                            </a>
+                            <ul class="dropdown-menu pull-left">
+                                <li class=" dropdown-submenu">
+                                    <a href="@Url.Action("Index","Interview")">
+                                        <i class="icon-compass"></i>
+                                        面试考核
+                                    </a>
+                                </li>
+                                <li class=" dropdown-submenu">
+                                    <a href="@Url.Action("Index","Title")">
+                                        <i class="icon-book-open"></i>
+                                        所获职称
+                                    </a>
+                                </li>
+                                <li class=" dropdown-submenu">
+                                    <a href="@Url.Action("Index","Family")">
+                                        <i class="icon-users"></i>
+                                        家庭成员
+                                    </a>
+                                </li>
+                                <li class=" dropdown-submenu">
+                                    <a href="@Url.Action("Index","Experience")">
+                                        <i class="icon-layers"></i>
+                                        工作经历
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="menu-dropdown classic-menu-dropdown">
+                            <a data-hover="megamenu-dropdown" data-close-others="true" data-toggle="dropdown" href="javascript:;">
+                                船东船舶 <i class="fa fa-angle-down"></i>
+                            </a>
+                            <ul class="dropdown-menu pull-left">
+                                <li class="dropdown-submenu">
+                                    <a href="@Url.Action("Index","Shipowner")">
+                                        <i class="icon-globe"></i>
+                                        船东管理
+                                    </a>
+                                </li>
+                                <li class=" dropdown-submenu">
+                                    <a href="@Url.Action("Index","Vessel")">
+                                        <i class="icon-map"></i>
+                                        船舶管理
+                                    </a>
+                                </li>
+                                <li class="dropdown-submenu">
+                                    <a href="@Url.Action("Index","ServiceRecord")">
+                                        <i class="icon-playlist"></i>
+                                        服务记录
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="menu-dropdown classic-menu-dropdown">
+                            <a data-hover="megamenu-dropdown" data-close-others="true" data-toggle="dropdown" href="javascript:;">
+                                船员证书 <i class="fa fa-angle-down"></i>
+                            </a>
+                            <ul class="dropdown-menu pull-left">
+                                <li class="dropdown-submenu">
+                                    <a href="@Url.Action("Index", "Certificate")">
+                                        <i class="icon-calendar"></i>
+                                        所有证书
+                                    </a>
+                                </li>
+                                <li class=" dropdown-submenu">
+                                    <a href="@Url.Action("Index", "Certificate", new { status="normal"})">
+                                        <i class="icon-grid"></i>
+                                        正常证书
+                                    </a>
+                                </li>
+                                <li class=" dropdown-submenu">
+                                    <a href="@Url.Action("Index", "Certificate", new { status="notice"})">
+                                        <i class="icon-cursor"></i>
+                                        即将到期证书
+                                    </a>
+                                </li>
+                                <li class=" dropdown-submenu">
+                                    <a href="@Url.Action("Index", "Certificate", new { status="overdue"})">
+                                        <i class="icon-dislike"></i>
+                                        逾期证书
+                                    </a>
+                                </li>
+                                <li class="dropdown-submenu">
+                                    <a href="@Url.Action("Index", "CertificateType",new { Category = 0 })">
+                                        <i class="icon-docs"></i>
+                                        证书类型
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="menu-dropdown classic-menu-dropdown">
+                            <a data-hover="megamenu-dropdown" data-close-others="true" data-toggle="dropdown" href="javascript:;">
+                                合同管理 <i class="fa fa-angle-down"></i>
+                            </a>
+                            <ul class="dropdown-menu pull-left">
+                                <li class=" dropdown-submenu">
+                                    <a href="@Url.Action("Index", "Contract")">
+                                        <i class="icon-film"></i>
+                                        所有合同
+                                    </a>
+                                </li>
+                                <li class="dropdown-submenu">
+                                    <a href="@Url.Action("Index", "Contract", new { status="todo"})">
+                                        <i class="icon-control-start"></i>
+                                        待履行合同
+                                    </a>
+                                </li>
+                                <li class="dropdown-submenu">
+                                    <a href="@Url.Action("Index", "Contract", new { status="normal"})">
+                                        <i class="icon-control-play"></i>
+                                        履行中合同
+                                    </a>
+                                </li>
+                                <li class=" dropdown-submenu">
+                                    <a href="@Url.Action("Index", "Contract", new { status = "notice" })">
+                                        <i class="icon-control-forward"></i>
+                                        即将到期合同
+                                    </a>
+                                </li>
+                                <li class=" dropdown-submenu">
+                                    <a href="@Url.Action("Index", "Contract", new {status = "overdue"})">
+                                        <i class="icon-control-end"></i>
+                                        正常完成合同
+                                    </a>
+                                </li>
+                                <li class=" dropdown-submenu">
+                                    <a href="@Url.Action("Index", "Wage")">
+                                        <i class="icon-diamond"></i>
+                                        工资结算
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="menu-dropdown classic-menu-dropdown">
+                            <a data-hover="megamenu-dropdown" data-close-others="true" data-toggle="dropdown" href="javascript:;">
+                                船舶证书 <i class="fa fa-angle-down"></i>
+                            </a>
+                            <ul class="dropdown-menu pull-left">
+                                <li class="dropdown-submenu">
+                                    <a href="@Url.Action("Index", "VesselCertificate")">
+                                        <i class="icon-calendar"></i>
+                                        所有证书
+                                    </a>
+                                </li>
+                                <li class=" dropdown-submenu">
+                                    <a href="@Url.Action("Index", "VesselCertificate", new { status = "normal" })">
+                                        <i class="icon-grid"></i>
+                                        正常证书
+                                    </a>
+                                </li>
+                                <li class=" dropdown-submenu">
+                                    <a href="@Url.Action("Index", "VesselCertificate", new { status = "check" })">
+                                        <i class="icon-social-tumblr"></i>
+                                        待检验证书
+                                    </a>
+                                </li>
+                                <li class=" dropdown-submenu">
+                                    <a href="@Url.Action("Index", "VesselCertificate", new { status = "notice" })">
+                                        <i class="icon-cursor"></i>
+                                        即将到期证书
+                                    </a>
+                                </li>
+                                <li class=" dropdown-submenu">
+                                    <a href="@Url.Action("Index", "VesselCertificate", new { status = "overdue" })">
+                                        <i class="icon-dislike"></i>
+                                        逾期证书
+                                    </a>
+                                </li>
+                                <li class="dropdown-submenu">
+                                    <a href="@Url.Action("Index", "CertificateType", new { Category = 1 })">
+                                        <i class="icon-docs"></i>
+                                        证书类型
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="menu-dropdown classic-menu-dropdown">
+                            <a data-hover="megamenu-dropdown" data-close-others="true" data-toggle="dropdown" href="javascript:;">
+                                船舶费用 <i class="fa fa-angle-down"></i>
+                            </a>
+                            <ul class="dropdown-menu pull-left">
+                                <li class=" dropdown-submenu">
+                                    <a href="@Url.Action("ManagedList", "Vessel")">
+                                        <i class="icon-map"></i>
+                                        管理船舶列表
+                                    </a>
+                                </li>
+                                <li class=" dropdown-submenu">
+                                    <a href="@Url.Action("CostBill", "VesselAccount")">
+                                        <i class="icon-loop"></i>
+                                        船舶账单汇总
+                                    </a>
+                                </li>
+                                <li class=" dropdown-submenu">
+                                    <a href="@Url.Action("BalanceList", "VesselAccount")">
+                                        <i class="icon-list"></i>
+                                        船舶账户余额
+                                    </a>
+                                </li>
+                                <li class=" dropdown-submenu">
+                                    <a href="@Url.Action("Index","BusinessCompany")">
+                                        <i class="icon-printer"></i>
+                                        账目往来单位
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="menu-dropdown classic-menu-dropdown">
+                            <a data-hover="megamenu-dropdown" data-close-others="true" data-toggle="dropdown" href="javascript:;">
+                                劳保用品 <i class="fa fa-angle-down"></i>
+                            </a>
+                            <ul class="dropdown-menu pull-left">
+                                <li class="dropdown-submenu">
+                                    <a href="@Url.Action("Index","LaborSupply")">
+                                        <i class="icon-size-actual"></i>
+                                        库存列表
+                                    </a>
+                                </li>
+                                <li class=" dropdown-submenu">
+                                    <a href="@Url.Action("TakeList", "LaborSupply")">
+                                        <i class="icon-size-fullscreen"></i>
+                                        领用记录
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="menu-dropdown classic-menu-dropdown">
+                            <a data-hover="megamenu-dropdown" data-close-others="true" data-toggle="dropdown" href="javascript:;">
+                                培训考证 <i class="fa fa-angle-down"></i>
+                            </a>
+                            <ul class="dropdown-menu pull-left">
+                                <li class="dropdown-submenu">
+                                    <a href="@Url.Action("Index","TrainingClass")">
+                                        <i class="icon-support"></i>
+                                        培训班
+                                    </a>
+                                </li>
+                                <li class=" dropdown-submenu">
+                                    <a href="@Url.Action("Index", "Trainee")">
+                                        <i class="icon-badge"></i>
+                                        培训学员
+                                    </a>
+                                </li>
+                                <li class=" dropdown-submenu">
+                                    <a href="@Url.Action("Index", "Exam")">
+                                        <i class="icon-notebook"></i>
+                                        船员考证
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            @Html.ActionLink("帮助", "Index", "Home")
+                        </li>
+                    </ul>
+                </div>
+                <!-- END MEGA MENU -->
+            </div>
+        </div>
+        <!-- END HEADER MENU -->
+    </div>
+    <!-- END HEADER -->
+    <!-- BEGIN PAGE CONTAINER -->
+    <div class="page-container">
+        @RenderBody()
+    </div>
+    <!-- END PAGE CONTAINER -->
+    <!-- BEGIN PRE-FOOTER -->
+    <div class="page-prefooter">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 col-sm-6 col-xs-12 footer-block">
+                    <h2>友情链接</h2>
+                    <ul>
+                        <li>
+                            <a href="http://www.crewcn.com/" target="_blank">船员招聘网</a>
+                        </li>
+                        <li>
+                            <a href="http://www.sol.com.cn/office/login.asp?gotofile=http%3A%2F%2Fcrew%2Esol%2Ecom%2Ecn%2Findex%2Easp%3F" target="_blank">航运在线</a>
+                        </li>
+                        <li>
+                            <a href="http://www.equasis.org/EquasisWeb/authen/HomePage?fs=HomePage" target="_blank">欧盟Equasis</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-3 col-sm-6 col-xs12 footer-block">
+                    <h2>友情链接</h2>
+                    <ul>
+                        <li>
+                            <a href="http://www.imocwx.com/wxfax.htm" target="_blank">气象网站</a>
+                        </li>
+                        <li>
+                            <a href="http://www.segumar.com/" target="_blank">巴拿马官网</a>
+                        </li>
+                        <li>
+                            <a href="http://www.classnk.or.jp/hp/zh/index.html" target="_blank">日本NK船级社官网</a>
+                        </li>
+                        <li>
+                            <a href="http://www.bureauveritas.com/wps/wcm/connect/bv_com/group#" target="_blank">法国BV船级社官网</a>
+                        </li>
+                        <li>
+                            <a href="http://www.lr.org/en/" target="_blank">劳氏船级社官网</a>
+                        </li>
+                        <li>
+                            <a href="http://hydro.ngd.gov.cn/Default.aspx" target="_blank">中国海道测绘官网</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-3 col-sm-6 col-xs-12 footer-block">
+                    <h2>政府网站</h2>
+                    <ul>
+                        <li>
+                            <a href="http://218.58.72.205/hcdzsb/skins/normal/desktopLR.jsp" target="_blank">山东海事局</a>
+                        </li>
+                        <li>
+                            <a href="http://cyxx.msa.gov.cn/lycx/zslycx!init.action?flag=1" target="_blank">上海海事局</a>
+                        </li>
+                        <li>
+                            <a href="http://www.msa.gov.cn/" target="_blank">中华人民共和国海事局</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-3 col-sm-6 col-xs-12 footer-block">
+                    <h2>联系我们</h2>
+                    <ul class="social-icons">
+                        <li>
+                            <a href="http://weibo.com/inksoftware" target="_blank" data-original-title="weibo" class="rss"></a>
+                        </li>
+                        <li>
+                            <a href="javascript:;" data-original-title="weichat" class="youtube"></a>
+                        </li>
+                        <li>
+                            <a data-original-title="qq" class="vimeo" target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=75960606&site=qq&menu=yes"></a>
+                        </li>
+                        <li>
+                            <a href="https://facebook.com/inksoftware" target="_blank" data-original-title="facebook" class="facebook"></a>
+                        </li>
+                        <li>
+                            <a href="https://twitter.com/inksoft" target="_blank" data-original-title="twitter" class="twitter"></a>
+                        </li>
+                        <li>
+                            <a href="https://googleplus.com/inksoft" target="_blank" data-original-title="googleplus" class="googleplus"></a>
+                        </li>
+                    </ul>
+                    <address class="margin-bottom-40">
+                        Email: <a href="mailto:inksoft@163.com">inksoft@163.com</a>
+                    </address>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END PRE-FOOTER -->
+    <!-- BEGIN FOOTER -->
+    <div class="page-footer">
+        <div class="container">
+            @DateTime.Now.Year © InkSoft. All Rights Reserved. <a href="http://www.miitbeian.gov.cn/" target="_blank">鲁ICP备15020343号</a>
+        </div>
+    </div>
+    <div class="scroll-to-top">
+        <i class="icon-arrow-up"></i>
+    </div>
+    <!-- END FOOTER -->
+
+    <!-- BEGIN JAVASCRIPTS (Load javascripts at bottom, this will reduce page load time) -->
+    <!-- BEGIN CORE PLUGINS -->
+    <!--[if lt IE 9]>
+    <script src="~/Scripts/respond.min.js"></script>
+    <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <script src="~/assets/plugins/excanvas.min.js"></script>
+    <![endif]-->
+
+    <script src="http://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
+    <script src="http://cdn.bootcss.com/jquery-migrate/1.2.1/jquery-migrate.min.js"></script>
+    <script src="http://cdn.bootcss.com/jqueryui/1.11.2/jquery-ui.min.js"></script>
+    <script src="http://cdn.bootcss.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+    <script src="http://cdn.bootcss.com/bootstrap-hover-dropdown/2.0.10/bootstrap-hover-dropdown.min.js"></script>
+    <script src="http://cdn.bootcss.com/jQuery-slimScroll/1.3.2/jquery.slimscroll.min.js"></script>
+    <script src="http://cdn.bootcss.com/jquery.blockUI/2.66.0-2013.10.09/jquery.blockUI.min.js"></script>
+    <script src="http://cdn.bootcss.com/Uniform.js/2.1.2/jquery.uniform.min.js"></script>
+    <script src="http://cdn.bootcss.com/iCheck/1.0.1/icheck.min.js"></script>
+    <script src="http://cdn.bootcss.com/select2/3.5.2/select2.min.js"></script>
+    <script src="http://cdn.bootcss.com/select2/3.5.2/select2_locale_zh-CN.min.js"></script>
+    <script src="http://cdn.bootcss.com/bootstrap-datepicker/1.4.0/js/bootstrap-datepicker.min.js"></script>
+    <script src="http://cdn.bootcss.com/bootstrap-datepicker/1.4.0/locales/bootstrap-datepicker.zh-CN.min.js"></script>
+    <script src="http://cdn.bootcss.com/bootbox.js/4.3.0/bootbox.min.js"></script>
+    <script src="http://cdn.bootcss.com/jquery-validate/1.13.1/jquery.validate.min.js"></script>
+    <script src="http://cdn.bootcss.com/datatables/1.10.2/js/jquery.dataTables.min.js"></script>
+    <script src="http://cdn.bootcss.com/typeahead.js/0.11.1/typeahead.bundle.min.js"></script>
+
+    @*<script src="~/Scripts/jquery-1.11.2.min.js"></script>
+    <script src="~/assets/plugins/jquery-migrate.min.js"></script>
+    <!-- IMPORTANT! Load jquery-ui.min.js before bootstrap.min.js to fix bootstrap tooltip conflict with jquery ui tooltip -->
+    <script src="~/assets/plugins/jquery-ui/jquery-ui.min.js"></script>
+    <script src="~/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script src="~/assets/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js"></script>
+    <script src="~/assets/plugins/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+    <script src="~/assets/plugins/jquery.blockui.min.js"></script>
+    <script src="~/assets/plugins/uniform/jquery.uniform.min.js"></script>
+    <!-- END CORE PLUGINS -->
+    <!-- BEGIN PAGE LEVEL PLUGINS -->
+    <script src="~/assets/plugins/icheck/icheck.min.js"></script>
+    <script src="~/assets/plugins/select2/select2.min.js"></script>
+    <script src="~/assets/plugins/select2/select2_locale_zh-CN.js"></script>
+    <script src="~/assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+    <script src="~/assets/plugins/bootstrap-datepicker/js/locales/bootstrap-datepicker.zh-CN.js"></script>
+    <script src="~/assets/plugins/bootbox/bootbox.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/assets/plugins/datatables/media/js/jquery.dataTables.min.js"></script>*@
+    <script src="~/assets/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js"></script>
+    <script src="~/Scripts/messages_zh.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="~/assets/plugins/bootstrap-fileinput/bootstrap-fileinput.js"></script>
+    
+    <!-- END PAGE LEVEL PLUGINS -->
+    <!-- BEGIN PAGE LEVEL SCRIPTS -->
+    <script src="~/assets/scripts/metronic.js"></script>
+    <script src="~/assets/layout3/scripts/layout.js"></script>
+    <script src="~/assets/layout3/scripts/demo.js"></script>
+    <!-- END PAGE LEVEL SCRIPTS -->
+
+    <script>
+        jQuery(document).ready(function () {
+            Metronic.init(); // init metronic core components
+            Layout.init(); // init current layout
+            Demo.init(); // init demo features
+        });
+    </script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

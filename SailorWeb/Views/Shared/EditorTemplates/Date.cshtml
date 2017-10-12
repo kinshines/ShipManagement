@@ -1,0 +1,9 @@
+﻿@model DateTime?
+
+    <div class="input-group date date-picker">
+    @Html.TextBoxFor(model => model, "{0:yyyy-MM-dd}", new { @class = "form-control", @readonly = "readonly", type = "date" })
+    <span class="input-group-btn">
+        <button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
+    </span>
+</div>
+
