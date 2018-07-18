@@ -15,7 +15,7 @@ namespace Ship.Infrastructure.Services
     /// </summary>
     public abstract class BaseService<T> where T : class
     {
-        private DefaultDbContext context;
+        protected DefaultDbContext context;
 
         public BaseService(DefaultDbContext cxt) => context = cxt;
 
