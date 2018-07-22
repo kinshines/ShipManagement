@@ -8,4 +8,9 @@
     <PackageReference Include="Microsoft.AspNetCore.App" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Ship.Core\Ship.Core.csproj" />
+    <ProjectReference Include="..\Ship.Infrastructure\Ship.Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>
