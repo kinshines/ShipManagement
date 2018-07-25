@@ -1,0 +1,79 @@
+﻿@model SailorDomain.Entities.LaborSupplyPut
+
+<div class="modal fade" id="putModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+                <h4 id="myLargeModalLabel" class="modal-title">劳保用品存入</h4>
+            </div>
+            <div class="portlet light">
+                <div class="portlet-body form">
+                    <!-- BEGIN FORM-->
+                    @using (Ajax.BeginForm("SupplyPut", "LaborSupply", null, new AjaxOptions { OnSuccess = "processSuccess" }, new { @class = "form-horizontal", role = "form" }))
+                    {
+                    <div class="form-body">
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true)
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.LaborSupply.Name, new { @class = "control-label col-md-3" })
+                            <div class="col-md-9">
+                                <p class="form-control-static">
+                                    <span></span>
+                                    @Html.HiddenFor(model=>model.LaborSupplyID)
+                                </p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.PutType, new { @class = "control-label col-md-3" })
+                            <div class="col-md-9">
+                                @Html.EditorFor(model => model.PutType, "Enum-radio")
+                                @Html.ValidationMessageFor(model => model.PutType)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3" for="Amount">
+                                @Html.DisplayNameFor(model => model.Amount)
+                                <span class="required" aria-required="true">*</span>
+                            </label>
+                            <div class="col-md-9">
+                                @Html.EditorFor(model => model.Amount, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Amount)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Remark, new { @class = "control-label col-md-3" })
+                            <div class="col-md-9">
+                                @Html.EditorFor(model => model.Remark, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Remark)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.PutDate, new { @class = "control-label col-md-3" })
+                            <div class="col-md-9">
+                                @Html.EditorFor(model => model.PutDate, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.PutDate)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-offset-3 col-md-9">
+                                        <button type="submit" class="btn green"><i class="fa fa-save"></i> 保存</button>
+                                        <a class="btn default" href="javascript:void(0)" data-dismiss="modal"><i class="fa fa-undo"></i> 返回列表</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                            </div>
+                        </div>
+                    </div>
+                    }
+                    <!-- END FORM-->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

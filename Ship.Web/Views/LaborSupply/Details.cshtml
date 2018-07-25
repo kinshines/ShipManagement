@@ -1,0 +1,250 @@
+﻿@model SailorDomain.Entities.LaborSupply
+
+@{
+    ViewBag.Title = "劳保用品详情";
+}
+
+<!-- BEGIN PAGE CONTENT -->
+<div class="page-content">
+    <div class="container">
+        <!-- BEGIN PAGE BREADCRUMB -->
+        <ul class="page-breadcrumb breadcrumb">
+            <li>
+                @Html.ActionLink("首页", "Index", "Home")
+                <i class="fa fa-circle"></i>
+            </li>
+            <li>
+                @Html.ActionLink("劳保用品管理", "Index")
+                <i class="fa fa-circle"></i>
+            </li>
+            <li class="active">
+                @ViewBag.Title
+            </li>
+        </ul>
+        <!-- END PAGE BREADCRUMB -->
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="portlet light">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <i class="fa fa-th font-green-sharp"></i>
+                            <span class="caption-subject font-green-sharp bold uppercase">@ViewBag.Title</span>
+                        </div>
+                    </div>
+                    <div class="portlet-body form">
+                        <form class="form-horizontal" role="form">
+                            <div class="form-body">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.Name, new { @class = "control-label col-md-3" })
+                                            <div class="col-md-9">
+                                                <p class="form-control-static">
+                                                    @Html.DisplayFor(model => model.Name)
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.Specification, new { @class = "control-label col-md-3" })
+                                            <div class="col-md-9">
+                                                <p class="form-control-static">
+                                                    @Html.DisplayFor(model => model.Specification)
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                </div>
+                                <!--/row-->
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.Total, new { @class = "control-label col-md-3" })
+                                            <div class="col-md-9">
+                                                <p class="form-control-static">
+                                                    @Html.DisplayFor(model => model.Total)
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.Baseline, new { @class = "control-label col-md-3" })
+                                            <div class="col-md-9">
+                                                <p class="form-control-static">
+                                                    @Html.DisplayFor(model => model.Baseline)
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                </div>
+                                <!--/row-->
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.Remark, new { @class = "control-label col-md-3" })
+                                            <div class="col-md-9">
+                                                <p class="form-control-static">
+                                                    @Html.DisplayFor(model => model.Remark)
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                    <div class="col-md-6">
+                                    </div>
+                                    <!--/span-->
+                                </div>
+                                <!--/row-->
+
+                            </div>
+                            <div class="form-actions">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="row">
+                                            <div class="col-md-offset-3 col-md-9">
+                                                <a href="@Url.Action("Edit", new { id = Model.LaborSupplyID })" class="btn green"><i class="fa fa-pencil"></i> 编辑</a>
+                                                <a href="@Url.Action("Index")" class="btn default"><i class="fa fa-undo"></i> 返回列表</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="portlet light">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <i class="fa fa-sliders font-green-sharp"></i>
+                            <span class="caption-subject font-green-sharp bold uppercase">存取记录</span>
+                        </div>
+                    </div>
+                    <div class="portlet-body form">
+                        <form class="form-horizontal" role="form">
+                            <div class="form-body">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <!-- BEGIN SAMPLE TABLE PORTLET-->
+                                        <div class="portlet light">
+                                            <div class="portlet-body">
+                                                <div class="table-scrollable table-scrollable-borderless">
+                                                    <table class="table table-hover table-striped">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>
+                                                                    存入类别
+                                                                </th>
+                                                                <th>
+                                                                    数量
+                                                                </th>
+                                                                <th>
+                                                                    备注
+                                                                </th>
+                                                                <th>
+                                                                    日期
+                                                                </th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @foreach (var item in Model.LaborSupplyPuts)
+                                                            {
+                                                                <tr>
+                                                                    <td>
+                                                                        @Html.DisplayFor(modelItem => item.PutType)
+                                                                    </td>
+                                                                    <td>
+                                                                        @Html.DisplayFor(modelItem => item.Amount)
+                                                                    </td>
+                                                                    <td>
+                                                                        @Html.DisplayFor(modelItem => item.Remark)
+                                                                    </td>
+                                                                    <td>
+                                                                        @Html.DisplayFor(modelItem => item.PutDate)
+                                                                    </td>
+                                                                </tr>
+                                                            }
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- END SAMPLE TABLE PORTLET-->
+                                    </div>
+                                    <div class="col-md-6">
+                                        <!-- BEGIN SAMPLE TABLE PORTLET-->
+                                        <div class="portlet light">
+                                            <div class="portlet-body">
+                                                <div class="table-scrollable table-scrollable-borderless">
+                                                    <table class="table table-hover table-striped">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>
+                                                                    领取类别
+                                                                </th>
+                                                                <th>
+                                                                    单位名称
+                                                                </th>
+                                                                <th>
+                                                                    领用人
+                                                                </th>
+                                                                <th>
+                                                                    数量
+                                                                </th>
+                                                                <th>
+                                                                    备注
+                                                                </th>
+                                                                <th>
+                                                                    日期
+                                                                </th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @foreach (var item in Model.LaborSupplyTakes)
+                                                            {
+                                                                <tr>
+                                                                    <td>
+                                                                        @Html.DisplayFor(modelItem => item.TakeType)
+                                                                    </td>
+                                                                    <td>
+                                                                        @Html.DisplayFor(modelItem => item.Department)
+                                                                    </td>
+                                                                    <td>
+                                                                        @Html.DisplayFor(modelItem => item.TakePerson)
+                                                                    </td>
+                                                                    <td>
+                                                                        @Html.DisplayFor(modelItem => item.Amount)
+                                                                    </td>
+                                                                    <td>
+                                                                        @Html.DisplayFor(modelItem => item.Remark)
+                                                                    </td>
+                                                                    <td>
+                                                                        @Html.DisplayFor(modelItem => item.TakeDate)
+                                                                    </td>
+                                                                </tr>
+                                                            }
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- END SAMPLE TABLE PORTLET-->
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END PAGE CONTENT -->

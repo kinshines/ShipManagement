@@ -1,0 +1,156 @@
+﻿
+@model SailorDomain.Entities.VesselAccount
+
+@{
+    ViewBag.Title = "签收单上传";
+}
+
+<!-- BEGIN PAGE CONTENT -->
+<div class="page-content">
+    <div class="container">
+        <!-- BEGIN PAGE BREADCRUMB -->
+        <ul class="page-breadcrumb breadcrumb">
+            <li>
+                @Html.ActionLink("首页", "Index", "Home")
+                <i class="fa fa-circle"></i>
+            </li>
+            <li>
+                @Html.ActionLink("船舶费用", "CostList")
+                <i class="fa fa-circle"></i>
+            </li>
+            <li class="active">
+                @ViewBag.Title
+            </li>
+        </ul>
+        <!-- END PAGE BREADCRUMB -->
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="portlet light">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <i class="fa fa-rmb font-green-sharp"></i>
+                            <span class="caption-subject font-green-sharp bold uppercase">@ViewBag.Title</span>
+                        </div>
+                    </div>
+                    <div class="portlet-body form">
+                        <!-- BEGIN FORM-->
+                        @using (Html.BeginForm("SignFile", "VesselAccount", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+                        {
+                            <div class="form-body">
+                                @Html.AntiForgeryToken()
+                                @Html.ValidationSummary(true)
+                                @Html.HiddenFor(model => model.VesselAccountID)
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.FeeItem, new { @class = "control-label col-md-3" })
+                                            <div class="col-md-9">
+                                                <p class="form-control-static">
+                                                    @Html.DisplayFor(model => model.FeeItem)
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">
+                                                费用额
+                                            </label>
+                                            <div class="col-md-9">
+                                                <p class="form-control-static">
+                                                    @Html.DisplayFor(model => model.Cost)  
+                                                    @Html.DisplayFor(model => model.USCost)
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.CompanyName, new { @class = "control-label col-md-3" })
+                                            <div class="col-md-9">
+                                                <p class="form-control-static">
+                                                    @Html.DisplayFor(model => model.CompanyName)
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.VesselName, new { @class = "control-label col-md-3" })
+                                            <div class="col-md-9">
+                                                <p class="form-control-static">
+                                                    @Html.DisplayFor(model => model.VesselName)
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.InvoiceNo, new { @class = "control-label col-md-3" })
+                                            <div class="col-md-9">
+                                                <p class="form-control-static">
+                                                    @Html.DisplayFor(model => model.InvoiceNo)
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.InvoiceDate, new { @class = "control-label col-md-3" })
+                                            <div class="col-md-9">
+                                                <p class="form-control-static">
+                                                    @Html.DisplayFor(model => model.InvoiceDate)
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">上传签收单</label>
+                                            <div class="col-md-9">
+                                                <div class="fileinput fileinput-new" data-provides="fileinput">
+                                                    <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="height: 300px; width: 300px;"></div>
+                                                    <div>
+                                                        <span class="btn btn-default btn-file"><span class="fileinput-new">选择图片</span><span class="fileinput-exists">更改</span>
+                                                        <input type="file" name="signFile"></span>
+                                                        <a href="#" class="btn btn-default fileinput-exists" data-dismiss="fileinput">移除</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-actions">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="row">
+                                            <div class="col-md-offset-3 col-md-9">
+                                                <button type="submit" class="btn green"><i class="fa fa-save"></i> 保存</button>
+                                                <a class="btn default" href="@Url.Action("Index")"><i class="fa fa-undo"></i> 返回列表</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                        <!-- END FORM-->
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END PAGE CONTENT -->
+

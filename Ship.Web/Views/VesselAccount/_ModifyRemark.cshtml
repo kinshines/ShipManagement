@@ -1,0 +1,46 @@
+﻿
+<div class="modal fade" id="remarkModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+                <h4 id="myLargeModalLabel" class="modal-title">修改备注</h4>
+            </div>
+            <div class="portlet light">
+                <div class="portlet-body form">
+                    <!-- BEGIN FORM-->
+                    @using (Ajax.BeginForm("ModifyRemark", "VesselAccount", null, new AjaxOptions { OnSuccess = "processSuccess" }, new { @class = "form-horizontal", role = "form" }))
+                    {
+                        <div class="form-body">
+                            @Html.AntiForgeryToken()
+                            @Html.ValidationSummary(true)
+                            <div class="form-group">
+                                <label class="control-label col-md-3"> 备注</label>
+                                <div class="col-md-9">
+                                    <textarea class="form-control" id="Remark" name="Remark"></textarea>
+                                    <input type="hidden" id="VesselAccountID" name="VesselAccountID" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <div class="col-md-offset-3 col-md-9">
+                                            <button type="submit" class="btn green"><i class="fa fa-save"></i> 保存</button>
+                                            <a class="btn default" href="javascript:void(0)" data-dismiss="modal"><i class="fa fa-undo"></i> 返回列表</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    <!-- END FORM-->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

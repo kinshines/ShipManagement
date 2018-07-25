@@ -1,0 +1,287 @@
+﻿@model Contract
+
+@{
+    ViewBag.Title = "合同详情";
+}
+
+<!-- BEGIN PAGE CONTENT -->
+<div class="page-content">
+    <div class="container">
+        <!-- BEGIN PAGE BREADCRUMB -->
+        <ul class="page-breadcrumb breadcrumb">
+            <li>
+                @Html.ActionLink("首页", "Index", "Home")
+                <i class="fa fa-circle"></i>
+            </li>
+            <li>
+                @Html.ActionLink("合同管理", "Index")
+                <i class="fa fa-circle"></i>
+            </li>
+            <li class="active">
+                @ViewBag.Title
+            </li>
+        </ul>
+        <!-- END PAGE BREADCRUMB -->
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="portlet light">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <i class="fa fa-th font-green-sharp"></i>
+                            <span class="caption-subject font-green-sharp bold uppercase">@ViewBag.Title</span>
+                        </div>
+                    </div>
+                    <div class="portlet-body form">
+                        <form class="form-horizontal" role="form">
+                            <div class="form-body">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.ContractNo, new { @class = "control-label col-md-3" })
+                                            <div class="col-md-9">
+                                                <p class="form-control-static">
+                                                    @Html.DisplayFor(model => model.ContractNo)
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.Sailor.Name, new { @class = "control-label col-md-3" })
+                                            <div class="col-md-9">
+                                                <p class="form-control-static">
+                                                    @Html.ActionLink(Model.Sailor.Name, "Details", "Sailor", new { id=Model.SailorID},null)
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                </div>
+                                <!--/row-->
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.Shipowner.Name, new { @class = "control-label col-md-3" })
+                                            <div class="col-md-9">
+                                                <p class="form-control-static">
+                                                    @Html.ActionLink(Model.Shipowner.Name, "Details", "Shipowner", new { id = Model.ShipownerID }, null)
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.Vessel.Name, new { @class = "control-label col-md-3" })
+                                            <div class="col-md-9">
+                                                <p class="form-control-static">
+                                                    @Html.ActionLink(Model.Vessel.Name, "Details", "Vessel", new { id = Model.VesselID }, null)
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                </div>
+                                <!--/row-->
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.SigningDate, new { @class = "control-label col-md-3" })
+                                            <div class="col-md-9">
+                                                <p class="form-control-static">
+                                                    @Html.DisplayFor(model => model.SigningDate)
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.Term, new { @class = "control-label col-md-3" })
+                                            <div class="col-md-9">
+                                                <p class="form-control-static">
+                                                    @Html.DisplayFor(model => model.Term)
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                </div>
+                                <!--/row-->
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.Post, new { @class = "control-label col-md-3" })
+                                            <div class="col-md-9">
+                                                <p class="form-control-static">
+                                                    @Html.DisplayFor(model => model.Post)
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="control-label col-md-3">
+                                            合同起始日期
+                                        </label>
+                                        <div class="col-md-9">
+                                            <p class="form-control-static">
+                                                @Html.DisplayFor(model => model.AboardDate) ~
+                                                @Html.DisplayFor(model => model.AshoreDate)
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--/row-->
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.ShipWage, new { @class = "control-label col-md-3" })
+                                            <div class="col-md-9">
+                                                <p class="form-control-static">
+                                                    @Html.DisplayFor(model => model.ShipWage)
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.HomeWage, new { @class = "control-label col-md-3" })
+                                            <div class="col-md-9">
+                                                <p class="form-control-static">
+                                                    @Html.DisplayFor(model => model.HomeWage)
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                </div>
+                                <!--/row-->
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.VacationWage, new { @class = "control-label col-md-3" })
+                                            <div class="col-md-9">
+                                                <p class="form-control-static">
+                                                    @Html.DisplayFor(model => model.VacationWage)
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.Wage, new { @class = "control-label col-md-3" })
+                                            <div class="col-md-9">
+                                                <p class="form-control-static">
+                                                    @Html.DisplayFor(model => model.Wage)
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                </div>
+                                <!--/row-->
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.ManagementFee, new { @class = "control-label col-md-3" })
+                                            <div class="col-md-9">
+                                                <p class="form-control-static">
+                                                    @Html.DisplayFor(model => model.ManagementFee)
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.AgencyFee, new { @class = "control-label col-md-3" })
+                                            <div class="col-md-9">
+                                                <p class="form-control-static">
+                                                    @Html.DisplayFor(model => model.AgencyFee)
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                    
+                                </div>
+                                <!--/row-->
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.ThirdPartyFee, new { @class = "control-label col-md-3" })
+                                            <div class="col-md-9">
+                                                <p class="form-control-static">
+                                                    @Html.DisplayFor(model => model.ThirdPartyFee)
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.Remark, new { @class = "control-label col-md-3" })
+                                            <div class="col-md-9">
+                                                <p class="form-control-static">
+                                                    @Html.DisplayFor(model => model.Remark)
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                    
+                                </div>
+                                <!--/row-->
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.NoticeDate, new { @class = "control-label col-md-3" })
+                                            <div class="col-md-9">
+                                                <p class="form-control-static">
+                                                    @Html.DisplayFor(model => model.NoticeDate)
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.WageInterval, new { @class = "control-label col-md-3" })
+                                            <div class="col-md-9">
+                                                <p class="form-control-static">
+                                                    @Html.DisplayFor(model => model.WageInterval)
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                </div>
+
+                            </div>
+                            <div class="form-actions">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="row">
+                                            <div class="col-md-offset-3 col-md-9">
+                                                <a href="@Url.Action("Export", new { id = Model.ContractID })" class="btn green"><i class="fa fa-wordpress"></i> 导出Word</a>
+                                                <a href="@Url.Action("Index")" class="btn default"><i class="fa fa-undo"></i> 返回列表</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END PAGE CONTENT -->

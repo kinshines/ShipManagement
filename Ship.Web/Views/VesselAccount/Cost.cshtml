@@ -1,0 +1,324 @@
+﻿@model SailorDomain.Entities.VesselAccount
+
+@{
+    ViewBag.Title = "添加费用";
+}
+
+<!-- BEGIN PAGE CONTENT -->
+<div class="page-content">
+    <div class="container">
+        <!-- BEGIN PAGE BREADCRUMB -->
+        <ul class="page-breadcrumb breadcrumb">
+            <li>
+                @Html.ActionLink("首页", "Index", "Home")
+                <i class="fa fa-circle"></i>
+            </li>
+            <li>
+                @Html.ActionLink("船舶费用", "CostList", new { VesselID = Request.QueryString["VesselID"], VesselName = Request.QueryString["VesselName"] })
+                <i class="fa fa-circle"></i>
+            </li>
+            <li class="active">
+                @ViewBag.Title
+            </li>
+        </ul>
+        <!-- END PAGE BREADCRUMB -->
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="portlet light">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <i class="fa fa-plus-square-o font-green-sharp"></i>
+                            <span class="caption-subject font-green-sharp bold uppercase">@ViewBag.Title</span>
+                        </div>
+                        <div class="caption">
+                            <span class="caption-subject bold note note-warning">船舶名称：@Request.QueryString["VesselName"]</span>
+                        </div>
+                    </div>
+                    <div class="portlet-body form">
+                        <!-- BEGIN FORM-->
+                        @using (Html.BeginForm("Cost", "VesselAccount", FormMethod.Post, new { @class = "form-horizontal", id="VesselCostForm", role = "form", enctype = "multipart/form-data" }))
+                        {
+                            <div class="form-body">
+                                @Html.AntiForgeryToken()
+                                @Html.ValidationSummary(true)
+                                @Html.Hidden("medium")
+                                @Html.Hidden("VesselID", Request.QueryString["VesselID"])
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.CompanyName, new { @class = "control-label col-md-5" })
+                                            <div class="col-md-7">
+                                                @Html.EditorFor(model => model.CompanyName, new { htmlAttributes = new { @class = "form-control typeahead" } })
+                                                @Html.ValidationMessageFor(model => model.CompanyName)
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.FeeItem, new { @class = "control-label col-md-5" })
+                                            <div class="col-md-7">
+                                                @Html.EditorFor(model => model.FeeItem, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.FeeItem)
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.InvoiceNo, new { @class = "control-label col-md-5" })
+                                            <div class="col-md-7">
+                                                @Html.EditorFor(model => model.InvoiceNo, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.InvoiceNo)
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                </div>
+                                <!--/row-->
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.Cost, new { @class = "control-label col-md-5" })
+                                            <div class="col-md-7">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        ￥
+                                                    </span>
+                                                    @Html.EditorFor(model => model.Cost, new { htmlAttributes = new { @class = "form-control" } })
+                                                </div>
+                                                @Html.ValidationMessageFor(model => model.Cost)
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.Payment, new { @class = "control-label col-md-5" })
+                                            <div class="col-md-7">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        ￥
+                                                    </span>
+                                                    @Html.EditorFor(model => model.Payment, new { htmlAttributes = new { @class = "form-control" } })
+                                                </div>
+                                                @Html.ValidationMessageFor(model => model.Payment)
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.Debt, new { @class = "control-label col-md-5" })
+                                            <div class="col-md-7">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        ￥
+                                                    </span>
+                                                    @Html.EditorFor(model => model.Debt, new { htmlAttributes = new { @class = "form-control" } })
+                                                </div>
+                                                @Html.ValidationMessageFor(model => model.Debt)
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                </div>
+                                <!--/row-->
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.USCost, new { @class = "control-label col-md-5" })
+                                            <div class="col-md-7">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        $
+                                                    </span>
+                                                    @Html.EditorFor(model => model.USCost, new { htmlAttributes = new { @class = "form-control" } })
+                                                </div>
+                                                @Html.ValidationMessageFor(model => model.USCost)
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.USPayment, new { @class = "control-label col-md-5" })
+                                            <div class="col-md-7">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        $
+                                                    </span>
+                                                    @Html.EditorFor(model => model.USPayment, new { htmlAttributes = new { @class = "form-control" } })
+                                                </div>
+                                                @Html.ValidationMessageFor(model => model.USPayment)
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.USDebt, new { @class = "control-label col-md-5" })
+                                            <div class="col-md-7">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        $
+                                                    </span>
+                                                    @Html.EditorFor(model => model.USDebt, new { htmlAttributes = new { @class = "form-control" } })
+                                                </div>
+                                                @Html.ValidationMessageFor(model => model.USDebt)
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                </div>
+                                <!--/row-->
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-5" for="InvoiceDate">
+                                                @Html.DisplayNameFor(model => model.InvoiceDate)
+                                                <span class="required" aria-required="true">*</span>
+                                            </label>
+                                            <div class="col-md-7">
+                                                @Html.EditorFor(model => model.InvoiceDate, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.InvoiceDate)
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.PaymentDate, new { @class = "control-label col-md-5" })
+                                            <div class="col-md-7">
+                                                @Html.EditorFor(model => model.PaymentDate, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.PaymentDate)
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.Payoff, new { @class = "control-label col-md-5" })
+                                            <div class="col-md-7">
+                                                <div class="icheck-inline">
+                                                    @Html.EditorFor(model => model.Payoff, new { htmlAttributes = new { @class = "form-control" } })
+                                                </div>
+                                                @Html.ValidationMessageFor(model => model.Payoff)
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                </div>
+                                <!--/row-->
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.Remark, new { @class = "control-label col-md-3" })
+                                            <div class="col-md-9">
+                                                @Html.EditorFor(model => model.Remark, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.Remark)
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                </div>
+                                <!--/row-->
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">上传发票</label>
+                                            <div class="col-md-9">
+                                                <div class="fileinput fileinput-new" data-provides="fileinput">
+                                                    <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="height: 300px; width: 300px;"></div>
+                                                    <div>
+                                                        <span class="btn btn-default btn-file"><span class="fileinput-new">选择图片</span><span class="fileinput-exists">更改</span><input type="file" name="invoiceFile"></span>
+                                                        <a href="#" class="btn btn-default fileinput-exists" data-dismiss="fileinput">移除</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">上传回单</label>
+                                            <div class="col-md-9">
+                                                <div class="fileinput fileinput-new" data-provides="fileinput">
+                                                    <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="height: 300px; width: 300px;"></div>
+                                                    <div>
+                                                        <span class="btn btn-default btn-file"><span class="fileinput-new">选择图片</span><span class="fileinput-exists">更改</span><input type="file" name="receiptFile"></span>
+                                                        <a href="#" class="btn btn-default fileinput-exists" data-dismiss="fileinput">移除</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                    <!--/span-->
+                                </div>
+                                <!--/row-->
+                            </div>
+                            <div class="form-actions">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="row">
+                                            <div class="col-md-offset-3 col-md-9">
+                                                <button type="submit" class="btn green"><i class="fa fa-save"></i> 保存</button>
+                                                <a href="@Url.Action("Index")" class="btn default"><i class="fa fa-undo"></i> 返回列表</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                        <!-- END FORM-->
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END PAGE CONTENT -->
+@section scripts{
+    <script>
+        $(function () {
+
+            $('#Cost,#Payment').on('change', function () {
+                if (!$('#Cost').val())
+                    return;
+                    var cost = Number($('#Cost').val());
+                    var payment = Number($('#Payment').val());
+                    $('#Debt').val(cost - payment > 0 ? cost - payment : 0);
+            });
+            $('#USCost,#USPayment').on('change', function () {
+                if (!$('#USCost').val())
+                    return;
+                    var cost = Number($('#USCost').val());
+                    var payment = Number($('#USPayment').val());
+                    $('#USDebt').val(cost - payment > 0 ? cost - payment : 0);
+            });
+
+            var companyUrl = '@Url.Action("GetCompanyName", "BusinessCompany")';
+
+            var bestPictures = new Bloodhound({
+                datumTokenizer: Bloodhound.tokenizers.obj.whitespace('Name'),
+                queryTokenizer: Bloodhound.tokenizers.whitespace,
+                //prefetch: allcompanyUrl,
+                remote: {
+                    url: companyUrl + '?query=%QUERY',
+                    wildcard: '%QUERY'
+                }
+            });
+
+            $('#CompanyName').typeahead(null, {
+                name: 'best-pictures',
+                display: 'Name',
+                source: bestPictures
+            });
+        });
+    </script>
+}

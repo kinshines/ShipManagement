@@ -1,0 +1,132 @@
+﻿@model Ship.Web.ViewModels.AboardContract
+
+<div class="portlet light">
+    <div class="portlet-body form">
+        <!-- BEGIN FORM-->
+        <form asp-controller="Contract" asp-action="Aboard" class="form-horizontal" role="form" data-ajax="true" data-ajax-method="post" data-ajax-success="processSuccess" data-ajax-mode="replace">
+            <div class="form-body">
+                @Html.AntiForgeryToken()
+                <div id="summaryErrors" class="validation-summary-errors">
+                    <ul></ul>
+                </div>
+                @Html.HiddenFor(model => model.ContractID)
+                <div class="form-group">
+                    @Html.LabelFor(model => model.SailorName, new { @class = "control-label col-md-2" })
+                    <div class="col-md-2">
+                        <p class="form-control-static">
+                            @Html.DisplayFor(model => model.SailorName)
+                        </p>
+                    </div>
+                    @Html.LabelFor(model => model.VesselName, new { @class = "control-label col-md-2" })
+                    <div class="col-md-2">
+                        <p class="form-control-static">
+                            @Html.DisplayFor(model => model.VesselName)
+                        </p>
+                    </div>
+                    @Html.LabelFor(model => model.Term, new { @class = "control-label col-md-2" })
+                    <div class="col-md-2">
+                        <p class="form-control-static">
+                            @Html.DisplayFor(model => model.Term)
+                            @Html.HiddenFor(model => model.Term)
+                        </p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.AboardDate, new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
+                        @Html.EditorFor(model => model.AboardDate)
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.AshoreDate, new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
+                        @Html.EditorFor(model => model.AshoreDate)
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.NoticeDate, new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
+                        @Html.EditorFor(model => model.NoticeDate)
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.AboardPlace, new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
+                        @Html.EditorFor(model => model.AboardPlace, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.SailZone, new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
+                        @Html.EditorFor(model => model.SailZone, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Remark, new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
+                        @Html.EditorFor(model => model.Remark, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                </div>
+            </div>
+            <div class="form-actions">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-offset-3 col-md-9">
+                                <button type="submit" class="btn green"><i class="fa fa-save"></i> 保存</button>
+                                <a class="btn default" href="javascript:void(0)" data-dismiss="modal"><i class="fa fa-undo"></i> 返回列表</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                    </div>
+                </div>
+            </div>
+        </form>
+        <!-- END FORM-->
+    </div>
+</div>
+
+<script>
+    function generateAshoreNoticeDate(e) {
+        var ashoreDate = e.date;
+        var term = Number($('#Term').val());
+
+        ashoreDate.setMonth(ashoreDate.getMonth() + term);
+        $('#AshoreDate').parent().datepicker('setDate', ashoreDate);
+
+        var noticeDate = new Date();
+        noticeDate = ashoreDate;
+        noticeDate.setMonth(ashoreDate.getMonth() - 1);
+        $('#NoticeDate').parent().datepicker('setDate', noticeDate);
+    }
+
+    $(function () {
+        $('#AboardDate').parent().datepicker({
+            rtl: Metronic.isRTL(),
+            format: "yyyy-mm-dd",
+            language: "zh-CN",
+            todayHighlight: true,
+            autoclose: true
+        }).on("changeDate", generateAshoreNoticeDate);
+        $('#AshoreDate').parent().datepicker({
+            rtl: Metronic.isRTL(),
+            format: "yyyy-mm-dd",
+            language: "zh-CN",
+            todayHighlight: true,
+            autoclose: true
+        }).on("changeDate", function (e) {
+            noticeDate = e.date;
+            noticeDate.setMonth(noticeDate.getMonth() - 1);
+            $('#NoticeDate').parent().datepicker('setDate', noticeDate);
+        });
+        $('#NoticeDate').parent().datepicker({
+            rtl: Metronic.isRTL(),
+            format: "yyyy-mm-dd",
+            language: "zh-CN",
+            todayHighlight: true,
+            autoclose: true
+        });
+    })
+</script>
+

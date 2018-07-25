@@ -1,0 +1,227 @@
+﻿
+@model IEnumerable<SailorDomain.Entities.VesselCertificate>
+
+@{
+    ViewBag.Title = "船舶证书列表";
+}
+
+<!-- BEGIN PAGE CONTENT -->
+<div class="page-content">
+    <div class="container">
+        <!-- BEGIN PAGE BREADCRUMB -->
+        <ul class="page-breadcrumb breadcrumb">
+            <li>
+                @Html.ActionLink("首页", "Index", "Home")
+                <i class="fa fa-circle"></i>
+            </li>
+            <li>
+                @Html.ActionLink("船舶管理", "ManagedList","Vessel")
+                <i class="fa fa-circle"></i>
+            </li>
+            <li class="active">
+                @ViewBag.Title
+            </li>
+        </ul>
+        <!-- END PAGE BREADCRUMB -->
+
+        <div class="row">
+            <div class="col-md-12">
+                <!-- BEGIN SAMPLE TABLE PORTLET-->
+                <div class="portlet light">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <i class="fa fa-list font-green-sharp"></i>
+                            <span class="caption-subject font-green-sharp bold uppercase">@ViewBag.Title</span>
+                        </div>
+                        <div class="caption">
+                            <span class="caption-subject bold note note-warning">船舶名称：@Request.QueryString["VesselName"]</span>
+                        </div>
+                        <div class="actions btn-set">
+                            <a href="@Url.Action("Create", new { VesselID = Request.QueryString["VesselID"], VesselName = Request.QueryString["VesselName"] })" class="btn btn-circle green-haze btn-sm">
+                                <i class="fa fa-plus"></i> 添加
+                            </a>
+                            <a href="javascript:void(0)" class="btn btn-circle green btn-sm btn-search">
+                                <i class="fa fa-search"></i> 搜索
+                            </a>
+                        </div>
+                    </div>
+                    <div class="portlet-body form portlet-search">
+                        <!-- BEGIN FORM-->
+                        @using (Html.BeginForm("CertificateList", "VesselCertificate", FormMethod.Get, new { @class = "form-horizontal" }))
+                        {
+                            @Html.Hidden("status")
+                            @Html.Hidden("VesselID", Request.QueryString["VesselID"])
+                            @Html.Hidden("VesselName", Request.QueryString["VesselName"])
+                            <button type="submit" class="display-hide"></button>
+                            <div class="form-body">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-4" for="Name">证书名称</label>
+                                            <div class="col-md-8">
+                                                @Html.TextBox("Name", ViewBag.Name as string, new { @class = "form-control", placeholder = "请输入证书名称" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-4" for="Code">证书编号</label>
+                                            <div class="col-md-8">
+                                                @Html.TextBox("Code", ViewBag.Code as string, new { @class = "form-control", placeholder = "请输入证书编号" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                    <div class="col-md-5">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">签发日期</label>
+                                            <div class="col-md-9">
+                                                <div class="input-group input-large date-picker input-daterange">
+                                                    @Html.TextBox("IssueBeginDate", ViewBag.IssueBeginDate as string, "{0:yyyy-MM-dd}", new { @class = "form-control" })
+                                                    <span class="input-group-addon">
+                                                        -
+                                                    </span>
+                                                    @Html.TextBox("IssueEndDate", ViewBag.IssueEndDate as string, "{0:yyyy-MM-dd}", new { @class = "form-control" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-4">失效日期</label>
+                                            <div class="col-md-8">
+                                                <div class="input-group input-large date-picker input-daterange">
+                                                    @Html.TextBox("ExpiryBeginDate", ViewBag.ExpiryBeginDate as string, "{0:yyyy-MM-dd}", new { @class = "form-control" })
+                                                    <span class="input-group-addon">
+                                                        -
+                                                    </span>
+                                                    @Html.TextBox("ExpiryEndDate", ViewBag.ExpiryEndDate as string, "{0:yyyy-MM-dd}", new { @class = "form-control" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                    <div class="col-md-5">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-4">检验日期</label>
+                                            <div class="col-md-8">
+                                                <div class="input-group input-large date-picker input-daterange">
+                                                    @Html.TextBox("CheckBeginDate", ViewBag.CheckBeginDate as string, "{0:yyyy-MM-dd}", new { @class = "form-control" })
+                                                    <span class="input-group-addon">
+                                                        -
+                                                    </span>
+                                                    @Html.TextBox("CheckEndDate", ViewBag.CheckEndDate as string, "{0:yyyy-MM-dd}", new { @class = "form-control" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                </div>
+                            </div>
+                        }
+                        <!-- END FORM-->
+                    </div>
+                    <div class="portlet-body">
+                        <div class="table-scrollable table-scrollable-borderless">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            证书名称
+                                        </th>
+                                        <th>
+                                            证书编号
+                                        </th>
+                                        <th>
+                                            签发日期
+                                        </th>
+                                        <th>
+                                            检验日期
+                                        </th>
+                                        <th>
+                                            失效日期
+                                        </th>
+                                        <th>
+                                            图片预览
+                                        </th>
+                                        <th>
+                                            操作
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        string statusRow = "";
+                                        if (item.ExpiryDate < DateTime.Now)
+                                        {
+                                            statusRow = "danger";
+                                        }
+                                        else if (item.ExpiryNoticeDate < DateTime.Now)
+                                        {
+                                            statusRow = "warning";
+                                        }
+                                        else if (item.CheckNoticeDate < DateTime.Now && DateTime.Now < item.CheckEndDate)
+                                        {
+                                            statusRow = "info";
+                                        }
+                                        else
+                                        {
+                                            statusRow = "success";
+                                        }
+                                        <tr class="@statusRow">
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Name)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Code)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.IssueDate)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.CheckBeginDate) ~
+                                                @Html.DisplayFor(modelItem => item.CheckEndDate)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.ExpiryDate)
+                                            </td>
+                                            <td>
+                                                @if (item.FileID.HasValue)
+                                                {
+                                                    <a href="javascript:Metronic.showPicture('@item.FileID','证书预览')" class="btn default btn-xs green">
+                                                        <i class="icon-eye"></i> 预览
+                                                    </a>
+                                                }
+                                            </td>
+                                            <td>
+                                                <a href="@Url.Action("Details", new { id = item.VesselCertificateID })" class="btn default btn-xs green-jungle">
+                                                    <i class="fa fa-th"></i> 详情
+                                                </a>
+                                                <a href="@Url.Action("Edit", new { id = item.VesselCertificateID })" class="btn default btn-xs blue">
+                                                    <i class="fa fa-edit"></i> 编辑
+                                                </a>
+                                                @if (User.IsInRole("CompanyAdmin"))
+                                                {
+                                                    <a href="javascript:Metronic.deleteItem('@Url.Action("Delete", new { id = item.VesselCertificateID })')" class="btn default btn-xs red">
+                                                        <i class="fa fa-trash"></i> 删除
+                                                    </a>
+                                                }
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <!-- END SAMPLE TABLE PORTLET-->
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END PAGE CONTENT -->

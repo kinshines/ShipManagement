@@ -1,0 +1,171 @@
+﻿@model X.PagedList.IPagedList<Ship.Core.Entities.Company>
+
+@{
+    ViewBag.Title = "单位列表";
+}
+
+<!-- BEGIN PAGE CONTENT -->
+<div class="page-content">
+    <div class="container">
+        <!-- BEGIN PAGE BREADCRUMB -->
+        <ul class="page-breadcrumb breadcrumb">
+            <li>
+                <a asp-controller="Home" asp-action="Index">首页</a>
+                <i class="fa fa-circle"></i>
+            </li>
+            <li>
+                <a asp-action="Index">业务往来单位</a>
+                <i class="fa fa-circle"></i>
+            </li>
+            <li class="active">
+                @ViewBag.Title
+            </li>
+        </ul>
+        <!-- END PAGE BREADCRUMB -->
+
+        <div class="row">
+            <div class="col-md-12">
+                <!-- BEGIN SAMPLE TABLE PORTLET-->
+                <div class="portlet light">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <i class="fa fa-list font-green-sharp"></i>
+                            <span class="caption-subject font-green-sharp bold uppercase">@ViewBag.Title</span>
+                        </div>
+                        <div class="actions btn-set">
+                            <a asp-action="Create" class="btn btn-circle green-haze btn-sm">
+                                <i class="fa fa-plus"></i> 添加
+                            </a>
+                            <a href="javascript:void(0)" class="btn btn-circle green btn-sm btn-search">
+                                <i class="fa fa-search"></i> 搜索
+                            </a>
+                        </div>
+                    </div>
+                    <div class="portlet-body form portlet-search">
+                        <!-- BEGIN FORM-->
+                        <form asp-controller="BusinessCompany" asp-action="Index" method="get" class="form-horizontal">
+                            <button type="submit" class="display-hide"></button>
+                            <div class="form-body">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">单位名称</label>
+                                            <div class="col-md-9">
+                                                <input name="Name" class="form-control", placeholder = "请输入单位名称" value="@ViewBag.Name"  />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">联系人</label>
+                                            <div class="col-md-9">
+                                                <input name="Contacter" class="form-control" , placeholder="请输入联系人" value="@ViewBag.Contacter" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">联系电话</label>
+                                            <div class="col-md-9">
+                                                <input name="ContactTel" class="form-control" , placeholder="请输入联系电话" value="@ViewBag.ContactTel" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                </div>
+                            </div>
+                        </form>
+                        <!-- END FORM-->
+                    </div>
+                    <div class="portlet-body">
+                        <div class="table-scrollable table-scrollable-borderless">
+                            <table class="table table-hover table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            @Html.DisplayNameFor(model=>model[0].Name)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model[0].Type)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model[0].Code)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model[0].Address)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model[0].Remark)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model[0].Contacter)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model[0].ContactTel)
+                                        </th>
+                                        <th>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Name)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Type)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Code)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Address)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Remark)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Contacter)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.ContactTel)
+                                            </td>
+                                            <td>
+                                                <a asp-action="Details" asp-route-id="@item.CompanyID" class="btn default btn-xs green-jungle">
+                                                    <i class="fa fa-th"></i> 详情
+                                                </a>
+                                                <a asp-action="Edit" asp-route-id="@item.CompanyID"  class="btn default btn-xs blue">
+                                                    <i class="fa fa-edit"></i> 编辑
+                                                </a>
+                                                @if (User.IsInRole("CompanyAdmin"))
+                                                {
+                                                    <a href="javascript:Metronic.deleteItem('@Url.Action("Delete", new { id = item.CompanyID })')" class="btn default btn-xs red">
+                                                        <i class="fa fa-trash"></i> 删除
+                                                    </a>
+                                                }
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                        第 @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) 页，共 @Model.PageCount 页
+
+                        @Html.PagedListPager(Model, page => Url.Action("Index",
+                        new { page, 
+                            Contacter = ViewBag.Contacter, 
+                            Name = ViewBag.Name,
+                            ContactTel = ViewBag.ContactTel
+                        }))
+                    </div>
+                </div>
+                <!-- END SAMPLE TABLE PORTLET-->
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END PAGE CONTENT -->

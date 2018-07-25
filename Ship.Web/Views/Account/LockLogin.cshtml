@@ -1,0 +1,61 @@
+﻿@model Ship.Web.ViewModels.LoginViewModel
+@{
+    ViewBag.Title = "锁屏";
+    Layout = "~/Views/Shared/_LayoutNoHeader.cshtml";
+}
+<link href="~/assets/pages/css/lock2.css" rel="stylesheet" />
+
+<div class="page-lock">
+    <div class="page-logo">
+        <a class="brand" asp-controller="Home" asp-action="Index">
+            <img src="~/assets/layout3/img/logo-crew-default.png" />
+        </a>
+    </div>
+    <div class="page-body">
+        <img class="page-lock-img" src="@Url.Action("GetAvatar", new { id = ViewBag.UserId, size = "large" })" alt="">
+        <div class="page-lock-info">
+            <h1>@ViewBag.Email</h1>
+            <span class="email">
+                <br />
+            </span>
+            <span class="locked">
+                锁定屏幕
+            </span>
+            <form asp-controller="Account" asp-action="Login" class="form-inline">
+                <input type="hidden" asp-for="Email" />
+                <div class="input-group input-medium">
+                    <input asp-for="Password" type="password" class="form-control" autocomplete="off" placeholder="密码"/>
+                    <span class="input-group-btn">
+                        <button type="submit" class="btn blue icn-only"><i class="m-icon-swapright m-icon-white"></i></button>
+                    </span>
+                </div>
+                <!-- /input-group -->
+                <div class="relogin">
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="page-footer-custom">
+        @DateTime.Now.Year &copy; 帆海船员管理系统.
+    </div>
+</div>
+
+@section scripts{
+    <script>
+        $(function () {
+            // init background slide images
+            $.backstretch([
+             "../assets/pages/media/bg/1.jpg",
+             "../assets/pages/media/bg/2.jpg",
+             "../assets/pages/media/bg/3.jpg",
+             "../assets/pages/media/bg/4.jpg"
+            ], {
+                fade: 1000,
+                duration: 8000
+            }
+         );
+        })
+    </script>
+
+}
+

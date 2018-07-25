@@ -1,0 +1,279 @@
+﻿@model Ship.Core.Entities.Certificate
+
+@{
+    ViewBag.Title = "编辑证书";
+}
+
+<!-- BEGIN PAGE CONTENT -->
+<div class="page-content">
+    <div class="container">
+        <!-- BEGIN PAGE BREADCRUMB -->
+        <ul class="page-breadcrumb breadcrumb">
+            <li>
+                <a asp-controller="Home" asp-action="Index">首页</a>
+                <i class="fa fa-circle"></i>
+            </li>
+            <li>
+                <a asp-action="Index">证书管理</a>
+                <i class="fa fa-circle"></i>
+            </li>
+            <li class="active">
+                @ViewBag.Title
+            </li>
+        </ul>
+        <!-- END PAGE BREADCRUMB -->
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="portlet light">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <i class="fa fa-edit font-green-sharp"></i>
+                            <span class="caption-subject font-green-sharp bold uppercase">编辑证书信息</span>
+                        </div>
+                    </div>
+                    <div class="portlet-body form">
+                        <!-- BEGIN FORM-->
+                        <form asp-controller="Certificate" asp-action="Edit" method="post" class="form-horizontal" role="form" enctype="multipart/form-data">
+                            <div class="form-body">
+                                <div asp-validation-summary="ModelOnly"></div>
+                                <input type="hidden" asp-for="CertificateID" />
+                                <input type="hidden" asp-for="FileID" />
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3" asp-for="Name">
+                                                <span class="required" aria-required="true">*</span>
+                                            </label>
+                                            <div class="col-md-9">
+                                                <input asp-for=" Name" class="form-control typeahead" />
+                                                <span asp-validation-for="Name"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3" asp-for="SailorID">
+                                                <span class="required" aria-required="true">*</span>
+                                            </label>
+                                            <div class="col-md-9">
+                                                <select asp-for="SailorID" class="form-control select2me">
+                                                    <option></option>
+                                                </select>
+                                                <span asp-validation-for="SailorID"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                </div>
+                                <!--/row-->
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label asp-for="Code" class="control-label col-md-3"></label>
+                                            <div class="col-md-9">
+                                                <input asp-for="Code" class="form-control" />
+                                                <span asp-validation-for="Code"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label asp-for="IssuePlace" class="control-label col-md-3"></label>
+                                            <div class="col-md-9">
+                                                <input asp-for="IssuePlace" class="form-control" />
+                                                <span asp-validation-for="IssuePlace"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                </div>
+                                <!--/row-->
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">有效日期</label>
+                                            <div class="col-md-9">
+                                                <div class="input-group date-picker input-daterange">
+                                                    <input type="text" asp-for="IssueDate" asp-format="{0:yyyy-MM-dd}" class="form-control" />
+                                                    <span class="input-group-addon">
+                                                        --
+                                                    </span>
+                                                    <input type="text" asp-for="ExpiryDate" asp-format="{0:yyyy-MM-dd}" class="form-control" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label asp-for="NoticeDate" class="control-label col-md-3"></label>
+                                            <div class="col-md-9">
+                                                <input asp-for="NoticeDate" class="form-control" />
+                                                <span asp-validation-for="NoticeDate"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                </div>
+                                <!--/row-->
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label asp-for="VesselDegree" class="control-label col-md-3"></label>
+                                            <div class="col-md-9">
+                                                <input asp-for="VesselDegree" class="form-control" />
+                                                <span asp-validation-for="VesselDegree"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label asp-for="Degree" class="control-label col-md-3"></label>
+                                            <div class="col-md-9">
+                                                <input asp-for="Degree" class="form-control" />
+                                                <span asp-validation-for="Degree"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                </div>
+                                <!--/row-->
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label asp-for="MaritimeBureau" class="control-label col-md-3"></label>
+                                            <div class="col-md-9">
+                                                <input asp-for="MaritimeBureau" class="form-control" />
+                                                <span asp-validation-for="MaritimeBureau"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label asp-for="Department" class="control-label col-md-3"></label>
+                                            <div class="col-md-9">
+                                                <input asp-for="Department" class="form-control" />
+                                                <span asp-validation-for="Department"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                </div>
+                                <!--/row-->
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label asp-for="Nationality" class="control-label col-md-3"></label>
+                                            <div class="col-md-9">
+                                                <input asp-for="Nationality" class="form-control" />
+                                                <span asp-validation-for="Nationality"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                </div>
+                                <!--/row-->
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">上传证书</label>
+                                            <div class="col-md-9">
+                                                <div class="fileinput fileinput-new" data-provides="fileinput">
+                                                    <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="height: 300px; width: 300px;"></div>
+                                                    <div>
+                                                        <span class="btn btn-default btn-file"><span class="fileinput-new">选择图片</span><span class="fileinput-exists">更改</span><input type="file" name="certificateFile"></span>
+                                                        <a href="#" class="btn btn-default fileinput-exists" data-dismiss="fileinput">移除</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                    @if (Model.FileID.HasValue)
+                                    {
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3">已上传证书</label>
+                                                <div class="col-md-9">
+                                                    <img src="@Url.Action("GetFile", "UploadFile", new { id=Model.FileID})" style="max-height: 300px; max-width: 300px;" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--/span-->
+                                    }
+
+                                </div>
+                                <!--/row-->
+
+                            </div>
+                            <div class="form-actions">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="row">
+                                            <div class="col-md-offset-3 col-md-9">
+                                                <button type="submit" class="btn green"><i class="fa fa-save"></i> 保存</button>
+                                                <a asp-action="Index" class="btn default"><i class="fa fa-undo"></i> 返回列表</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        <!-- END FORM-->
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END PAGE CONTENT -->
+
+@section scripts{
+    <script>
+        $(function () {
+            $('#ExpiryDate').parent().datepicker({
+                rtl: Metronic.isRTL(),
+                format: "yyyy-mm-dd",
+                language: "zh-CN",
+                todayHighlight: true,
+                autoclose: true
+            }).on("changeDate", function (e) {
+                var expiryDate = $('#ExpiryDate').val();
+                var noticeDate = new Date(expiryDate.replace(/-/g, "/"));
+                noticeDate.setMonth(noticeDate.getMonth() - 3);
+                $('#NoticeDate').parent().datepicker('setDate', noticeDate);
+            });
+
+            var vesselListUrl = '@Url.Action("GetVessels", "Vessel")';
+            var vesselUrl = '@Url.Action("GetVessel", "Vessel")';
+            Metronic.handleVesselShipowner(vesselListUrl, vesselUrl);
+
+            var certificateUrl = '@Url.Action("GetSailorCertificates", "CertificateType")';
+
+            var bestPictures = new Bloodhound({
+                datumTokenizer: Bloodhound.tokenizers.obj.whitespace('Name'),
+                queryTokenizer: Bloodhound.tokenizers.whitespace,
+                //prefetch: allcompanyUrl,
+                remote: {
+                    url: certificateUrl + '?query=%QUERY',
+                    wildcard: '%QUERY'
+                }
+            });
+
+            $('#Name').typeahead(null, {
+                name: 'best-pictures',
+                display: 'Name',
+                source: bestPictures
+            });
+
+        });
+
+    </script>
+}

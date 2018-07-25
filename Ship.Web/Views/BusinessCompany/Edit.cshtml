@@ -1,0 +1,274 @@
+﻿@model SailorDomain.Entities.Company
+
+@{
+    ViewBag.Title = "编辑业务往来单位";
+}
+
+<!-- BEGIN PAGE CONTENT -->
+<div class="page-content">
+    <div class="container">
+        <!-- BEGIN PAGE BREADCRUMB -->
+        <ul class="page-breadcrumb breadcrumb">
+            <li>
+                <a asp-controller="Home" asp-action="Index">首页</a>
+                <i class="fa fa-circle"></i>
+            </li>
+            <li>
+                <a asp-action="Index">单位管理</a>
+                <i class="fa fa-circle"></i>
+            </li>
+            <li class="active">
+                @ViewBag.Title
+            </li>
+        </ul>
+        <!-- END PAGE BREADCRUMB -->
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="portlet light">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <i class="fa fa-edit font-green-sharp"></i>
+                            <span class="caption-subject font-green-sharp bold uppercase">编辑业务往来单位</span>
+                        </div>
+                    </div>
+                    <div class="portlet-body form">
+                        <!-- BEGIN FORM-->
+                        <form asp-controller="BusinessCompany" asp-action="Edit" method="post" class="form-horizontal" role="form">
+                            <div class="form-body">
+                                <div asp-validation-summary="ModelOnly"></div>
+                                <input type="hidden" asp-for="CompanyID" />
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3" asp-for="Name">
+                                                <span class="required" aria-required="true">*</span>
+                                            </label>
+                                            <div class="col-md-9">
+                                                <input type="text" class="form-control" asp-for="Name" />
+                                                <span asp-validation-for="Name"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3" asp-for="Type"></label>
+                                            <div class="col-md-9">
+                                                <input asp-for="Type" class="form-control" />
+                                                <span asp-validation-for="Type"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                </div>
+                                <!--/row-->
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label asp-for="Code" class="control-label col-md-3"></label>
+                                            <div class="col-md-9">
+                                                <input class="form-control" asp-for="Code" />
+                                                <span asp-validation-for="Code"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label asp-for="Property" class="control-label col-md-3"></label>
+                                            <div class="col-md-9">
+                                                <input asp-for="Property" class="form-control" />
+                                                <span asp-validation-for="Property"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                </div>
+                                <!--/row-->
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label asp-for="Representative" class="control-label col-md-3"></label>
+                                            <div class="col-md-9">
+                                                <input asp-for="Representative" class="form-control" />
+                                                <span asp-validation-for="Representative"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label asp-for="HonorLevel" class="control-label col-md-3"></label>
+                                            <div class="col-md-9">
+                                                <input asp-for="HonorLevel" class="form-control" />
+                                                <span asp-validation-for="HonorLevel"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                </div>
+                                <!--/row-->
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label asp-for="Address" class="control-label col-md-3"></label>
+                                            <div class="col-md-9">
+                                                <input asp-for="Address" class="form-control" />
+                                                <span asp-validation-for="Address"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label asp-for="PostalCode" class="control-label col-md-3"></label>
+                                            <div class="col-md-9">
+                                                <input asp-for="PostalCode" class="form-control" />
+                                                <span asp-validation-for="PostalCode"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--/row-->
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label asp-for="Telephone" class="control-label col-md-3"></label>
+                                            <div class="col-md-9">
+                                                <input asp-for="Telephone" class="form-control" />
+                                                <span asp-validation-for="Telephone"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label asp-for="Fax" class="control-label col-md-3"></label>
+                                            <div class="col-md-9">
+                                                <input asp-for="Fax" class="form-control" />
+                                                <span asp-validation-for="Fax"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                </div>
+                                <!--/row-->
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label asp-for="Email" class="control-label col-md-3"></label>
+                                            <div class="col-md-9">
+                                                <input asp-for="Email" class="form-control" />
+                                                <span asp-validation-for="Email"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label asp-for="Website" class="control-label col-md-3"></label>
+                                            <div class="col-md-9">
+                                                <input asp-for="Website" class="form-control" />
+                                                <span asp-validation-for="Website"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                </div>
+                                <!--/row-->
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label asp-for="Contacter" class="control-label col-md-3"></label>
+                                            <div class="col-md-9">
+                                                <input asp-for="Contacter" class="form-control" />
+                                                <span asp-validation-for="Contacter"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label asp-for="ContactTel" class="control-label col-md-3"></label>
+                                            <div class="col-md-9">
+                                                <input asp-for="ContactTel" class="form-control" />
+                                                <span asp-validation-for="ContactTel"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                </div>
+                                <!--/row-->
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label asp-for="Bank" class="control-label col-md-3"></label>
+                                            <div class="col-md-9">
+                                                <input asp-for="Bank" class="form-control" />
+                                                <span asp-validation-for="Bank"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label asp-for="BankAccount" class="control-label col-md-3"></label>
+                                            <div class="col-md-9">
+                                                <input asp-for="BankAccount" class="form-control" />
+                                                <span asp-validation-for="BankAccount"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                </div>
+                                <!--/row-->
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label asp-for="TaxNo" class="control-label col-md-3"></label>
+                                            <div class="col-md-9">
+                                                <input asp-for="TaxNo" class="form-control" />
+                                                <span asp-validation-for="TaxNo"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label asp-for="Remark" class="control-label col-md-3"></label>
+                                            <div class="col-md-9">
+                                                <input asp-for="Remark" class="form-control" />
+                                                <span asp-validation-for="Remark"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                </div>
+                                <!--/row-->
+
+                            </div>
+                            <div class="form-actions">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="row">
+                                            <div class="col-md-offset-3 col-md-9">
+                                                <button type="submit" class="btn green"><i class="fa fa-save"></i> 保存</button>
+                                                <a asp-action="Index" class="btn default"><i class="fa fa-undo"></i> 返回列表</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        <!-- END FORM-->
+                    </div>
+                    
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END PAGE CONTENT -->

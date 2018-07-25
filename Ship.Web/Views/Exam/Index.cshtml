@@ -1,0 +1,203 @@
+﻿@model IPagedList<Exam>
+
+@{
+    ViewBag.Title = "考证列表";
+}
+
+<!-- BEGIN PAGE CONTENT -->
+<div class="page-content">
+    <div class="container">
+        <!-- BEGIN PAGE BREADCRUMB -->
+        <ul class="page-breadcrumb breadcrumb">
+            <li>
+                @Html.ActionLink("首页", "Index", "Home")
+                <i class="fa fa-circle"></i>
+            </li>
+            <li>
+                @Html.ActionLink("考证管理", "Index")
+                <i class="fa fa-circle"></i>
+            </li>
+            <li class="active">
+                @ViewBag.Title
+            </li>
+        </ul>
+        <!-- END PAGE BREADCRUMB -->
+
+        <div class="row">
+            <div class="col-md-12">
+                <!-- BEGIN SAMPLE TABLE PORTLET-->
+                <div class="portlet light">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <i class="fa fa-list font-green-sharp"></i>
+                            <span class="caption-subject font-green-sharp bold uppercase">@ViewBag.Title</span>
+                        </div>
+                        <div class="actions btn-set">
+                            <a href="@Url.Action("Create")" class="btn btn-circle green-haze btn-sm">
+                                <i class="fa fa-plus"></i> 添加
+                            </a>
+                            <a href="javascript:void(0)" class="btn btn-circle green btn-sm btn-search">
+                                <i class="fa fa-search"></i> 搜索
+                            </a>
+                        </div>
+                    </div>
+                    <div class="portlet-body form portlet-search">
+                        <!-- BEGIN FORM-->
+                        @using (Html.BeginForm("Index", "Exam", FormMethod.Get, new { @class = "form-horizontal" }))
+                        {
+                            <button type="submit" class="display-hide"></button>
+                            <div class="form-body">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-4">船员姓名</label>
+                                            <div class="col-md-8">
+                                                @Html.TextBox("SailorName", ViewBag.SailorName as string, new { @class = "form-control", placeholder = "请输入船员姓名" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-4">申请职务</label>
+                                            <div class="col-md-8">
+                                                @Html.DropDownList("Post", null, "", new { @class = "form-control select2me" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">考试日期</label>
+                                            <div class="col-md-9">
+                                                <div class="input-group input-large date-picker input-daterange">
+                                                    @Html.TextBox("BeginDate", ViewBag.BeginDate as string, "{0:yyyy-MM-dd}", new { @class = "form-control" })
+                                                    <span class="input-group-addon">
+                                                        --
+                                                    </span>
+                                                    @Html.TextBox("EndDate", ViewBag.EndDate as string, "{0:yyyy-MM-dd}", new { @class = "form-control" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                </div>
+                            </div>
+                        }
+                        <!-- END FORM-->
+                    </div>
+                    <div class="portlet-body">
+                        <div class="table-scrollable table-scrollable-borderless">
+                            <table class="table table-hover table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            船员姓名
+                                        </th>
+                                        <th>
+                                            申请职务
+                                        </th>
+                                        <th>
+                                            准考证号
+                                        </th>
+                                        <th>
+                                            考试日期
+                                        </th>
+                                        <th>
+                                            证书号码
+                                        </th>
+                                        <th>
+                                            签发日期
+                                        </th>
+                                        <th>
+                                            是否合格
+                                        </th>
+                                        <th>
+                                            备注
+                                        </th>
+                                        <th>
+                                            操作
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @Html.ActionLink(item.SailorName, "Details", "Sailor", new { id = item.SailorID }, null)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.ApplyPost)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.ExamNo)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.ExamDate)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.CertificateNo)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.IssueDate)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Qualified)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Remark)
+                                            </td>
+                                            <td>
+                                                <a href="javascript:addItem('@item.ExamID')" class="btn default btn-xs green">
+                                                    <i class="fa fa-plus-square"></i> 添加科目
+                                                </a>
+                                                <a href="@Url.Action("Details", new { id = item.ExamID })" class="btn default btn-xs green-jungle">
+                                                    <i class="fa fa-th"></i> 详情
+                                                </a>
+                                                <a href="@Url.Action("Edit", new { id=item.ExamID})" class="btn default btn-xs blue">
+                                                    <i class="fa fa-edit"></i> 编辑
+                                                </a>
+                                                @if (User.IsInRole("CompanyAdmin"))
+                                                {
+                                                    <a href="javascript:Metronic.deleteItem('@Url.Action("Delete", new { id = item.ExamID })')" class="btn default btn-xs red">
+                                                        <i class="fa fa-trash"></i> 删除
+                                                    </a>
+                                                }
+
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                        第 @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) 页，共 @Model.PageCount 页
+
+                        @Html.PagedListPager(Model, page => Url.Action("Index",
+                        new { page, BeginDate = ViewBag.BeginDate, EndDate = ViewBag.EndDate, SailorName = ViewBag.SailorName }))
+                    </div>
+                </div>
+                <!-- END SAMPLE TABLE PORTLET-->
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END PAGE CONTENT -->
+<partial name="_AddItem"  />
+@section scripts{
+    <script>
+        function addItem(id) {
+            $('input[name="ExamID"]').val(id);
+            $('#addModal').modal();
+        }
+
+        function addSuccess(data) {
+            if (data == "error") {
+                alert("保存失败！")
+            }
+            else {
+                $('#addModal').modal('hide');
+            }
+        }
+    </script>
+}

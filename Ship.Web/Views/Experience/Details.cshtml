@@ -1,0 +1,213 @@
+﻿@model Experience
+
+@{
+    ViewBag.Title = "工作经历详情";
+}
+
+<!-- BEGIN PAGE CONTENT -->
+<div class="page-content">
+    <div class="container">
+        <!-- BEGIN PAGE BREADCRUMB -->
+        <ul class="page-breadcrumb breadcrumb">
+            <li>
+                @Html.ActionLink("首页", "Index", "Home")
+                <i class="fa fa-circle"></i>
+            </li>
+            <li>
+                @Html.ActionLink("工作经历管理", "Index")
+                <i class="fa fa-circle"></i>
+            </li>
+            <li class="active">
+                @ViewBag.Title
+            </li>
+        </ul>
+        <!-- END PAGE BREADCRUMB -->
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="portlet light">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <i class="fa fa-th font-green-sharp"></i>
+                            <span class="caption-subject font-green-sharp bold uppercase">@ViewBag.Title</span>
+                        </div>
+                    </div>
+                    <div class="portlet-body form">
+                        <form class="form-horizontal" role="form">
+                            <div class="form-body">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.SailorName, new { @class = "control-label col-md-3" })
+                                            <div class="col-md-9">
+                                                <p class="form-control-static">
+                                                    @Html.ActionLink(Model.SailorName, "Details", "Sailor", new { id = Model.SailorID }, null)
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.Post, new { @class = "control-label col-md-3" })
+                                            <div class="col-md-9">
+                                                <p class="form-control-static">
+                                                    @Html.DisplayFor(model => model.Post)
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                </div>
+                                <!--/row-->
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.VesselName, new { @class = "control-label col-md-3" })
+                                            <div class="col-md-9">
+                                                <p class="form-control-static">
+                                                    @Html.DisplayFor(model => model.VesselName)
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.IMO, new { @class = "control-label col-md-3" })
+                                            <div class="col-md-9">
+                                                <p class="form-control-static">
+                                                    @Html.DisplayFor(model => model.IMO)
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                </div>
+                                <!--/row-->
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3" for="BeginTime">
+                                                起始日期
+                                            </label>
+                                            <div class="col-md-9">
+                                                <p class="form-control-static">
+                                                    @Html.DisplayFor(model => model.BeginTime)~@Html.DisplayFor(model => model.EndTime)
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.DurationMonth, new { @class = "control-label col-md-3" })
+                                            <div class="col-md-9">
+                                                <p class="form-control-static">
+                                                    @Html.DisplayFor(model => model.DurationMonth)
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                </div>
+                                <!--/row-->
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.CompanyName, new { @class = "control-label col-md-3" })
+                                            <div class="col-md-9">
+                                                <p class="form-control-static">
+                                                    @Html.DisplayFor(model => model.CompanyName)
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.VesselType, new { @class = "control-label col-md-3" })
+                                            <div class="col-md-9">
+                                                <p class="form-control-static">
+                                                    @Html.DisplayFor(model => model.VesselType)
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                </div>
+                                <!--/row-->
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.Flag, new { @class = "control-label col-md-3" })
+                                            <div class="col-md-9">
+                                                <p class="form-control-static">
+                                                    @Html.DisplayFor(model => model.Flag)
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.DeadWeightTon, new { @class = "control-label col-md-3" })
+                                            <div class="col-md-9">
+                                                <p class="form-control-static">
+                                                    @Html.DisplayFor(model => model.DeadWeightTon)
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                </div>
+                                <!--/row-->
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.MainEngine, new { @class = "control-label col-md-3" })
+                                            <div class="col-md-9">
+                                                <p class="form-control-static">
+                                                    @Html.DisplayFor(model => model.MainEngine)
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.Power, new { @class = "control-label col-md-3" })
+                                            <div class="col-md-9">
+                                                <p class="form-control-static">
+                                                    @Html.DisplayFor(model => model.Power)
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                </div>
+                                <!--/row-->
+                            </div>
+                            <div class="form-actions">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="row">
+                                            <div class="col-md-offset-3 col-md-9">
+                                                <a href="@Url.Action("Edit", new { id = Model.ExperienceID })" class="btn green"><i class="fa fa-pencil"></i> 编辑</a>
+                                                <a href="@Url.Action("Index")" class="btn default"><i class="fa fa-undo"></i> 返回列表</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END PAGE CONTENT -->

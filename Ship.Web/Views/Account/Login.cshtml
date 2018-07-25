@@ -1,0 +1,77 @@
+﻿@model SailorWeb.ViewModels.LoginViewModel
+@{
+    ViewBag.Title = "登录";
+    Layout = "~/Views/Shared/_LayoutNoHeader.cshtml";
+}
+<link href="~/assets/pages/css/login-soft.css" rel="stylesheet" />
+<!-- BEGIN LOGO -->
+<div class="logo">
+    <a asp-controller="Home" asp-action="Index">
+        <img src="~/assets/layout3/img/logo-crew-default.png" asp-append-version="true" />
+    </a>
+</div>
+<!-- END LOGO -->
+<!-- BEGIN LOGIN -->
+<div class="content">
+    <!-- BEGIN LOGIN FORM -->
+    <form asp-controller="Account" asp-action="Login" asp-route-returnUrl="@ViewBag.ReturnUrl" method="post" class="login-form">
+        <div asp-validation-summary="ModelOnly"></div>
+        <h4 class="form-title">登录您的账号</h4>
+        <div class="form-group">
+            <!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
+            <label class="control-label visible-ie8 visible-ie9" asp-for="Email"></label>
+            <div class="input-icon">
+                <i class="fa fa-user"></i>
+                <input asp-for="Email" class="form-control placeholder-no-fix" autocomplete="off" placeholder="邮箱" />
+            </div>
+            <span asp-validation-for="Email"></span>
+        </div>
+        <div class="form-group">
+            <label class="control-label visible-ie8 visible-ie9" asp-for="Password"></label>
+            <div class="input-icon">
+                <i class="fa fa-lock"></i>
+                <input asp-for="Password" type="password" class="form-control placeholder-no-fix" autocomplete="off" placeholder="密码" />
+            </div>
+            <span asp-validation-for="Password"></span>
+        </div>
+        <div class="form-actions">
+            <label class="checkbox">
+                <input type="checkbox" asp-for="RememberMe" /> <label asp-for="RememberMe"></label>
+            </label>
+            <button type="submit" class="btn blue pull-right">
+                登录 <i class="m-icon-swapright m-icon-white"></i>
+            </button>
+        </div>
+        <div class="login-options">
+            <br /><br /><br /><br /><br />
+        </div>
+    </form>
+    <!-- END LOGIN FORM -->
+</div>
+
+<!-- END LOGIN -->
+<!-- BEGIN COPYRIGHT -->
+<div class="copyright">
+    @DateTime.Now.Year &copy;  帆海船员管理系统.
+</div>
+<!-- END COPYRIGHT -->
+@section scripts{
+    <script>
+        $(function () {
+            $('body').addClass('login');
+            // init background slide images
+            $.backstretch([
+             "../assets/pages/media/bg/1.jpg",
+             "../assets/pages/media/bg/2.jpg",
+             "../assets/pages/media/bg/3.jpg",
+             "../assets/pages/media/bg/4.jpg"
+            ], {
+                fade: 1000,
+                duration: 8000
+            }
+         );
+        })
+    </script>
+
+}
+
