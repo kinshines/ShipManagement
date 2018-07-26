@@ -1,4 +1,4 @@
-﻿@model SailorDomain.Entities.Vessel
+﻿@model Vessel
 
 @{
     ViewBag.Title = "新增船舶";
@@ -286,7 +286,7 @@
 @section scripts{
     <script>
         $(function () {
-            var ShipownerID = '@Request.QueryString["ShipownerID"]';
+            var ShipownerID = '@Context.Request.Query["ShipownerID"]';
             if (ShipownerID) {
                 $('#ShipownerID').select2("readonly",true);
             }

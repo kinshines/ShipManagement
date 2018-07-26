@@ -1,4 +1,4 @@
-﻿@model SailorDomain.Entities.ServiceRecord
+﻿@model ServiceRecord
 
 @{
     ViewBag.Title = "新增服务记录";
@@ -234,7 +234,7 @@
             var vesselUrl = '@Url.Action("GetVessel", "Vessel")';
             Metronic.handleVesselShipowner(vesselListUrl, vesselUrl);
 
-            var SailorID = '@Request.QueryString["SailorID"]';
+            var SailorID = '@Context.Request.Query["SailorID"]';
             if (SailorID) {
                 $('#SailorID').select2("readonly", true);
                 var sailorUrl = '@Url.Action("GetSailor", "Sailor")';

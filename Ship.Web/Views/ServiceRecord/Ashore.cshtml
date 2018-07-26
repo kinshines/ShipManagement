@@ -1,12 +1,10 @@
-﻿@model SailorDomain.Entities.ServiceRecord
+﻿@model ServiceRecord
 
 <div class="portlet light">
     <div class="portlet-body form">
         <!-- BEGIN FORM-->
-        @using (Ajax.BeginForm("Ashore", "ServiceRecord", null, new AjaxOptions { OnSuccess = "ashoreSuccess" }, new { @class = "form-horizontal", role = "form" }))
-        {
+        <form asp-action="Ashore" asp-controller="ServiceRecord" ajax-success="ashoreSuccess" class="form-horizontal" role="form">
             <div class="form-body">
-                @Html.AntiForgeryToken()
                 <div id="summaryErrors" class="validation-summary-errors">
                     <ul></ul>
                 </div>
@@ -84,7 +82,7 @@
                     </div>
                 </div>
             </div>
-        }
+        </form>
         <!-- END FORM-->
     </div>
 </div>

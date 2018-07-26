@@ -10,7 +10,7 @@
             <div class="portlet light">
                 <div class="portlet-body form">
                     <!-- BEGIN FORM-->
-                    <form asp-controller="Exam" asp-action="AddItem" class="form-horizontal" role="form" data-ajax="true" data-ajax-mode="replace" data-ajax-method="post" data-ajax-success="addSuccess">
+                    <form asp-controller="Exam" asp-action="AddItem" class="form-horizontal" role="form" ajax-success="addSuccess">
                         <div class="form-body">
                             @Html.AntiForgeryToken()
                             @Html.ValidationSummary(true)

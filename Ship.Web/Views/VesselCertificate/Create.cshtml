@@ -1,4 +1,4 @@
-﻿@model SailorDomain.Entities.VesselCertificate
+﻿@model VesselCertificate
 
 @{
     ViewBag.Title = "新增船舶证书";
@@ -32,7 +32,7 @@
                             <span class="caption-subject font-green-sharp bold uppercase">新增船舶证书</span>
                         </div>
                         <div class="caption">
-                            <span class="caption-subject bold note note-warning">船舶名称：@Request.QueryString["VesselName"]</span>
+                            <span class="caption-subject bold note note-warning">船舶名称：@Context.Request.Query["VesselName"]</span>
                         </div>
                     </div>
                     <div class="portlet-body form">
@@ -43,7 +43,7 @@
                                 @Html.AntiForgeryToken()
                                 @Html.ValidationSummary(true)
                                 @Html.Hidden("medium")
-                                @Html.Hidden("VesselID", Request.QueryString["VesselID"])
+                                @Html.Hidden("VesselID", Context.Request.Query["VesselID"])
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
@@ -204,7 +204,7 @@
                 $('#CheckNoticeDate').parent().datepicker('setDate', noticeDate);
             });
 
-            var VesselID = '@Request.QueryString["VesselID"]';
+            var VesselID = '@Context.Request.Query["VesselID"]';
             if (VesselID) {
                 $('#VesselID').select2("readonly", true);
             }

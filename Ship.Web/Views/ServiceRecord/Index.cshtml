@@ -1,8 +1,7 @@
-﻿@using PagedList.Mvc
-@model PagedList.IPagedList<SailorDomain.Entities.ServiceRecord>
+﻿@model IPagedList<ServiceRecord>
 
 @{
-    if ("aboard".Equals(Request.QueryString["status"]))
+    if ("aboard".Equals(Context.Request.Query["status"]))
     {
         ViewBag.Title = "在船船员";
     }
@@ -148,7 +147,7 @@
                                         <th>
                                             上船日期
                                         </th>
-                                        @if ("aboard".Equals(Request.QueryString["status"]))
+                                        @if ("aboard".Equals(Context.Request.Query["status"]))
                                         {
                                         <th>
                                             计划下船日期
@@ -203,7 +202,7 @@
                                             <td data-content="ashoreDate">
                                                 @Html.DisplayFor(modelItem => item.AshoreDate)
                                             </td>
-                                            @if ("aboard".Equals(Request.QueryString["status"]))
+                                            @if ("aboard".Equals(Context.Request.Query["status"]))
                                             {
                                                 <td>
                                                 @Html.DisplayFor(modelItem => item.Remark)

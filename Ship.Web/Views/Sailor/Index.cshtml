@@ -1,6 +1,4 @@
-﻿@using SailorDomain.Entities;
-@using PagedList.Mvc;
-@model PagedList.IPagedList<Sailor>
+﻿@model IPagedList<Sailor>
 
 @{
     ViewBag.Title = "船员列表";
@@ -198,7 +196,7 @@
                                                 </div>
                                             </td>
                                             <td>
-                                                @if (item.Status == SailorStatus.在船)
+                                                @if (item.Status == Ship.Core.Enums.SailorStatus.在船)
                                                 {
                                                     <a href="javascript:Metronic.showDialog('@Url.Action("Details", "ServiceRecord", new { id = item.ServiceRecordID })','在船情况');" class="btn default btn-xs blue-stripe" title="点击查看在船情况">
                                                         <span data-content="status">@Html.DisplayFor(modelItem => item.Status)</span>
@@ -249,7 +247,7 @@
     </div>
 </div>
 <!-- END PAGE CONTENT -->
-@Html.Partial("_ChangeStatus")
+<partial name="_ChangeStatus" />
 
 @section scripts{
     <script>

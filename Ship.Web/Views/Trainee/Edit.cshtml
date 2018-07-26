@@ -1,4 +1,4 @@
-﻿@model SailorDomain.Entities.Trainee
+﻿@model Trainee
 
 @{
     ViewBag.Title = "编辑培训人员";
@@ -162,7 +162,7 @@
 @section scripts{
     <script>
         $(function () {
-            var medium = '@Request.QueryString["medium"]';
+            var medium = '@Context.Request.Query["medium"]';
             if (medium == "EndTraining") {
                 $('#SailorID').select2("readonly", true);
                 $('#TrainingClassID').select2("readonly", true);

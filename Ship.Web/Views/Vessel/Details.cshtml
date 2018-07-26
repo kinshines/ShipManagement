@@ -1,5 +1,4 @@
-﻿@using SailorDomain.Entities
-@model Vessel
+﻿@model Vessel
 
 @{
     ViewBag.Title = "船舶详情";
@@ -610,7 +609,7 @@
 @section scripts{
     <script>
         $(function() {
-            var tab = '@Request.QueryString["tab"]';
+            var tab = '@Context.Request.Query["tab"]';
             if (tab) {
                 tab = '#' + tab;
                 $('a[href=' + tab + ']').get(0).click();

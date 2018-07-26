@@ -1,4 +1,4 @@
-﻿@model SailorDomain.Entities.LaborSupplyTake
+﻿@model LaborSupplyTake
 
 <div class="modal fade" id="takeModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -10,11 +10,9 @@
             <div class="portlet light">
                 <div class="portlet-body form">
                     <!-- BEGIN FORM-->
-                    @using (Ajax.BeginForm("SupplyTake", "LaborSupply", null, new AjaxOptions { OnSuccess = "processSuccess" }, new { @class = "form-horizontal", role = "form" }))
-                    {
+                    <form asp-controller="LaborSupply" asp-action="SupplyTake" ajax-success="processSuccess" class="form-horizontal" role="form">
                         <div class="form-body">
-                            @Html.AntiForgeryToken()
-                            @Html.ValidationSummary(true)
+                            <div asp-validation-summary="ModelOnly"></div>
                             <div class="form-group">
                                 @Html.LabelFor(model => model.LaborSupply.Name, new { @class = "control-label col-md-3" })
                                 <div class="col-md-9">
@@ -84,7 +82,7 @@
                                 </div>
                             </div>
                         </div>
-                    }
+                    </form>
                     <!-- END FORM-->
                 </div>
             </div>

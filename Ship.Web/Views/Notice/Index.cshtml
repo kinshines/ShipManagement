@@ -1,6 +1,5 @@
-﻿@using PagedList.Mvc
-@using SailorDomain.Entities
-@model PagedList.IPagedList<Notice>
+﻿@using Ship.Core.Enums
+@model IPagedList<Notice>
 
 @{
     ViewBag.Title = "消息提醒";
@@ -148,8 +147,7 @@
     </div>
 </div>
 <!-- END PAGE CONTENT -->
-@Html.Partial("_NoticeHandle", new NoticeHandle())
-
+<partial name="_NoticeHandle" model="new NoticeHandle()" />
 @section scripts{
     <script>
         $(function () {

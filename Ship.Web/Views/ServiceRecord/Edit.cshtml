@@ -1,4 +1,4 @@
-﻿@model SailorDomain.Entities.ServiceRecord
+﻿@model ServiceRecord
 
 <!-- BEGIN PAGE CONTENT -->
 <div class="page-content">
@@ -222,7 +222,7 @@
             var vesselUrl = '@Url.Action("GetVessel", "Vessel")';
             Metronic.handleVesselShipowner(vesselListUrl, vesselUrl);
 
-            var medium = '@Request.QueryString["medium"]';
+            var medium = '@Context.Request.Query["medium"]';
             if (medium == "Ashore") {
                 $('#Post').select2("readonly", true);
                 $('#SailorID').select2("readonly", true);

@@ -3,7 +3,7 @@
 <div class="portlet light">
     <div class="portlet-body form">
         <!-- BEGIN FORM-->
-        <form asp-controller="Contract" asp-action="Aboard" class="form-horizontal" role="form" data-ajax="true" data-ajax-method="post" data-ajax-success="processSuccess" data-ajax-mode="replace">
+        <form asp-controller="Contract" asp-action="Aboard" class="form-horizontal" role="form" ajax-success="processSuccess">
             <div class="form-body">
                 @Html.AntiForgeryToken()
                 <div id="summaryErrors" class="validation-summary-errors">

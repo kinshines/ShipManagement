@@ -1,5 +1,4 @@
-﻿@using PagedList.Mvc
-@model PagedList.IPagedList<SailorDomain.Entities.Wage>
+﻿@model IPagedList<Wage>
 
 @{
     ViewBag.Title = "月度工资列表";
@@ -34,7 +33,7 @@
                             <span class="caption-subject font-green-sharp bold uppercase">@ViewBag.Title</span>
                         </div>
                         <div class="actions btn-set">
-                            <a href="@Url.Action("Calculate",new{year=Request.QueryString["year"],month=Request.QueryString["month"]})" class="btn btn-circle green-haze btn-sm">
+                            <a href="@Url.Action("Calculate",new{year=Context.Request.Query["year"],month=Context.Request.Query["month"]})" class="btn btn-circle green-haze btn-sm">
                                 <i class="fa fa-refresh"></i> 重新结算
                             </a>
                             <a href="javascript:void(0)" class="btn btn-circle green btn-sm btn-search">

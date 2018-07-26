@@ -9,11 +9,9 @@
             <div class="portlet light">
                 <div class="portlet-body form">
                     <!-- BEGIN FORM-->
-                    @using (Ajax.BeginForm("ChangeStatus", "Sailor", null, new AjaxOptions { OnSuccess = "changeSuccess" }, new { @class = "form-horizontal", role = "form" }))
-                    {
+                    <form asp-controller="Sailor" asp-action="ChangeStatus" ajax-success="changeSuccess" class="form-horizontal" role="form">
                         <div class="form-body">
-                            @Html.AntiForgeryToken()
-                            @Html.ValidationSummary(true)
+                            <div asp-validation-summary="ModelOnly"></div>
                             <div class="form-group">
                                 <label class="control-label col-md-3">
                                     船员姓名
@@ -45,7 +43,7 @@
                                                 <input type="radio" data-radio="iradio_minimal-blue" name="SailorStatus" value="4" class="icheck" /> 不跟踪
                                             </label>
                                         </div>
-                                    </div>                             
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -63,7 +61,7 @@
                                 </div>
                             </div>
                         </div>
-                    }
+                    </form>
                     <!-- END FORM-->
                 </div>
             </div>

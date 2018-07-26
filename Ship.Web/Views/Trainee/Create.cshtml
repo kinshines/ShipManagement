@@ -1,4 +1,4 @@
-﻿@model SailorDomain.Entities.Trainee
+﻿@model Trainee
 
 @{
     ViewBag.Title = "新增培训人员";
@@ -97,7 +97,7 @@
                                     <!--/span-->
                                 </div>
                                 <!--/row-->
-                                @if (!"BeginTraining".Equals(Request.QueryString["medium"]))
+                                @if (!"BeginTraining".Equals(Context.Request.Query["medium"]))
                                 {
                                     <div class="row">
                                     <div class="col-md-6">
@@ -169,7 +169,7 @@
 @section scripts{
     <script>
         $(function () {
-            var SailorID = '@Request.QueryString["SailorID"]';
+            var SailorID = '@Context.Request.Query["SailorID"]';
             if (SailorID) {
                 $('#SailorID').select2("readonly", true);
             }

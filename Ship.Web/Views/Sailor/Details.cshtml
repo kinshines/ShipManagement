@@ -1,4 +1,4 @@
-﻿@model SailorDomain.Entities.Sailor
+﻿@model Sailor
 
 @{
     ViewBag.Title = "船员详情";
@@ -31,7 +31,7 @@
                         <span class="label label-primary">
                             @Html.DisplayFor(model => model.Post)
                         </span>&nbsp;&nbsp;
-                        @if (Model.Status == SailorDomain.Entities.SailorStatus.在船)
+                        @if (Model.Status == Ship.Core.Enums.SailorStatus.在船)
                         {
                             <span class="label label-warning">
                                 @Html.DisplayFor(model => model.Status)
@@ -1653,7 +1653,7 @@
 @section scripts{
     <script>
         $(function () {
-            var tab = '@Request.QueryString["tab"]';
+            var tab = '@Context.Request.Query["tab"]';
             if (tab) {
                 tab = '#' + tab;
                 $('a[href=' + tab + ']').get(0).click();

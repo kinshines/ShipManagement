@@ -1,4 +1,4 @@
-﻿@model SailorDomain.Entities.VesselAccount
+﻿@model VesselAccount
 
 @{
     ViewBag.Title = "添加费用";
@@ -14,7 +14,7 @@
                 <i class="fa fa-circle"></i>
             </li>
             <li>
-                @Html.ActionLink("船舶费用", "CostList", new { VesselID = Request.QueryString["VesselID"], VesselName = Request.QueryString["VesselName"] })
+                @Html.ActionLink("船舶费用", "CostList", new { VesselID = Context.Request.Query["VesselID"], VesselName = Context.Request.Query["VesselName"] })
                 <i class="fa fa-circle"></i>
             </li>
             <li class="active">
@@ -32,7 +32,7 @@
                             <span class="caption-subject font-green-sharp bold uppercase">@ViewBag.Title</span>
                         </div>
                         <div class="caption">
-                            <span class="caption-subject bold note note-warning">船舶名称：@Request.QueryString["VesselName"]</span>
+                            <span class="caption-subject bold note note-warning">船舶名称：@Context.Request.Query["VesselName"]</span>
                         </div>
                     </div>
                     <div class="portlet-body form">
@@ -43,7 +43,7 @@
                                 @Html.AntiForgeryToken()
                                 @Html.ValidationSummary(true)
                                 @Html.Hidden("medium")
-                                @Html.Hidden("VesselID", Request.QueryString["VesselID"])
+                                @Html.Hidden("VesselID", Context.Request.Query["VesselID"])
                                 <div class="row">
                                     <div class="col-md-4">
                                         <div class="form-group">

@@ -1,5 +1,4 @@
-﻿@using PagedList.Mvc;
-@model PagedList.IPagedList<SailorDomain.Entities.VesselAccount>
+﻿@model IPagedList<VesselAccount>
 
 @{
     ViewBag.Title = "船舶汇款记录";
@@ -34,10 +33,10 @@
                             <span class="caption-subject font-green-sharp bold uppercase">@ViewBag.Title</span>
                         </div>
                         <div class="caption">
-                            <span class="caption-subject bold note note-warning">船舶名称：@Request.QueryString["VesselName"]</span>
+                            <span class="caption-subject bold note note-warning">船舶名称：@Context.Request.Query["VesselName"]</span>
                         </div>
                         <div class="actions btn-set">
-                            <a href="@Url.Action("Deposit", "VesselAccount", new { VesselID = Request.QueryString["VesselID"], VesselName = Request.QueryString["VesselName"] })" class="btn btn-circle green-haze btn-sm">
+                            <a href="@Url.Action("Deposit", "VesselAccount", new { VesselID = Context.Request.Query["VesselID"], VesselName = Context.Request.Query["VesselName"] })" class="btn btn-circle green-haze btn-sm">
                                 <i class="fa fa-plus"></i> 添加汇款记录
                             </a>
                             <a href="javascript:void(0)" class="btn btn-circle green btn-sm btn-search">
@@ -49,7 +48,7 @@
                         <!-- BEGIN FORM-->
                         @using (Html.BeginForm("DepositList", "VesselAccount", FormMethod.Get, new { @class = "form-horizontal" }))
                         {
-                            @Html.Hidden("VesselName", Request.QueryString["VesselName"])
+                            @Html.Hidden("VesselName", Context.Request.Query["VesselName"])
                             <button type="submit" class="display-hide"></button>
                             <div class="form-body">
                                 <div class="row">

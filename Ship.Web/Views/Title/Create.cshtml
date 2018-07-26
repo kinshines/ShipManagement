@@ -1,4 +1,4 @@
-﻿@model SailorDomain.Entities.Title
+﻿@model Title
 
 @{
     ViewBag.Title = "新增职称";
@@ -212,7 +212,7 @@
 @section scripts{
     <script>
         $(function () {
-            var SailorID = '@Request.QueryString["SailorID"]';
+            var SailorID = '@Context.Request.Query["SailorID"]';
             if (SailorID) {
                 $('#SailorID').select2("readonly", true);
                 var sailorUrl = '@Url.Action("GetSailor", "Sailor")';

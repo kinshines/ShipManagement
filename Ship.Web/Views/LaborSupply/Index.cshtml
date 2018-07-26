@@ -1,6 +1,4 @@
-﻿@using PagedList.Mvc
-@using SailorDomain.Entities
-@model PagedList.IPagedList<LaborSupply>
+﻿@model IPagedList<LaborSupply>
 
 @{
     ViewBag.Title = "劳保用品列表";
@@ -156,8 +154,8 @@
     </div>
 </div>
 <!-- END PAGE CONTENT -->
-@Html.Partial("_SupplyPut", new LaborSupplyPut() { PutDate = DateTime.Now })
-@Html.Partial("_SupplyTake", new LaborSupplyTake() { TakeDate = DateTime.Now })
+<partial name="_SupplyPut" model="new LaborSupplyPut() { PutDate = DateTime.Now }" />
+<partial name="_SupplyTake" model="new LaborSupplyTake() { TakeDate = DateTime.Now }" />
 @section scripts{
     <script>
         function putSupply(id, name) {

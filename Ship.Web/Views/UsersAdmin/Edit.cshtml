@@ -1,4 +1,4 @@
-﻿@model SailorWeb.ViewModels.EditUserViewModel
+﻿@model Ship.Web.ViewModels.EditUserViewModel
 
 @{
     ViewBag.Title = "Edit";
@@ -24,12 +24,12 @@
             </div>
         </div>
         <div class="form-group">
-            @Html.Label("Roles", new { @class = "control-label col-md-2" })
+            <label for="Roles" class="control-label col-md-2">Roles</label>
             <span class=" col-md-10">
                 @foreach (var item in Model.RolesList)
                 {
                     <input type="checkbox" name="SelectedRole" value="@item.Value" checked="@item.Selected" class="checkbox-inline" />
-                    @Html.Label(item.Value, new { @class = "control-label" })
+                    <lable class="control-label">@item.Value</lable>
                 }
             </span>
         </div>
