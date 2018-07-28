@@ -12,6 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Ship.Infrastructure.Data;
+using Ship.Infrastructure.Services;
 using Ship.Web.Models;
 
 namespace Ship.Web
@@ -37,6 +38,29 @@ namespace Ship.Web
 
             services.AddDbContext<DefaultDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddScoped<CertificateService>();
+            services.AddScoped<CertificateTypeService>();
+            services.AddScoped<CompanyService>();
+            services.AddScoped<ContractService>();
+            services.AddScoped<ExamService>();
+            services.AddScoped<ExperienceService>();
+            services.AddScoped<FamilyService>();
+            services.AddScoped<InterviewService>();
+            services.AddScoped<LaborSupplyService>();
+            services.AddScoped<NoticeService>();
+            services.AddScoped<SailorService>();
+            services.AddScoped<ServiceRecordService>();
+            services.AddScoped<ShipownerService>();
+            services.AddScoped<SysCompanyService>();
+            services.AddScoped<TitleService>();
+            services.AddScoped<TraineeService>();
+            services.AddScoped<TrainingClassService>();
+            services.AddScoped<UploadFileService>();
+            services.AddScoped<VesselAccountService>();
+            services.AddScoped<VesselCertificateService>();
+            services.AddScoped<VesselService>();
+            services.AddScoped<WageService>();
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
