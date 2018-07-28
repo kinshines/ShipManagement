@@ -16,7 +16,7 @@ namespace Ship.Infrastructure.Services
         }
         public IQueryable<LaborSupplyTake> GetTakes()
         {
-            return context.LaborSupplyTakes.Include(t => t.LaborSupply).Where(t => t.LaborSupply.SysCompanyId == SysCompanyId);
+            return context.LaborSupplyTake.Include(t => t.LaborSupply).Where(t => t.LaborSupply.SysCompanyId == SysCompanyId);
         }
 
         public LaborSupply SupplyPut(LaborSupplyPut supplyput)
@@ -24,7 +24,7 @@ namespace Ship.Infrastructure.Services
             LaborSupply laborSupply = Find(supplyput.LaborSupplyID);
             laborSupply.Total = laborSupply.Total + supplyput.Amount;
             Update(laborSupply, false);
-            context.LaborSupplyPuts.Add(supplyput);
+            context.LaborSupplyPut.Add(supplyput);
             Save();
             return laborSupply;
         }
@@ -36,7 +36,7 @@ namespace Ship.Infrastructure.Services
                 return null;
             laborSupply.Total = laborSupply.Total - supplytake.Amount;
             Update(laborSupply, false);
-            context.LaborSupplyTakes.Add(supplytake);
+            context.LaborSupplyTake.Add(supplytake);
             Save();
             return laborSupply;
         }

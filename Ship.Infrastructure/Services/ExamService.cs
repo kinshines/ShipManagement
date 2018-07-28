@@ -15,7 +15,7 @@ namespace Ship.Infrastructure.Services
 
         public void AddItem(ExamItem item)
         {
-            context.ExamItems.Add(item);
+            context.ExamItem.Add(item);
             context.SaveChanges();
         }
     }

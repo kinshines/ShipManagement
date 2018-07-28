@@ -30,11 +30,11 @@ namespace Ship.Infrastructure.Services
 
         private VesselBalance GetBalance(int vesselID)
         {
-            return context.VesselBalances.Find(vesselID);
+            return context.VesselBalance.Find(vesselID);
         }
         public IQueryable<VesselBalance> BalanceList()
         {
-            return context.VesselBalances.Include(b => b.Shipowner).Include(b => b.Vessel).Where(b => b.Shipowner.SysCompanyId == SysCompanyId);
+            return context.VesselBalance.Include(b => b.Shipowner).Include(b => b.Vessel).Where(b => b.Shipowner.SysCompanyId == SysCompanyId);
         }
 
         public VesselAccount AddCost(VesselAccount vesselcost, bool isSave = true)
@@ -58,7 +58,7 @@ namespace Ship.Infrastructure.Services
                     Balance = -(vesselcost.Cost.HasValue ? vesselcost.Cost.Value : 0),
                     USBalance = -(vesselcost.USCost.HasValue ? vesselcost.USCost.Value : 0)
                 };
-                context.VesselBalances.Add(balance);
+                context.VesselBalance.Add(balance);
             }
             else
             {
@@ -109,7 +109,7 @@ namespace Ship.Infrastructure.Services
             cost.Debt = payment.Debt;
             cost.USDebt = payment.USDebt;
             cost.PaymentDate = payment.PaymentDate;
-            context.VesselCostPayments.Add(payment);
+            context.VesselCostPayment.Add(payment);
             Update(cost);
             return payment;
         }
@@ -126,7 +126,7 @@ namespace Ship.Infrastructure.Services
                     Balance = vesseldeposit.Deposit.HasValue ? vesseldeposit.Deposit.Value : 0,
                     USBalance = vesseldeposit.USDeposit.HasValue ? vesseldeposit.USDeposit.Value : 0
                 };
-                context.VesselBalances.Add(balance);
+                context.VesselBalance.Add(balance);
             }
             else
             {
@@ -160,12 +160,12 @@ namespace Ship.Infrastructure.Services
             }
             else
             {
-                var payments = context.VesselCostPayments.Where(v => v.VesselAccountID == accountID.Value).ToList();
+                var payments = context.VesselCostPayment.Where(v => v.VesselAccountID == accountID.Value).ToList();
                 foreach (var payment in payments)
                 {
                     DeleteFile(payment.ReceiptFileID);
                 }
-                context.VesselCostPayments.RemoveRange(payments);
+                context.VesselCostPayment.RemoveRange(payments);
                 balance.Balance += account.Cost.HasValue ? account.Cost.Value : 0;
                 balance.USBalance += account.USCost.HasValue ? account.USCost.Value : 0;
             }
@@ -174,7 +174,7 @@ namespace Ship.Infrastructure.Services
         }
         public bool DeletePayment(int? paymentID)
         {
-            var payment = context.VesselCostPayments.Find(paymentID);
+            var payment = context.VesselCostPayment.Find(paymentID);
             if (payment == null)
                 return true;
             var cost = Find(payment.VesselAccountID);
@@ -197,13 +197,13 @@ namespace Ship.Infrastructure.Services
             {
                 cost.USDebt += payment.USPayment ?? 0;
             }
-            context.VesselCostPayments.Remove(payment);
+            context.VesselCostPayment.Remove(payment);
             return Update(cost);
         }
 
         public void DeleteFile(int? fileId)
         {
-            var file = context.UploadFiles.Find(fileId);
+            var file = context.UploadFile.Find(fileId);
             if (file == null)
                 return;
             string oldDiskPath = env.ContentRootFileProvider.GetFileInfo(file.Path).PhysicalPath;
@@ -211,7 +211,7 @@ namespace Ship.Infrastructure.Services
             {
                 System.IO.File.Delete(oldDiskPath);
             }
-            context.UploadFiles.Remove(file);
+            context.UploadFile.Remove(file);
         }
     }
 }

@@ -89,6 +89,7 @@ namespace Ship.Core.Entities
         [Display(Name = "管理类别")]
         public VesselManageType VesselManageType { get; set; }
         public virtual Shipowner Shipowner { get; set; }
+        public virtual VesselBalance VesselBalance { get; set; }
         public virtual ICollection<ServiceRecord> ServiceRecords { get; set; }
         public virtual ICollection<Contract> Contracts { get; set; }
         public virtual ICollection<Sailor> Sailors { get; set; }

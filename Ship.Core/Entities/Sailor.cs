@@ -217,6 +217,7 @@ namespace Ship.Core.Entities
         public virtual ICollection<ServiceRecord> ServiceRecords { get; set; }
         public virtual ICollection<Title> Titles { get; set; }
         public virtual ICollection<Trainee> Trainees { get; set; }
+        public virtual ICollection<Wage> Wages { get; set; }
         public virtual Vessel Vessel { get; set; }
     }
 }
