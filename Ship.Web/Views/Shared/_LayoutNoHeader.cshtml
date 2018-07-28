@@ -1,0 +1,81 @@
+﻿<!DOCTYPE html>
+<!--[if IE 8]> <html lang="zh-cn" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="zh-cn" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="zh-cn">
+<!--<![endif]-->
+<head>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"] - 帆海船员管理系统</title>
+    <link href="https://cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="~/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" />
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/Uniform.js/2.1.2/themes/default/css/uniform.default.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/iCheck/1.0.1/skins/minimal/blue.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/select2/3.5.2/select2.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/bootstrap-datepicker/1.4.0/css/bootstrap-datepicker3.min.css" rel="stylesheet">
+    <link href="~/plugins/bootstrap-fileinput/bootstrap-fileinput.css" rel="stylesheet" />
+    <!-- END PAGE LEVEL PLUGIN STYLES -->
+    <!-- BEGIN THEME STYLES -->
+    <!-- DOC: To use 'rounded corners' style just load 'components-rounded.css' stylesheet instead of 'components.css' in the below style tag -->
+    <link href="~/css/components-rounded.css" rel="stylesheet" id="style_components" />
+    <link href="~/css/plugins.css" rel="stylesheet" />
+    <link href="~/layout3/css/layout.css" rel="stylesheet" />
+    <link href="~/layout3/css/themes/default.css" rel="stylesheet" />
+    <!-- END THEME STYLES -->
+</head>
+<body>
+    @RenderBody()
+
+    <!-- BEGIN JAVASCRIPTS (Load javascripts at bottom, this will reduce page load time) -->
+    <!-- BEGIN CORE PLUGINS -->
+    <!--[if lt IE 9]>
+    <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <script src="/plugins/excanvas.min.js"></script>
+    <![endif]-->
+
+    <script src="https://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery-migrate/1.2.1/jquery-migrate.min.js"></script>
+    <script src="https://cdn.bootcss.com/jqueryui/1.11.2/jquery-ui.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap-hover-dropdown/2.0.10/bootstrap-hover-dropdown.min.js"></script>
+    <script src="https://cdn.bootcss.com/jQuery-slimScroll/1.3.2/jquery.slimscroll.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery.blockUI/2.66.0-2013.10.09/jquery.blockUI.min.js"></script>
+    <script src="https://cdn.bootcss.com/Uniform.js/2.1.2/jquery.uniform.min.js"></script>
+    <script src="https://cdn.bootcss.com/iCheck/1.0.1/icheck.min.js"></script>
+    <script src="https://cdn.bootcss.com/select2/3.5.2/select2.min.js"></script>
+    <script src="https://cdn.bootcss.com/select2/3.5.2/select2_locale_zh-CN.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap-datepicker/1.4.0/js/bootstrap-datepicker.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap-datepicker/1.4.0/locales/bootstrap-datepicker.zh-CN.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootbox.js/4.3.0/bootbox.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery-backstretch/2.0.4/jquery.backstretch.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery-validate/1.13.1/jquery.validate.min.js"></script>
+
+    <script src="~/scripts/messages_zh.js"></script>
+    <script src="~/scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="~/plugins/bootstrap-fileinput/bootstrap-fileinput.js"></script>
+
+    <!-- END PAGE LEVEL PLUGINS -->
+    <!-- BEGIN PAGE LEVEL SCRIPTS -->
+    <script src="~/scripts/metronic.js"></script>
+    <script src="~/layout3/scripts/layout.js"></script>
+    <script src="~/layout3/scripts/demo.js"></script>
+    <script src="~/pages/scripts/login-soft.js"></script>
+    <!-- END PAGE LEVEL SCRIPTS -->
+
+    <script>
+        jQuery(document).ready(function () {
+            Metronic.init(); // init metronic core components
+            Layout.init(); // init current layout
+            Demo.init(); // init demo features
+        });
+    </script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>
+

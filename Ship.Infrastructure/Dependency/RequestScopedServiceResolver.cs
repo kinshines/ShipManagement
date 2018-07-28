@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Microsoft.Extensions.DependencyInjection;
+using System.Security.Principal;
 
 namespace Ship.Infrastructure.Dependency
 {
@@ -72,6 +73,11 @@ namespace Ship.Infrastructure.Dependency
         public IEnumerable<object> GetServices(Type serviceType)
         {
             return _httpContextAccessor.HttpContext.RequestServices.GetServices(serviceType);
+        }
+
+        public IPrincipal GetCurrentUser()
+        {
+            return _httpContextAccessor.HttpContext.User;
         }
     }
 }

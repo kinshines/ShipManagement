@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -22,10 +24,29 @@ namespace Ship.Web.Models
             : base(options)
         {
         }
-
-        protected override void OnModelCreating(ModelBuilder builder)
+        public static async Task CreateAdminAccount(IServiceProvider serviceProvider,IConfiguration configuration)
         {
-            base.OnModelCreating(builder);
+            UserManager<ApplicationUser> userManager =
+                serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+            RoleManager<IdentityRole> roleManager =
+                serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+            const string name = "admin@ink.com";
+            const string password = "admin@ink.com";
+            const string roleName = "SuperAdmin";
+
+            if (await userManager.FindByNameAsync(name) == null)
+            {
+                if (!await roleManager.RoleExistsAsync(roleName))
+                {
+                    await roleManager.CreateAsync(new IdentityRole(roleName));
+                }
+                var user = new ApplicationUser { UserName = name, Email = name, CompanyId = 0, CompanyName = "InkSoft" };
+                IdentityResult result = await userManager.CreateAsync(user, password);
+                if (result.Succeeded)
+                {
+                    await userManager.AddToRoleAsync(user, roleName);
+                }
+            }
         }
     }
 }

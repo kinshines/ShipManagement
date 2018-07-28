@@ -20,16 +20,16 @@ namespace Ship.Infrastructure.Services
             this.logger = logger;
             this.principal = ServiceLocator.Instance.GetCurrentUser();
         }
-        public string SysUserId => principal.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        public string SysUserId => principal?.FindFirst(ClaimTypes.NameIdentifier)?.Value;
         public int SysCompanyId
         {
             get
             {
+                if (principal == null)
+                    return 0;
                 var value = principal.FindFirst(ClaimTypes.GroupSid)?.Value;
                 if (value == null)
-                {
                     return 0;
-                }
                 return Convert.ToInt32(value);
             }
         }

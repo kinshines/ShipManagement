@@ -12,6 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Ship.Infrastructure.Data;
+using Ship.Infrastructure.Dependency;
 using Ship.Infrastructure.Services;
 using Ship.Web.Models;
 
@@ -32,6 +33,9 @@ namespace Ship.Web
             services.AddDbContext<DefaultDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"),
                 builder => builder.MigrationsAssembly("Ship.Web")));
+
+            services.AddSingleton<IScopedServiceResolver, RequestScopedServiceResolver>();
+            ServiceLocator.Instance.SetServiceCollection(services);
 
             services.AddScoped<CertificateService>();
             services.AddScoped<CertificateTypeService>();
@@ -59,22 +63,23 @@ namespace Ship.Web
             services.AddDbContext<ApplicationDbContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("IdentityConnection")));
 
-            services.AddIdentityCore<ApplicationUser>()
-                .AddRoles<IdentityRole>()
-                .AddEntityFrameworkStores<ApplicationDbContext>()
-                .AddSignInManager()
-                .AddDefaultTokenProviders();
-
-            services.Configure<IdentityOptions>(options =>
+            services.AddIdentityCore<ApplicationUser>(options =>
             {
                 options.Password.RequiredLength = 6;
-
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequireDigit = false;
                 options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
                 options.Lockout.MaxFailedAccessAttempts = 5;
                 options.Lockout.AllowedForNewUsers = true;
-
                 options.User.RequireUniqueEmail = true;
-            });
+                //options.User.AllowedUserNameCharacters = "qwertyuiopasdfghjklzxcvbnm";
+            })
+            .AddRoles<IdentityRole>()
+            .AddEntityFrameworkStores<ApplicationDbContext>()
+            .AddSignInManager()
+            .AddDefaultTokenProviders();
 
             services.AddAuthentication(options =>
             {
@@ -120,6 +125,9 @@ namespace Ship.Web
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            ServiceLocator.Instance.SetApplicationServiceProvider(app.ApplicationServices);
+            ApplicationDbContext.CreateAdminAccount(app.ApplicationServices, Configuration).Wait();
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Security.Principal;
 using System.Text;
 
 namespace Ship.Infrastructure.Dependency
@@ -46,5 +47,6 @@ namespace Ship.Infrastructure.Dependency
         /// <param name="serviceType">服务类型</param>
         /// <returns></returns>
         IEnumerable<object> GetServices(Type serviceType);
+        IPrincipal GetCurrentUser();
     }
 }

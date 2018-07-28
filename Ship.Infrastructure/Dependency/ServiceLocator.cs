@@ -62,7 +62,7 @@ namespace Ship.Infrastructure.Dependency
         /// <summary>
         /// 设置应用程序服务集合
         /// </summary>
-        internal void SetServiceCollection(IServiceCollection services)
+        public void SetServiceCollection(IServiceCollection services)
         {
             Guard.Against.Null(services, nameof(services));
             _services = services;
@@ -71,7 +71,7 @@ namespace Ship.Infrastructure.Dependency
         /// <summary>
         /// 设置应用程序服务提供者
         /// </summary>
-        internal void SetApplicationServiceProvider(IServiceProvider provider)
+        public void SetApplicationServiceProvider(IServiceProvider provider)
         {
             Guard.Against.Null(provider, nameof(provider));
             _provider = provider;
@@ -302,8 +302,15 @@ namespace Ship.Infrastructure.Dependency
         {
             try
             {
-                IPrincipal user = GetService<IPrincipal>();
-                return user as ClaimsPrincipal;
+                Guard.Against.Null(_services, nameof(_services));
+                Guard.Against.Null(_provider, nameof(_provider));
+
+                IScopedServiceResolver scopedResolver = _provider.GetService<IScopedServiceResolver>();
+                if (scopedResolver != null && scopedResolver.ResolveEnabled)
+                {
+                    return scopedResolver.GetCurrentUser() as ClaimsPrincipal;
+                }
+                return null;
             }
             catch (Exception)
             {

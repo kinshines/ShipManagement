@@ -550,8 +550,8 @@ namespace Ship.Web.Controllers
             {
                 return File(diskPath, "image/jpeg");
             }
-            var noimage= _env.ContentRootFileProvider.GetFileInfo("/Files/avatar/noimage.gif").PhysicalPath;
-            return File(noimage, "image/gif");
+            var noimage = _env.ContentRootFileProvider.GetFileInfo("/Files/avatar/noimage.gif").PhysicalPath;
+            return PhysicalFile(noimage, "image/gif");
         }
 
         #region Helpers

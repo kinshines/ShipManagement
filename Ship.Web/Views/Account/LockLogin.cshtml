@@ -3,12 +3,12 @@
     ViewBag.Title = "锁屏";
     Layout = "~/Views/Shared/_LayoutNoHeader.cshtml";
 }
-<link href="~/assets/pages/css/lock2.css" rel="stylesheet" />
+<link href="~/pages/css/lock2.css" rel="stylesheet" />
 
 <div class="page-lock">
     <div class="page-logo">
         <a class="brand" asp-controller="Home" asp-action="Index">
-            <img src="~/assets/layout3/img/logo-crew-default.png" />
+            <img src="~/layout3/img/logo-crew-default.png" />
         </a>
     </div>
     <div class="page-body">
@@ -45,10 +45,10 @@
         $(function () {
             // init background slide images
             $.backstretch([
-             "../assets/pages/media/bg/1.jpg",
-             "../assets/pages/media/bg/2.jpg",
-             "../assets/pages/media/bg/3.jpg",
-             "../assets/pages/media/bg/4.jpg"
+             "../pages/media/bg/1.jpg",
+             "../pages/media/bg/2.jpg",
+             "../pages/media/bg/3.jpg",
+             "../pages/media/bg/4.jpg"
             ], {
                 fade: 1000,
                 duration: 8000
