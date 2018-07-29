@@ -2,7 +2,6 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Ship.Infrastructure.Data;
 
@@ -16,14 +15,12 @@ namespace Ship.Web.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "2.1.1-rtm-30846")
-                .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
             modelBuilder.Entity("Ship.Core.Entities.Certificate", b =>
                 {
                     b.Property<int>("CertificateID")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<int>("CertificateTypeID");
 
@@ -76,8 +73,7 @@ namespace Ship.Web.Migrations
             modelBuilder.Entity("Ship.Core.Entities.CertificateType", b =>
                 {
                     b.Property<int>("CertificateTypeID")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<byte>("CertificateCategory");
 
@@ -103,8 +99,7 @@ namespace Ship.Web.Migrations
             modelBuilder.Entity("Ship.Core.Entities.Company", b =>
                 {
                     b.Property<int>("CompanyID")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("Address")
                         .HasMaxLength(200);
@@ -171,8 +166,7 @@ namespace Ship.Web.Migrations
             modelBuilder.Entity("Ship.Core.Entities.Contract", b =>
                 {
                     b.Property<int>("ContractID")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<DateTime?>("AboardDate");
 
@@ -244,8 +238,7 @@ namespace Ship.Web.Migrations
             modelBuilder.Entity("Ship.Core.Entities.Exam", b =>
                 {
                     b.Property<int>("ExamID")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<byte?>("ApplyPost");
 
@@ -288,8 +281,7 @@ namespace Ship.Web.Migrations
             modelBuilder.Entity("Ship.Core.Entities.ExamItem", b =>
                 {
                     b.Property<int>("ExamItemID")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<DateTime?>("ExamDate");
 
@@ -312,8 +304,7 @@ namespace Ship.Web.Migrations
             modelBuilder.Entity("Ship.Core.Entities.Experience", b =>
                 {
                     b.Property<int>("ExperienceID")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<DateTime?>("BeginTime");
 
@@ -365,8 +356,7 @@ namespace Ship.Web.Migrations
             modelBuilder.Entity("Ship.Core.Entities.Family", b =>
                 {
                     b.Property<int>("FamilyID")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("Address")
                         .HasMaxLength(50);
@@ -406,8 +396,7 @@ namespace Ship.Web.Migrations
             modelBuilder.Entity("Ship.Core.Entities.Interview", b =>
                 {
                     b.Property<int>("InterviewID")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("Comment")
                         .IsRequired()
@@ -489,8 +478,7 @@ namespace Ship.Web.Migrations
             modelBuilder.Entity("Ship.Core.Entities.LaborSupply", b =>
                 {
                     b.Property<int>("LaborSupplyID")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<int>("Baseline");
 
@@ -519,8 +507,7 @@ namespace Ship.Web.Migrations
             modelBuilder.Entity("Ship.Core.Entities.LaborSupplyPut", b =>
                 {
                     b.Property<int>("LaborSupplyPutID")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<int>("Amount");
 
@@ -543,8 +530,7 @@ namespace Ship.Web.Migrations
             modelBuilder.Entity("Ship.Core.Entities.LaborSupplyTake", b =>
                 {
                     b.Property<int>("LaborSupplyTakeID")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<int>("Amount");
 
@@ -573,8 +559,7 @@ namespace Ship.Web.Migrations
             modelBuilder.Entity("Ship.Core.Entities.Notice", b =>
                 {
                     b.Property<int>("NoticeID")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<bool>("Active");
 
@@ -603,8 +588,7 @@ namespace Ship.Web.Migrations
             modelBuilder.Entity("Ship.Core.Entities.Sailor", b =>
                 {
                     b.Property<int>("SailorID")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("AccountName")
                         .HasMaxLength(10);
@@ -752,8 +736,7 @@ namespace Ship.Web.Migrations
             modelBuilder.Entity("Ship.Core.Entities.ServiceRecord", b =>
                 {
                     b.Property<int>("ServiceRecordID")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<DateTime?>("AboardDate");
 
@@ -819,8 +802,7 @@ namespace Ship.Web.Migrations
             modelBuilder.Entity("Ship.Core.Entities.Shipowner", b =>
                 {
                     b.Property<int>("ShipownerID")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("Address")
                         .HasMaxLength(50);
@@ -863,8 +845,7 @@ namespace Ship.Web.Migrations
             modelBuilder.Entity("Ship.Core.Entities.SysCompany", b =>
                 {
                     b.Property<int>("SysCompanyId")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("Contacter")
                         .HasMaxLength(10);
@@ -887,8 +868,7 @@ namespace Ship.Web.Migrations
             modelBuilder.Entity("Ship.Core.Entities.Title", b =>
                 {
                     b.Property<int>("TitleID")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("Approach")
                         .HasMaxLength(50);
@@ -940,8 +920,7 @@ namespace Ship.Web.Migrations
             modelBuilder.Entity("Ship.Core.Entities.Trainee", b =>
                 {
                     b.Property<int>("TraineeID")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("CertificateNo")
                         .HasMaxLength(50);
@@ -982,8 +961,7 @@ namespace Ship.Web.Migrations
             modelBuilder.Entity("Ship.Core.Entities.TrainingClass", b =>
                 {
                     b.Property<int>("TrainingClassID")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<DateTime?>("BeginDate");
 
@@ -1043,8 +1021,7 @@ namespace Ship.Web.Migrations
             modelBuilder.Entity("Ship.Core.Entities.UploadFile", b =>
                 {
                     b.Property<int>("UploadFileID")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<DateTime>("CreateTime");
 
@@ -1067,8 +1044,7 @@ namespace Ship.Web.Migrations
             modelBuilder.Entity("Ship.Core.Entities.Vessel", b =>
                 {
                     b.Property<int>("VesselID")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("AuxiliaryEngine")
                         .HasMaxLength(200);
@@ -1138,8 +1114,7 @@ namespace Ship.Web.Migrations
             modelBuilder.Entity("Ship.Core.Entities.VesselAccount", b =>
                 {
                     b.Property<int>("VesselAccountID")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<double>("Balance");
 
@@ -1230,8 +1205,7 @@ namespace Ship.Web.Migrations
             modelBuilder.Entity("Ship.Core.Entities.VesselCertificate", b =>
                 {
                     b.Property<int>("VesselCertificateID")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<int>("CertificateTypeID");
 
@@ -1275,8 +1249,7 @@ namespace Ship.Web.Migrations
             modelBuilder.Entity("Ship.Core.Entities.VesselCostPayment", b =>
                 {
                     b.Property<int>("VesselCostPaymentID")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<double?>("Debt");
 
@@ -1305,8 +1278,7 @@ namespace Ship.Web.Migrations
             modelBuilder.Entity("Ship.Core.Entities.Wage", b =>
                 {
                     b.Property<int>("WageID")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<DateTime>("BeginDate");
 

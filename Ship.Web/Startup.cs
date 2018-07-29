@@ -31,7 +31,7 @@ namespace Ship.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<DefaultDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"),
+                options.UseMySql(Configuration.GetConnectionString("DefaultConnection"),
                 builder => builder.MigrationsAssembly("Ship.Web")));
 
             services.AddSingleton<IScopedServiceResolver, RequestScopedServiceResolver>();
@@ -61,7 +61,7 @@ namespace Ship.Web
             services.AddScoped<WageService>();
 
             services.AddDbContext<ApplicationDbContext>(options =>
-            options.UseSqlServer(Configuration.GetConnectionString("IdentityConnection")));
+            options.UseMySql(Configuration.GetConnectionString("IdentityConnection")));
 
             services.AddIdentityCore<ApplicationUser>(options =>
             {
