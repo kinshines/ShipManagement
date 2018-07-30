@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -15,6 +16,7 @@ using Ship.Infrastructure.Data;
 using Ship.Infrastructure.Dependency;
 using Ship.Infrastructure.Services;
 using Ship.Web.Models;
+using System.Globalization;
 
 namespace Ship.Web
 {
@@ -97,7 +99,7 @@ namespace Ship.Web
                 options.SlidingExpiration = true;
             });
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
