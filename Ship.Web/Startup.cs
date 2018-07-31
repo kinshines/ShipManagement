@@ -16,7 +16,8 @@ using Ship.Infrastructure.Data;
 using Ship.Infrastructure.Dependency;
 using Ship.Infrastructure.Services;
 using Ship.Web.Models;
-using System.Globalization;
+using Ship.Web.Validation;
+using Ship.Web.Resources;
 
 namespace Ship.Web
 {
@@ -99,7 +100,19 @@ namespace Ship.Web
                 options.SlidingExpiration = true;
             });
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
+            services.AddMvc(o =>
+            {
+                o.ModelBindingMessageProvider.SetValueMustNotBeNullAccessor(
+                   value =>
+                    SiteResources.CustomImplicitRequired);
+                o.ModelBindingMessageProvider.SetAttemptedValueIsInvalidAccessor(
+                   (value, fieldName) => string.Format(SiteResources.CustomInvalidValue, value));
+                o.ModelBindingMessageProvider.SetValueMustBeANumberAccessor(
+                    fieldName => string.Format(SiteResources.CustomNumeric, fieldName));
+                o.ModelMetadataDetailsProviders.Add(
+                    new CustomValidationMetadataProvider("Ship.Web.Resources.SiteResources",
+                        typeof(SiteResources)));
+            }).SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
